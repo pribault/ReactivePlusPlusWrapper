@@ -94,6 +94,36 @@ namespace rppw
 		Disposable subscribe(N onSuccess, E onError) const;
 
 		/**
+		 * @brief Inspects an error before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const std::exception_ptr&.
+		 * @param action Callback stored by value and invoked on each subscription's error.
+		 * @return Single preserving success and errors.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const std::exception_ptr &> F>
+		Single doOnError(F action) const;
+
+		/**
+		 * @brief Executes an action before forwarding successful termination.
+		 * @tparam F Const-invocable no-argument callback.
+		 * @param action Callback stored by value; not invoked on error or cancellation.
+		 * @return Single preserving success and errors, without adding a completion signal.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor F>
+		Single doOnComplete(F action) const;
+
+		/**
+		 * @brief Inspects the success value before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const T&.
+		 * @param action Callback stored by value; not invoked on error or cancellation.
+		 * @return Single preserving success and errors.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const T &> F>
+		Single doOnSuccess(F action) const;
+
+		/**
 		 * @brief Transforms the success value.
 		 * @tparam F Const-invocable callable producing an admissible, non-reference value.
 		 * @param function Value transformation.

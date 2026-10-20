@@ -68,6 +68,18 @@ namespace rppw
 		return Observable<std::monostate>{source_}.subscribe([](std::monostate) {}, std::move(onError), std::move(onComplete));
 	}
 
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Completable Completable::doOnError(F action) const
+	{
+		return Completable{Observable<std::monostate>{source_}.doOnError(std::move(action))};
+	}
+
+	template <concepts::CallbackFor F>
+	Completable Completable::doOnComplete(F action) const
+	{
+		return Completable{Observable<std::monostate>{source_}.doOnComplete(std::move(action))};
+	}
+
 	template <concepts::ReactiveSource R>
 	R Completable::andThen(R next) const
 	{

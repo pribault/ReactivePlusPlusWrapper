@@ -65,6 +65,29 @@ The first error terminates the result and cancels active sources. Disposing the
 result cancels active subscriptions; `concat` never starts remaining sources after
 an error or cancellation. Range traversal and allocation failures throw synchronously.
 
+### Side-effect hooks
+
+All four source types provide `doOnError(action)` and `doOnComplete(action)`.
+`Single<T>` and `Maybe<T>` also provide `doOnSuccess(action)`;
+`Observable<T>` provides `doOnNext(action)`.
+
+Hooks run before the corresponding downstream notification, preserve the source
+type and notifications, and do not modify the original source. Callbacks are
+stored by value and run only during subscription, once per matching event.
+Error callbacks receive `const std::exception_ptr&`; value callbacks receive
+`const T&`. Completion callbacks take no arguments.
+
+`doOnComplete` runs before any normal termination: before success for `Single`,
+before success or empty completion for `Maybe`, and before completion for
+`Completable` and `Observable`. It does not add a completion signal to `Single`
+or to a successful `Maybe`. `doOnSuccess` is skipped for an empty `Maybe`.
+Error and cancellation do not trigger completion hooks.
+
+Like `subscribe` callbacks, hooks **must not throw**: an escaping exception calls
+`std::terminate`. Hooks run in the upstream notification context; they add no
+scheduler. Reference captures must outlive processing, and callers must
+synchronize state shared across subscriptions.
+
 ## Prerequisites
 
 - CMake 3.25 or later and C++20.
