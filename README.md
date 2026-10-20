@@ -41,6 +41,30 @@ int main()
 
 Output: `20`, `40`, then `complete`, each on its own line.
 
+### Combining source lists
+
+`Completable::concat(sources)` and `Completable::merge(sources)` combine a
+homogeneous range of `Completable` into one `Completable`.
+`Observable<T>::concat(sources)` and `Observable<T>::merge(sources)` accept
+homogeneous ranges of `Observable<T>`, `Single<T>` or `Maybe<T>` and return
+an `Observable<T>`. Vectors, lists, arrays and input-range views are supported.
+
+```cpp
+const std::vector sources{rppw::Single<int>::just(1), rppw::Single<int>::just(2)};
+const auto sequential = rppw::Observable<int>::concat(sources);
+const auto merged = rppw::Observable<int>::merge(sources);
+```
+
+The range is copied immediately; source execution remains deferred and restarts
+for each subscription. `concat` subscribes in order, waiting for each completion.
+`merge` subscribes without waiting, preserving each source's value order but not
+ordering between sources. It adds neither threads nor a concurrency limit;
+synchronous sources still execute on the subscribing thread unless scheduled.
+Empty ranges complete immediately, and empty Maybes emit nothing.
+The first error terminates the result and cancels active sources. Disposing the
+result cancels active subscriptions; `concat` never starts remaining sources after
+an error or cancellation. Range traversal and allocation failures throw synchronously.
+
 ## Prerequisites
 
 - CMake 3.25 or later and C++20.
@@ -255,7 +279,7 @@ are outside the contract.
 
 Constraints are named in [Concepts.h](include/rppw/Concepts.h), under
 `rppw::concepts`: `FactoryFor`, `SourceFactoryFor`, `CallbackFor`, `MapperFor`, `PredicateFor`,
-`FlatMapperFor`, `RangeOf`, `ReactiveSource` and `ExceptionValue`. Signatures use these
+`FlatMapperFor`, `RangeOf`, `ObservableSourceRangeOf`, `ReactiveSource` and `ExceptionValue`. Signatures use these
 concepts directly to reject incompatible calls during overload selection,
 particularly for `map`, `flatMap` and `andThen`.
 `map` requires an owned, copyable, non-reference result; `flatMap` requires

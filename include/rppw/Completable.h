@@ -38,6 +38,31 @@ namespace rppw
 		static Completable complete();
 
 		/**
+		 * @brief Subscribes to Completables sequentially in range order.
+		 * @tparam R Input range of Completable.
+		 * @param sources Sources copied into owned storage immediately.
+		 * @return Completable completing after all sources, including an empty range.
+		 * @note Each subscription restarts the chain. An error or cancellation prevents
+		 * subscription to remaining sources. Range traversal and allocation exceptions
+		 * are synchronous.
+		 */
+		template <concepts::RangeOf<Completable> R>
+		static Completable concat(R &&sources);
+
+		/**
+		 * @brief Subscribes to Completables without waiting for preceding completions.
+		 * @tparam R Input range of Completable.
+		 * @param sources Sources copied into owned storage immediately.
+		 * @return Completable completing after all sources, including an empty range.
+		 * @note Each subscription restarts the sources. An error or cancellation cancels
+		 * all active sources. No scheduler is added. Range traversal and allocation
+		 * exceptions are synchronous.
+		 * @warning No concurrency limit is imposed.
+		 */
+		template <concepts::RangeOf<Completable> R>
+		static Completable merge(R &&sources);
+
+		/**
 		 * @brief Creates a source that only forwards the supplied error.
 		 * @param error Non-null exception retained by the source.
 		 * @return Failing Completable.

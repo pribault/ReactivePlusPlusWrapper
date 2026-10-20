@@ -11,6 +11,30 @@
 
 namespace rppw
 {
+	template <concepts::RangeOf<Completable> R>
+	Completable Completable::concat(R &&sources)
+	{
+		const auto inner = Observable<Completable>::fromIterable(std::forward<R>(sources))
+							   .map(
+								   [](const Completable &source)
+								   {
+									   return source.source_;
+								   });
+		return Completable{Observable<std::monostate>{(inner.source_ | rpp::operators::concat()).as_dynamic()}};
+	}
+
+	template <concepts::RangeOf<Completable> R>
+	Completable Completable::merge(R &&sources)
+	{
+		const auto inner = Observable<Completable>::fromIterable(std::forward<R>(sources))
+							   .map(
+								   [](const Completable &source)
+								   {
+									   return source.source_;
+								   });
+		return Completable{Observable<std::monostate>{(inner.source_ | rpp::operators::merge()).as_dynamic()}};
+	}
+
 	template <concepts::ExceptionValue E>
 	Completable Completable::error(E error)
 	{
