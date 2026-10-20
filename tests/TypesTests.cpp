@@ -138,6 +138,19 @@ namespace rppw::test
 			{ source.dropWhile(predicate) } -> std::same_as<Observable<int>>;
 		};
 
+		template <typename F>
+		concept AcceptsQuantifierPredicates = requires(const Observable<int> &source, F predicate) {
+			{ source.allOf(predicate) } -> std::same_as<Single<bool>>;
+			{ source.anyOf(predicate) } -> std::same_as<Single<bool>>;
+			{ source.noneOf(predicate) } -> std::same_as<Single<bool>>;
+		};
+
+		static_assert(AcceptsQuantifierPredicates<decltype([](const int &value) { return value > 0; })>);
+		static_assert(AcceptsQuantifierPredicates<decltype([](int value) { return value; })>);
+		static_assert(!AcceptsQuantifierPredicates<decltype([](int) {})>);
+		static_assert(!AcceptsQuantifierPredicates<decltype([](int &&) { return true; })>);
+		static_assert(!AcceptsQuantifierPredicates<decltype([flag = false](int) mutable { return flag = !flag; })>);
+
 		static_assert(AcceptsPrefixPredicates<decltype([](const int &value) { return value > 0; })>);
 		static_assert(AcceptsPrefixPredicates<decltype([](int value) { return value; })>);
 		static_assert(!AcceptsPrefixPredicates<decltype([](int) {})>);

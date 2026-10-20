@@ -188,6 +188,42 @@ namespace rppw
 		Observable filter(F predicate) const;
 
 		/**
+		 * @brief Tests whether every value satisfies the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Test applied until the first false result.
+		 * @return Single emitting false at the first failure, or true at normal completion.
+		 * An empty source produces true.
+		 * @note A decisive result cancels upstream. Upstream errors and predicate exceptions
+		 * before that result are forwarded as errors. Evaluation is deferred per subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Single<bool> allOf(F predicate) const;
+
+		/**
+		 * @brief Tests whether at least one value satisfies the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Test applied until the first true result.
+		 * @return Single emitting true at the first match, or false at normal completion.
+		 * An empty source produces false.
+		 * @note A decisive result cancels upstream. Upstream errors and predicate exceptions
+		 * before that result are forwarded as errors. Evaluation is deferred per subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Single<bool> anyOf(F predicate) const;
+
+		/**
+		 * @brief Tests whether no value satisfies the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Test applied until the first true result.
+		 * @return Single emitting false at the first match, or true at normal completion.
+		 * An empty source produces true.
+		 * @note A decisive result cancels upstream. Upstream errors and predicate exceptions
+		 * before that result are forwarded as errors. Evaluation is deferred per subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Single<bool> noneOf(F predicate) const;
+
+		/**
 		 * @brief Merges the sources produced for each value.
 		 * @tparam F Const-invocable callable returning `Observable<U>`.
 		 * @param function Inner-source factory.
