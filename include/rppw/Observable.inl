@@ -116,6 +116,44 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Observable<T> Observable<T>::doOnError(F action) const
+	{
+		return Observable{(source_ | rpp::operators::tap([](const T &) {},
+														 [action = std::move(action)](const std::exception_ptr &error) noexcept
+														 {
+															 std::invoke(action, error);
+														 },
+														 [] {}))
+							  .as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor F>
+	Observable<T> Observable<T>::doOnComplete(F action) const
+	{
+		return Observable{(source_ | rpp::operators::tap([](const T &) {}, [](const std::exception_ptr &) {},
+														 [action = std::move(action)]() noexcept
+														 {
+															 std::invoke(action);
+														 }))
+							  .as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const T &> F>
+	Observable<T> Observable<T>::doOnNext(F action) const
+	{
+		return Observable{(source_ | rpp::operators::tap(
+										 [action = std::move(action)](const T &value) noexcept
+										 {
+											 std::invoke(action, value);
+										 },
+										 [] {}))
+							  .as_dynamic()};
+	}
+
+	template <detail::Value T>
 	template <concepts::MapperFor<T> F>
 	auto Observable<T>::map(F function) const
 	{

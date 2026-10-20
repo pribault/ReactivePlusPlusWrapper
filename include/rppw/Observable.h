@@ -138,6 +138,36 @@ namespace rppw
 		Disposable subscribe(N onNext, E onError, C onComplete) const;
 
 		/**
+		 * @brief Inspects an error before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const std::exception_ptr&.
+		 * @param action Callback stored by value and invoked on each subscription's error.
+		 * @return Observable preserving all notifications.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const std::exception_ptr &> F>
+		Observable doOnError(F action) const;
+
+		/**
+		 * @brief Executes an action before forwarding normal completion.
+		 * @tparam F Const-invocable no-argument callback.
+		 * @param action Callback stored by value; not invoked on error or cancellation.
+		 * @return Observable preserving all notifications.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor F>
+		Observable doOnComplete(F action) const;
+
+		/**
+		 * @brief Inspects each value before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const T&.
+		 * @param action Callback stored by value, invoked only when a value arrives.
+		 * @return Observable preserving all notifications.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const T &> F>
+		Observable doOnNext(F action) const;
+
+		/**
 		 * @brief Transforms each value without modifying the source.
 		 * @tparam F Const-invocable callable producing an admissible, non-reference value.
 		 * @param function Transformation applied to each element.

@@ -59,6 +59,31 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Single<T> Single<T>::doOnError(F action) const
+	{
+		return Single{source_.doOnError(std::move(action))};
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor F>
+	Single<T> Single<T>::doOnComplete(F action) const
+	{
+		return doOnSuccess(
+			[action = std::move(action)](const T &) noexcept
+			{
+				std::invoke(action);
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const T &> F>
+	Single<T> Single<T>::doOnSuccess(F action) const
+	{
+		return Single{source_.doOnNext(std::move(action))};
+	}
+
+	template <detail::Value T>
 	template <concepts::MapperFor<T> F>
 	auto Single<T>::map(F function) const
 	{

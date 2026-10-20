@@ -103,6 +103,37 @@ namespace rppw
 		Disposable subscribe(N onSuccess, E onError, C onComplete) const;
 
 		/**
+		 * @brief Inspects an error before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const std::exception_ptr&.
+		 * @param action Callback stored by value and invoked on each subscription's error.
+		 * @return Maybe preserving all terminal outcomes.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const std::exception_ptr &> F>
+		Maybe doOnError(F action) const;
+
+		/**
+		 * @brief Executes an action before success or empty completion.
+		 * @tparam F Const-invocable no-argument callback.
+		 * @param action Callback stored by value and invoked once per normal termination.
+		 * Not invoked on error or cancellation.
+		 * @return Maybe preserving the distinction between success and empty completion.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor F>
+		Maybe doOnComplete(F action) const;
+
+		/**
+		 * @brief Inspects a present value before forwarding success unchanged.
+		 * @tparam F Const-invocable callback accepting const T&.
+		 * @param action Callback stored by value; not invoked when empty, on error or cancellation.
+		 * @return Maybe preserving all terminal outcomes.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const T &> F>
+		Maybe doOnSuccess(F action) const;
+
+		/**
 		 * @brief Transforms a present value without invoking the function when empty.
 		 * @tparam F Const-invocable callable producing an admissible, non-reference value.
 		 * @param function Value transformation.

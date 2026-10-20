@@ -115,6 +115,26 @@ namespace rppw
 		Disposable subscribe(C onComplete, E onError) const;
 
 		/**
+		 * @brief Inspects an error before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const std::exception_ptr&.
+		 * @param action Callback stored by value and invoked on each subscription's error.
+		 * @return Completable preserving completion and errors.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const std::exception_ptr &> F>
+		Completable doOnError(F action) const;
+
+		/**
+		 * @brief Executes an action before forwarding normal completion.
+		 * @tparam F Const-invocable no-argument callback.
+		 * @param action Callback stored by value; not invoked on error or cancellation.
+		 * @return Completable preserving completion and errors.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor F>
+		Completable doOnComplete(F action) const;
+
+		/**
 		 * @brief Subscribes to the second source only after this source completes normally.
 		 * @tparam R `Observable<U>`, `Single<U>`, `Maybe<U>` or Completable.
 		 * @param next Second source stored by value.

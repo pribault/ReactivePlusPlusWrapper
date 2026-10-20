@@ -8,6 +8,7 @@ add_executable(ReactivePlusPlusWrapperTests
     MaybeTests.cpp
     ObservableTests.cpp
     SchedulerTests.cpp
+    SideEffectTests.cpp
     SingleTests.cpp
     TypesTests.cpp)
 target_include_directories(ReactivePlusPlusWrapperTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

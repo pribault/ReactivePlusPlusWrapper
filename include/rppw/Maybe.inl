@@ -80,6 +80,44 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Maybe<T> Maybe<T>::doOnError(F action) const
+	{
+		return Maybe{source_.doOnError(std::move(action))};
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor F>
+	Maybe<T> Maybe<T>::doOnComplete(F action) const
+	{
+		return defer(
+			[source = source_, action = std::move(action)]
+			{
+				const auto seen = std::make_shared<bool>(false);
+				return Maybe{source
+								 .doOnNext(
+									 [seen, action](const T &) noexcept
+									 {
+										 *seen = true;
+										 std::invoke(action);
+									 })
+								 .doOnComplete(
+									 [seen, action]() noexcept
+									 {
+										 if (!*seen)
+											 std::invoke(action);
+									 })};
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const T &> F>
+	Maybe<T> Maybe<T>::doOnSuccess(F action) const
+	{
+		return Maybe{source_.doOnNext(std::move(action))};
+	}
+
+	template <detail::Value T>
 	template <concepts::MapperFor<T> F>
 	auto Maybe<T>::map(F function) const
 	{
