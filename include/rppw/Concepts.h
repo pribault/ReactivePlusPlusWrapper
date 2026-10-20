@@ -79,6 +79,15 @@ namespace rppw::concepts
 							std::same_as<std::invoke_result_t<const F &, T>, Source<typename std::invoke_result_t<const F &, T>::value_type>>;
 
 	/**
+	 * @brief Const-invocable binary reducer: (accumulator, value) -> new accumulator.
+	 * @tparam F Callable type accepting accumulator and const T&.
+	 * @tparam R Accumulator/result type.
+	 * @tparam T Source value type.
+	 */
+	template <typename F, typename R, typename T>
+	concept ReducerFor = std::invocable<const F &, R, const T &> && std::convertible_to<std::invoke_result_t<const F &, R, const T &>, R>;
+
+	/**
 	 * @brief Input range whose elements are convertible to the requested type.
 	 * @tparam R Range type, possibly a reference.
 	 * @tparam T Target value type.

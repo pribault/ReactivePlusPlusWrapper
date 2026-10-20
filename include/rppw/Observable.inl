@@ -385,6 +385,18 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <typename R, concepts::ReducerFor<R, T> F>
+	Single<R> Observable<T>::reduce(R initial, F accumulator) const
+	{
+		return Single<R>{Observable<R>{(source_ | rpp::operators::reduce(std::move(initial),
+																		 [accumulator = std::move(accumulator)](R acc, const T &value)
+																		 {
+																			 return std::invoke(accumulator, acc, value);
+																		 }))
+										   .as_dynamic()}};
+	}
+
+	template <detail::Value T>
 	Single<T> Observable<T>::singleOrError() const
 	{
 		return Single<T>{Observable{detail::cardinality(source_, true, "singleOrError")}};

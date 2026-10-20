@@ -343,6 +343,20 @@ namespace rppw
 		Single<std::size_t> count() const;
 
 		/**
+		 * @brief Applies a function to each value, sequentially, producing a single result.
+		 * @tparam R Accumulator/result type, which must be copyable.
+		 * @tparam F Const-invocable binary reducer: (accumulator, value) -> new accumulator.
+		 * @param initial Initial accumulator value.
+		 * @param accumulator Reducer function stored by value.
+		 * @return Single emitting the final accumulator value, or the initial value for an empty source.
+		 * @note Upstream errors discard the partial result and signal onError.
+		 * Reducer exceptions are propagated through the reactive error channel.
+		 * Cancellation is propagated upstream. Evaluation is deferred per subscription.
+		 */
+		template <typename R, concepts::ReducerFor<R, T> F>
+		Single<R> reduce(R initial, F accumulator) const;
+
+		/**
 		 * @brief Selects the greatest value after normal completion.
 		 * @tparam Compare Const-invocable strict weak ordering, defaulting to std::less<>.
 		 * @param compare Comparator stored by value, returning true when its first argument is smaller.
