@@ -199,8 +199,98 @@ class rppw::Observable&lt; T &gt;</div><p>Cold source of zero or more values, fo
   </table>
   </dd>
 </dl>
-<p>Each subscription executes its own chain. Composing operators does not invoke producers. Without an explicit scheduler, synchronous processing runs on the thread calling <a class="el" href="classrppw_1_1_observable.html#a93ecbedd74c98fafba4c8171885b5852" title="Subscribes the three callbacks and starts processing.">subscribe()</a>. Producer and operator exceptions are forwarded through std::exception_ptr. An error or completion terminates the subscription; no further events are delivered. Reactive objects are copyable and share their type-erased RPP representation, which may allocate. Operators return a new chain. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive their use, including asynchronous use. The caller must synchronize data shared between subscriptions. No backpressure mechanism is provided. </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p>Each subscription executes its own chain. Composing operators does not invoke producers. Without an explicit scheduler, synchronous processing runs on the thread calling <a class="el" href="classrppw_1_1_observable.html#a93ecbedd74c98fafba4c8171885b5852" title="Subscribes the three callbacks and starts processing.">subscribe()</a>. Producer and operator exceptions are forwarded through std::exception_ptr. An error or completion terminates the subscription; no further events are delivered. Reactive objects are copyable and share their type-erased RPP representation, which may allocate. Operators return a new chain. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive their use, including asynchronous use. The caller must synchronize data shared between subscriptions. No backpressure mechanism is provided.</dd></dl>
+<div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// stl</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;exception&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// rpp</span></div>
+<div class="line"><span class="preprocessor">#include &lt;rpp/rpp.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// rppw</span></div>
+<div class="line"><span class="preprocessor">#include &lt;rppw/Concepts.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;rppw/Disposable.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>rppw</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">template</span> &lt;detail::Value T&gt;</div>
+<div class="line">    <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a></div>
+<div class="line">    {</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        <span class="keyword">using </span><a class="code hl_typedef" href="classrppw_1_1_observable.html#affc72bfb9976cefd8aa45a4e26182452">value_type</a> = T;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> just(T value);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::RangeOf&lt;T&gt; R&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> fromIterable(R &amp;&amp;range);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> empty();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> error(std::exception_ptr error);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue E&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> error(E error);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::SourceFactoryFor&lt;T, rppw::Observable&gt; F&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> defer(F factory);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;T&gt; N, concepts::CallbackFor&lt;std::exception_ptr &amp;&gt; E, concepts::CallbackFor C&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(N onNext, E onError, C onComplete) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::MapperFor&lt;T&gt; F&gt;</div>
+<div class="line">        <span class="keyword">auto</span> map(F function) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> filter(F predicate) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::FlatMapperFor&lt;T, rppw::Observable&gt; F&gt;</div>
+<div class="line">        <span class="keyword">auto</span> flatMap(F function) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> take(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> subscribeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> observeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_single.html">Single&lt;T&gt;</a> singleOrError() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe&lt;T&gt;</a> singleElement() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> ignoreElements() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a>(rpp::dynamic_observable&lt;T&gt; source)</div>
+<div class="line">            : source_{std::move(source)}</div>
+<div class="line">        {</div>
+<div class="line">        }</div>
+<div class="line">        rpp::dynamic_observable&lt;T&gt; source_;</div>
+<div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a>;</div>
+<div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_single.html">Single</a>;</div>
+<div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a>;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a>;</div>
+<div class="line">    };</div>
+<div class="line">} <span class="comment">// namespace rppw</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// rppw</span></div>
+<div class="line"><span class="preprocessor">#include &lt;rppw/Observable.inl&gt;</span></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:29</div></div>
+<div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
+<div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:33</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:38</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html_affc72bfb9976cefd8aa45a4e26182452"><div class="ttname"><a href="classrppw_1_1_observable.html#affc72bfb9976cefd8aa45a4e26182452">rppw::Observable::value_type</a></div><div class="ttdeci">T value_type</div><div class="ttdoc">Type of emitted values.</div><div class="ttdef"><b>Definition</b> Observable.h:41</div></div>
+<div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:33</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adddbc39c9dfd7dee6adbaeeaf875dbb9" name="adddbc39c9dfd7dee6adbaeeaf875dbb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adddbc39c9dfd7dee6adbaeeaf875dbb9">&#9670;&#160;</a></span>defer()</h2>
 

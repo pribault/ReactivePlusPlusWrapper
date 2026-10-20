@@ -121,8 +121,31 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Copyable handle sharing the cancellation state of an RPP subscription. </p>
-<p>Copies share cancellation; destroying a handle does not explicitly request cancellation. An empty handle is considered disposed. </p><dl class="section note"><dt>Note</dt><dd><a class="el" href="classrppw_1_1_disposable.html#a1b4988ef1b564f4e0a4cb3cdcf12f505" title="Cancels the subscription and propagates cancellation to upstream resources.">dispose()</a> and <a class="el" href="classrppw_1_1_disposable.html#aa2894e8a66ce69e39535842931bf5a07" title="Checks whether the handle is empty, cancelled or terminated.">isDisposed()</a> delegate to thread-safe RPP operations. This does not permit concurrent assignment to the same handle object. </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p>Copies share cancellation; destroying a handle does not explicitly request cancellation. An empty handle is considered disposed. </p><dl class="section note"><dt>Note</dt><dd><a class="el" href="classrppw_1_1_disposable.html#a1b4988ef1b564f4e0a4cb3cdcf12f505" title="Cancels the subscription and propagates cancellation to upstream resources.">dispose()</a> and <a class="el" href="classrppw_1_1_disposable.html#aa2894e8a66ce69e39535842931bf5a07" title="Checks whether the handle is empty, cancelled or terminated.">isDisposed()</a> delegate to thread-safe RPP operations. This does not permit concurrent assignment to the same handle object.</dd></dl>
+<div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// rpp</span></div>
+<div class="line"><span class="preprocessor">#include &lt;rpp/disposables/composite_disposable.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>rppw</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a></div>
+<div class="line">    {</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a>();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a>(rpp::composite_disposable_wrapper disposable);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordtype">void</span> dispose() const noexcept;</div>
+<div class="line"> </div>
+<div class="line">        [[nodiscard]] <span class="keywordtype">bool</span> isDisposed() const noexcept;</div>
+<div class="line"> </div>
+<div class="line">    private:</div>
+<div class="line">        rpp::composite_disposable_wrapper disposable_;</div>
+<div class="line">    };</div>
+<div class="line">} <span class="comment">// namespace rppw</span></div>
+<div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3c6e1fca1135f2251e063e3f010b85fa" name="a3c6e1fca1135f2251e063e3f010b85fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c6e1fca1135f2251e063e3f010b85fa">&#9670;&#160;</a></span>Disposable()</h2>
 
