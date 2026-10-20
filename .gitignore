@@ -59,6 +59,7 @@ compile_commands.json
 
 # vcpkg
 vcpkg_installed/
+CMakeUserPresets.json
 
 # debug information files
 *.dwo
@@ -66,3 +67,5 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+.vs

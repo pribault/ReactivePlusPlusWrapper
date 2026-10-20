@@ -1,0 +1,61 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      }
+    },
+    {
+      "name": "Debug",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTING": true,
+        "RPPW_BUILD_EXAMPLES": true,
+        "VCPKG_MANIFEST_FEATURES": "tests"
+      }
+    },
+    {
+      "name": "Release",
+      "inherits": "Debug",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "Profile",
+      "inherits": "Debug",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "Debug", "configurePreset": "Debug" },
+    { "name": "Release", "configurePreset": "Release" },
+    { "name": "Profile", "configurePreset": "Profile" }
+  ],
+  "testPresets": [
+    {
+      "name": "Debug",
+      "configurePreset": "Debug",
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "timeout": 30 }
+    },
+    {
+      "name": "Release",
+      "configurePreset": "Release",
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "timeout": 30 }
+    },
+    {
+      "name": "Profile",
+      "configurePreset": "Profile",
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "timeout": 30 }
+    }
+  ]
+}

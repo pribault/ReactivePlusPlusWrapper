@@ -1,0 +1,192 @@
+name: CI
+
+on:
+  push:
+    branches: [ "develop", "master" ]
+  pull_request:
+    branches: [ "develop", "master" ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  commitlint:
+    name: Commit messages
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install commitlint
+        run: |
+          npm install --prefix "$RUNNER_TEMP/commitlint-tools" --no-save \
+            --package-lock=false --ignore-scripts --no-audit --no-fund \
+            @commitlint/cli@19.8.1 @commitlint/config-conventional@19.8.1
+
+      - name: Check all commit messages
+        env:
+          NODE_PATH: ${{ runner.temp }}/commitlint-tools/node_modules
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
+          EVENT_NAME: ${{ github.event_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          if [[ "$EVENT_NAME" == "push" && "$BASE_SHA" =~ ^0+$ ]]; then
+            commits=$(git rev-list --reverse "$HEAD_SHA" --not \
+              "--exclude=origin/$BRANCH_NAME" --remotes=origin)
+          else
+            if ! git cat-file -e "$BASE_SHA^{commit}"; then
+              git fetch --no-tags origin "$BASE_SHA"
+            fi
+            commits=$(git rev-list --reverse "$BASE_SHA..$HEAD_SHA")
+          fi
+
+          if [[ -z "$commits" ]]; then
+            echo "No newly introduced commits to check."
+            exit 0
+          fi
+
+          failed=0
+          while IFS= read -r commit; do
+            printf 'Checking commit %s\n' "$commit"
+            message=$(git show -s --format=%B "$commit")
+            if [[ -z "${message//[[:space:]]/}" ]]; then
+              echo "::error::Commit $commit has an empty message."
+              failed=1
+              continue
+            fi
+            if ! printf '%s\n' "$message" | node \
+              "$RUNNER_TEMP/commitlint-tools/node_modules/@commitlint/cli/cli.js" \
+              --config "$GITHUB_WORKSPACE/commitlint.config.mjs" --strict --verbose; then
+              failed=1
+            fi
+          done <<< "$commits"
+          exit "$failed"
+
+  build:
+    name: Build and test (${{ matrix.os }}, ${{ matrix.preset }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, ubuntu-24.04, macos-14]
+        preset: [Debug, Release, Profile]
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize MSVC
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Checkout pinned vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          ref: 40dd49b0c9c7dbd79dc64cad5e82308eae04f67f
+          path: .vcpkg
+
+      - name: Bootstrap vcpkg
+        run: |
+          $root = Join-Path $env:GITHUB_WORKSPACE ".vcpkg"
+          "VCPKG_ROOT=$root" >> $env:GITHUB_ENV
+          if ($IsWindows) {
+            chcp 65001
+            & (Join-Path $root "bootstrap-vcpkg.bat") -disableMetrics
+          } else {
+            & (Join-Path $root "bootstrap-vcpkg.sh") -disableMetrics
+          }
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Configure
+        run: |
+          if ($IsWindows) { chcp 65001 }
+          cmake --preset ${{ matrix.preset }}
+
+      - name: Build library, tests, examples and standalone headers
+        run: |
+          if ($IsWindows) { chcp 65001 }
+          cmake --build --preset ${{ matrix.preset }} --parallel 4
+
+      - name: Run all tests
+        run: ctest --preset ${{ matrix.preset }}
+
+      - name: Install package
+        run: cmake --install build/${{ matrix.preset }} --prefix build/install
+
+      - name: Configure independent installed-package consumer
+        run: |
+          if ($IsWindows) { chcp 65001 }
+          $configuration = if ("${{ matrix.preset }}" -eq "Profile") { "RelWithDebInfo" } else { "${{ matrix.preset }}" }
+          cmake -S examples/consumer -B build/consumer -G Ninja `
+            "-DCMAKE_BUILD_TYPE=$configuration" `
+            "-DCMAKE_PREFIX_PATH=$env:GITHUB_WORKSPACE/build/install" `
+            "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
+            "-DVCPKG_INSTALLED_DIR=$env:GITHUB_WORKSPACE/build/${{ matrix.preset }}/vcpkg_installed" `
+            -DVCPKG_MANIFEST_MODE=OFF
+
+      - name: Build independent consumer
+        run: |
+          if ($IsWindows) { chcp 65001 }
+          cmake --build build/consumer --parallel 4
+
+      - name: Test independent consumer
+        run: ctest --test-dir build/consumer --output-on-failure --no-tests=error --timeout 30
+
+  doxygen:
+    name: Doxygen
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes doxygen
+
+      - name: Check public API documentation
+        run: |
+          mkdir -p build/doxygen
+          doxygen Doxyfile
+
+  clang-format:
+    name: clang-format 21.1.8
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned clang-format
+        run: python -m pip install clang-format==21.1.8
+
+      - name: Check C++ formatting
+        run: |
+          find include src tests examples -type f \
+            \( -name '*.h' -o -name '*.hpp' -o -name '*.inl' -o -name '*.inc' -o -name '*.cpp' \) \
+            -print0 | xargs -0 -r clang-format --dry-run --Werror --style=file
