@@ -169,6 +169,47 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Single<bool> Observable<T>::allOf(F predicate) const
+	{
+		return noneOf(
+			[predicate = std::move(predicate)](const T &value)
+			{
+				return !std::invoke(predicate, value);
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Single<bool> Observable<T>::anyOf(F predicate) const
+	{
+		const auto firstMatch = filter(
+									[predicate = std::move(predicate)](const T &value) -> bool
+									{
+										return std::invoke(predicate, value);
+									})
+									.take(1);
+		return Single<bool>{Observable<bool>{(firstMatch.source_ | rpp::operators::reduce(false,
+																						  [](bool, const T &)
+																						  {
+																							  return true;
+																						  }))
+												 .as_dynamic()}};
+	}
+
+	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Single<bool> Observable<T>::noneOf(F predicate) const
+	{
+		return anyOf(std::move(predicate))
+			.map(
+				[](bool matched)
+				{
+					return !matched;
+				});
+	}
+
+	template <detail::Value T>
 	template <concepts::FlatMapperFor<T, rppw::Observable> F>
 	auto Observable<T>::flatMap(F function) const
 	{

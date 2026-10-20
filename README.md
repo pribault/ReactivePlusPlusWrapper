@@ -30,6 +30,13 @@ drop operators forward the boundary value and all later values without
 evaluating the predicate again. State resets for each subscription, and
 predicate exceptions use the reactive error channel.
 
+`Observable<T>::allOf(predicate)`, `anyOf(predicate)` and `noneOf(predicate)`
+return `Single<bool>` and cancel upstream as soon as the result is known.
+Otherwise they wait for normal completion. On an empty source, `allOf` and
+`noneOf` return true, and `anyOf` returns false. Evaluation is deferred for each
+subscription; errors before a decisive result are propagated, not converted
+to boolean results.
+
 ```cpp
 // stl
 #include <exception>

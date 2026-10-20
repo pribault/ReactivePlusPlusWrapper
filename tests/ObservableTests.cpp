@@ -22,6 +22,155 @@ namespace rppw::test
 		};
 
 		template <typename Case>
+		class ObservableQuantifierTest : public RunLoopTest
+		{
+		protected:
+			template <typename F>
+			Single<bool> apply(const Observable<int> &source, F predicate)
+			{
+				if constexpr (Case::value == 0)
+					return source.allOf(std::move(predicate));
+				else if constexpr (Case::value == 1)
+					return source.anyOf(std::move(predicate));
+				else
+					return source.noneOf(std::move(predicate));
+			}
+
+			Disposable subscribeResult(const Single<bool> &source)
+			{
+				return subscribe(source.map(
+					[](bool value)
+					{
+						return value ? 1 : 0;
+					}));
+			}
+
+			static constexpr bool decisive = Case::value != 0;
+			static constexpr int  matchedResult = Case::value == 1 ? 1 : 0;
+			static constexpr int  exhaustedResult = Case::value == 1 ? 0 : 1;
+		};
+
+		using QuantifierCases = ::testing::Types<std::integral_constant<int, 0>, std::integral_constant<int, 1>, std::integral_constant<int, 2>>;
+		TYPED_TEST_SUITE(ObservableQuantifierTest, QuantifierCases);
+
+		TYPED_TEST(ObservableQuantifierTest, ReturnsIdentityForEmptySource)
+		{
+			StrictMock<MockFunction<bool(int)>> predicate;
+			EXPECT_CALL(this->observer, next(TestFixture::exhaustedResult));
+			EXPECT_TRUE(this->subscribeResult(this->apply(Observable<int>::empty(), predicate.AsStdFunction())).isDisposed());
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, ReturnsResultAfterExhaustingSource)
+		{
+			StrictMock<MockFunction<bool(int)>> predicate;
+			EXPECT_CALL(predicate, Call(1)).WillOnce(::testing::Return(!TestFixture::decisive));
+			EXPECT_CALL(predicate, Call(2)).WillOnce(::testing::Return(!TestFixture::decisive));
+			EXPECT_CALL(this->observer, next(TestFixture::exhaustedResult));
+			this->subscribeResult(this->apply(Observable<int>::fromIterable(std::array{1, 2}), predicate.AsStdFunction()));
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, CancelsUpstreamAtFirstDecisiveValue)
+		{
+			StrictMock<MockFunction<void(int)>> produced;
+			StrictMock<MockFunction<bool(int)>> predicate;
+			InSequence							sequence;
+			EXPECT_CALL(produced, Call(1));
+			EXPECT_CALL(predicate, Call(1)).WillOnce(::testing::Return(!TestFixture::decisive));
+			EXPECT_CALL(produced, Call(2));
+			EXPECT_CALL(predicate, Call(2)).WillOnce(::testing::Return(TestFixture::decisive));
+			EXPECT_CALL(this->observer, next(TestFixture::matchedResult));
+			const auto source = Observable<int>::fromIterable(std::array{1, 2, 3}).doOnNext(produced.AsStdFunction());
+			EXPECT_TRUE(this->subscribeResult(this->apply(source, predicate.AsStdFunction())).isDisposed());
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, SkipsErrorsAfterDecisiveValue)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::error(this->failure)});
+			EXPECT_CALL(this->observer, next(TestFixture::matchedResult));
+			this->subscribeResult(this->apply(source,
+											  [](int)
+											  {
+												  return TestFixture::decisive;
+											  }));
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, PreservesUpstreamErrorWithoutResult)
+		{
+			StrictMock<MockFunction<bool(int)>> predicate;
+			EXPECT_CALL(this->observer, error(this->failure));
+			this->subscribeResult(this->apply(Observable<int>::error(this->failure), predicate.AsStdFunction()));
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, PreservesErrorAfterInconclusiveValues)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::error(this->failure)});
+			EXPECT_CALL(this->observer, error(this->failure));
+			this->subscribeResult(this->apply(source,
+											  [](int)
+											  {
+												  return !TestFixture::decisive;
+											  }));
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, PropagatesPredicateExceptionWithoutResult)
+		{
+			StrictMock<MockFunction<bool(int)>> predicate;
+			EXPECT_CALL(predicate, Call(1)).WillOnce(::testing::Throw(std::runtime_error{"quantifier"}));
+			EXPECT_CALL(this->observer, error(ExceptionContaining<std::runtime_error>("quantifier")));
+			const auto subscription = this->subscribeResult(this->apply(Observable<int>::fromIterable(std::array{1, 2}), predicate.AsStdFunction()));
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, DefersEvaluationForEverySubscription)
+		{
+			StrictMock<MockFunction<bool(int)>> predicate;
+			const auto							source = this->apply(Observable<int>::just(1), predicate.AsStdFunction());
+			InSequence							sequence;
+			EXPECT_CALL(predicate, Call(1)).WillOnce(::testing::Return(TestFixture::decisive));
+			EXPECT_CALL(this->observer, next(TestFixture::matchedResult));
+			EXPECT_CALL(predicate, Call(1)).WillOnce(::testing::Return(!TestFixture::decisive));
+			EXPECT_CALL(this->observer, next(TestFixture::exhaustedResult));
+			this->subscribeResult(source);
+			this->subscribeResult(source);
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, WaitsForCompletionWithoutDecisiveValue)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::empty().subscribeOn(this->loop)});
+			const auto subscription = this->subscribeResult(this->apply(source,
+																		[](int)
+																		{
+																			return !TestFixture::decisive;
+																		}));
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(this->observer, next(TestFixture::exhaustedResult));
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, CancelsScheduledUpstreamWithoutResult)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			StrictMock<MockFunction<bool(int)>>			predicate;
+			const auto									source = Observable<int>::defer(factory.AsStdFunction()).subscribeOn(this->loop);
+			const auto									subscription = this->subscribeResult(this->apply(source, predicate.AsStdFunction()));
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableQuantifierTest, AcceptsBooleanConvertiblePredicateResult)
+		{
+			EXPECT_CALL(this->observer, next(TypeParam::value == 2 ? 0 : 1));
+			this->subscribeResult(this->apply(Observable<int>::just(1),
+											  [](const int &value)
+											  {
+												  return value;
+											  }));
+		}
+
+		template <typename Case>
 		class ObservablePrefixTest : public RunLoopTest
 		{
 		protected:
