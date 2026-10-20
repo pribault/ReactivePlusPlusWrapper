@@ -1227,5 +1227,132 @@ namespace rppw::test
 		}
 
 		INSTANTIATE_TEST_SUITE_P(ValueCounts, InvalidMaybeCardinalityTest, ::testing::Values(std::vector{1, 2}, std::vector{1, 2, 3, 4}));
+
+		class ObservableReduceTest : public RunLoopTest
+		{
+		protected:
+			template <typename T, typename R, typename F>
+			Single<R> reduce(const Observable<T> &source, R initial, F accumulator)
+			{
+				return source.reduce(std::move(initial), std::move(accumulator));
+			}
+		};
+
+		TEST_F(ObservableReduceTest, SumsAllValues)
+		{
+			EXPECT_CALL(observer, next(10));
+			subscribe(reduce(Observable<int>::fromIterable(std::array{1, 2, 3, 4}), 0,
+							 [](int acc, int value)
+							 {
+								 return acc + value;
+							 }));
+		}
+
+		TEST_F(ObservableReduceTest, ReturnsInitialValueForEmptySource)
+		{
+			EXPECT_CALL(observer, next(42));
+			subscribe(reduce(Observable<int>::empty(), 42,
+							 [](int acc, int value)
+							 {
+								 return acc + value;
+							 }));
+		}
+
+		TEST_F(ObservableReduceTest, ReturnsInitialValueForSingleValue)
+		{
+			EXPECT_CALL(observer, next(5));
+			subscribe(reduce(Observable<int>::just(5), 0,
+							 [](int acc, int value)
+							 {
+								 return acc + value;
+							 }));
+		}
+
+		TEST_F(ObservableReduceTest, MultipliesAllValues)
+		{
+			EXPECT_CALL(observer, next(24));
+			subscribe(reduce(Observable<int>::fromIterable(std::array{1, 2, 3, 4}), 1,
+							 [](int acc, int value)
+							 {
+								 return acc * value;
+							 }));
+		}
+
+		TEST_F(ObservableReduceTest, ForwardsUpstreamError)
+		{
+			EXPECT_CALL(observer, error(failure));
+			subscribe(reduce(Observable<int>::error(failure), 0,
+							 [](int acc, int value)
+							 {
+								 return acc + value;
+							 }));
+		}
+
+		TEST_F(ObservableReduceTest, PropagatesReducerException)
+		{
+			EXPECT_CALL(observer, error(ExceptionContaining<std::runtime_error>("reduce")));
+			subscribe(reduce(Observable<int>::fromIterable(std::array{1, 2}), 0,
+							 [](int, int) -> int
+							 {
+								 throw std::runtime_error{"reduce"};
+							 }));
+		}
+
+		TEST_F(ObservableReduceTest, DefersEvaluationForEachSubscription)
+		{
+			StrictMock<MockFunction<int(int, int)>> reducer;
+			const auto								source = reduce(Observable<int>::fromIterable(std::array{1, 2}), 0, reducer.AsStdFunction());
+			InSequence								sequence;
+			EXPECT_CALL(reducer, Call(0, 1)).WillOnce(::testing::Return(1));
+			EXPECT_CALL(reducer, Call(1, 2)).WillOnce(::testing::Return(3));
+			EXPECT_CALL(observer, next(3));
+			EXPECT_CALL(reducer, Call(0, 1)).WillOnce(::testing::Return(1));
+			EXPECT_CALL(reducer, Call(1, 2)).WillOnce(::testing::Return(3));
+			EXPECT_CALL(observer, next(3));
+			subscribe(source);
+			subscribe(source);
+		}
+
+		TEST_F(ObservableReduceTest, WaitsForCompletion)
+		{
+			const auto source =
+				reduce(Observable<int>::concat(std::array{Observable<int>::fromIterable(std::array{1, 2}), Observable<int>::empty().subscribeOn(loop)}), 0,
+					   [](int acc, int value)
+					   {
+						   return acc + value;
+					   });
+			const auto subscription = subscribe(source);
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(observer, next(3));
+			drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableReduceTest, CancelsScheduledUpstream)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									subscription = subscribe(reduce(Observable<int>::defer(factory.AsStdFunction()).subscribeOn(loop), 0,
+																						[](int acc, int value)
+																						{
+															return acc + value;
+														}));
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableReduceTest, UsesStatefulReducer)
+		{
+			int callCount = 0;
+			EXPECT_CALL(observer, next(3));
+			subscribe(reduce(Observable<int>::fromIterable(std::array{1, 2}), 0,
+							 [&callCount](int acc, int value)
+							 {
+								 ++callCount;
+								 return acc + value;
+							 }));
+			EXPECT_EQ(callCount, 2);
+		}
 	} // namespace
 } // namespace rppw::test
