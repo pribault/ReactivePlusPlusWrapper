@@ -137,6 +137,22 @@ namespace rppw::test
 		concept AcceptsRange = requires(R &&range) { Observable<int>::fromIterable(std::forward<R>(range)); };
 
 		template <typename R>
+		concept AcceptsObservableComposition = requires(R &&sources) {
+			{ Observable<int>::concat(std::forward<R>(sources)) } -> std::same_as<Observable<int>>;
+			{ Observable<int>::merge(std::forward<R>(sources)) } -> std::same_as<Observable<int>>;
+		};
+
+		static_assert(AcceptsObservableComposition<std::vector<Observable<int>>>);
+		static_assert(AcceptsObservableComposition<const std::vector<Observable<int>> &>);
+		static_assert(AcceptsObservableComposition<std::vector<Single<int>> &>);
+		static_assert(AcceptsObservableComposition<std::vector<Maybe<int>>>);
+		static_assert(AcceptsObservableComposition<std::ranges::empty_view<Observable<int>>>);
+		static_assert(!AcceptsObservableComposition<std::vector<Observable<long>>>);
+		static_assert(!AcceptsObservableComposition<std::vector<Completable>>);
+		static_assert(!AcceptsObservableComposition<std::vector<int>>);
+		static_assert(!AcceptsObservableComposition<int>);
+
+		template <typename R>
 		concept AcceptsAndThen = requires(R source) { Completable::complete().andThen(source); };
 
 		template <typename F>

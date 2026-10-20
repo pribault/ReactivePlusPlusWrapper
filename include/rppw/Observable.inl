@@ -33,6 +33,38 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::ObservableSourceRangeOf<T> R>
+	Observable<T> Observable<T>::concat(R &&sources)
+	{
+		const auto inner = Observable<std::ranges::range_value_t<R>>::fromIterable(std::forward<R>(sources))
+							   .map(
+								   [](const auto &source)
+								   {
+									   if constexpr (std::same_as<std::remove_cvref_t<decltype(source)>, Observable<T>>)
+										   return source.source_;
+									   else
+										   return source.toObservable().source_;
+								   });
+		return Observable{(inner.source_ | rpp::operators::concat()).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <concepts::ObservableSourceRangeOf<T> R>
+	Observable<T> Observable<T>::merge(R &&sources)
+	{
+		const auto inner = Observable<std::ranges::range_value_t<R>>::fromIterable(std::forward<R>(sources))
+							   .map(
+								   [](const auto &source)
+								   {
+									   if constexpr (std::same_as<std::remove_cvref_t<decltype(source)>, Observable<T>>)
+										   return source.source_;
+									   else
+										   return source.toObservable().source_;
+								   });
+		return Observable{(inner.source_ | rpp::operators::merge()).as_dynamic()};
+	}
+
+	template <detail::Value T>
 	Observable<T> Observable<T>::empty()
 	{
 		return Observable{rpp::source::empty<T>().as_dynamic()};

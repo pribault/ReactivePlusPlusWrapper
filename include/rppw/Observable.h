@@ -59,6 +59,34 @@ namespace rppw
 		static Observable fromIterable(R &&range);
 
 		/**
+		 * @brief Subscribes to sources sequentially, preserving their order.
+		 * @tparam R Input range of Observable<T>, Single<T> or Maybe<T>.
+		 * @param sources Homogeneous range copied into owned storage immediately.
+		 * @return Observable forwarding all values, completing when all sources complete.
+		 * An empty range completes without values; empty Maybes are skipped.
+		 * @note Subscription is deferred and repeated for each subscriber.
+		 * An error or cancellation prevents subscription to remaining sources.
+		 * Range traversal and allocation exceptions are synchronous.
+		 */
+		template <concepts::ObservableSourceRangeOf<T> R>
+		static Observable concat(R &&sources);
+
+		/**
+		 * @brief Subscribes to sources without waiting for preceding sources to complete.
+		 * @tparam R Input range of Observable<T>, Single<T> or Maybe<T>.
+		 * @param sources Homogeneous range copied into owned storage immediately.
+		 * @return Observable completing after all sources, or immediately for an empty range.
+		 * Empty Maybes contribute no values.
+		 * @note Each subscription restarts the sources. Their own value order is preserved;
+		 * ordering between sources is unspecified. An error cancels all active sources.
+		 * Cancellation is propagated to every active source. No scheduler is added.
+		 * Range traversal and allocation exceptions are synchronous.
+		 * @warning No concurrency limit is imposed.
+		 */
+		template <concepts::ObservableSourceRangeOf<T> R>
+		static Observable merge(R &&sources);
+
+		/**
 		 * @brief Creates a source that completes without emitting a value.
 		 * @return Empty source.
 		 */

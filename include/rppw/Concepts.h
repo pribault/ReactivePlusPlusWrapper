@@ -87,6 +87,17 @@ namespace rppw::concepts
 	concept RangeOf = std::ranges::input_range<R> && std::convertible_to<std::ranges::range_reference_t<R>, T>;
 
 	/**
+	 * @brief Homogeneous input range of Observable<T>, Single<T> or Maybe<T>.
+	 * @tparam R Range type, possibly a reference.
+	 * @tparam T Exact source value type.
+	 * @note Keeps self-type constraints outside Observable for Clang 15 compatibility.
+	 */
+	template <typename R, typename T>
+	concept ObservableSourceRangeOf =
+		std::ranges::input_range<R> && (std::same_as<std::ranges::range_value_t<R>, Observable<T>> || std::same_as<std::ranges::range_value_t<R>, Single<T>> ||
+										std::same_as<std::ranges::range_value_t<R>, Maybe<T>>);
+
+	/**
 	 * @brief One of the wrapper's four reactive categories, without implicit conversion.
 	 * @tparam R Specialized Observable, Single or Maybe, or Completable.
 	 */
