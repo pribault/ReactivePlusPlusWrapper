@@ -22,6 +22,171 @@ namespace rppw::test
 		};
 
 		template <typename Case>
+		class ObservableSelectionTest : public RunLoopTest
+		{
+		protected:
+			Maybe<int> select(const Observable<int> &source)
+			{
+				if constexpr (Case::value == 0)
+					return source.elementAt(1);
+				else if constexpr (Case::value == 1)
+					return source.first();
+				else
+					return source.last();
+			}
+
+			static constexpr int expectedValue = Case::value == 0 ? 2 : Case::value == 1 ? 1 : 3;
+		};
+
+		using SelectionCases = ::testing::Types<std::integral_constant<int, 0>, std::integral_constant<int, 1>, std::integral_constant<int, 2>>;
+		TYPED_TEST_SUITE(ObservableSelectionTest, SelectionCases);
+
+		TYPED_TEST(ObservableSelectionTest, SelectsExpectedValue)
+		{
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			EXPECT_TRUE(this->subscribe(this->select(Observable<int>::fromIterable(std::array{1, 2, 3}))).isDisposed());
+		}
+
+		TYPED_TEST(ObservableSelectionTest, CompletesEmptySourceWithoutValue)
+		{
+			EXPECT_CALL(this->observer, complete());
+			EXPECT_TRUE(this->subscribe(this->select(Observable<int>::empty())).isDisposed());
+		}
+
+		TYPED_TEST(ObservableSelectionTest, ForwardsOriginalError)
+		{
+			EXPECT_CALL(this->observer, error(this->failure));
+			EXPECT_TRUE(this->subscribe(this->select(Observable<int>::error(this->failure))).isDisposed());
+		}
+
+		TYPED_TEST(ObservableSelectionTest, DefersSourceForEachSubscription)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									result = this->select(Observable<int>::defer(factory.AsStdFunction()));
+			InSequence									sequence;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::fromIterable(std::array{1, 2, 3})));
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::fromIterable(std::array{1, 2, 3})));
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			this->subscribe(result);
+			this->subscribe(result);
+		}
+
+		TYPED_TEST(ObservableSelectionTest, WaitsForScheduledValues)
+		{
+			const auto subscription = this->subscribe(this->select(Observable<int>::fromIterable(std::array{1, 2, 3}).observeOn(this->loop)));
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableSelectionTest, CancelsScheduledUpstream)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto subscription = this->subscribe(this->select(Observable<int>::defer(factory.AsStdFunction()).subscribeOn(this->loop)));
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableTest, ElementAtZeroSelectsFirstValue)
+		{
+			EXPECT_CALL(observer, next(1));
+			subscribe(Observable<int>::fromIterable(std::array{1, 2}).elementAt(0));
+		}
+
+		TEST_F(ObservableTest, ElementAtCancelsBeforeProducingFollowingValue)
+		{
+			StrictMock<MockFunction<void(int)>> produced;
+			InSequence							sequence;
+			EXPECT_CALL(produced, Call(1));
+			EXPECT_CALL(produced, Call(2));
+			EXPECT_CALL(observer, next(2));
+			subscribe(Observable<int>::fromIterable(std::array{1, 2, 3}).doOnNext(produced.AsStdFunction()).elementAt(1));
+		}
+
+		TEST_F(ObservableTest, FirstCancelsBeforeProducingFollowingValue)
+		{
+			StrictMock<MockFunction<void(int)>> produced;
+			EXPECT_CALL(produced, Call(1));
+			EXPECT_CALL(observer, next(1));
+			subscribe(Observable<int>::fromIterable(std::array{1, 2}).doOnNext(produced.AsStdFunction()).first());
+		}
+
+		TEST_F(ObservableTest, ElementAtSourceLengthCompletesEmpty)
+		{
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::fromIterable(std::array{1, 2}).elementAt(2));
+		}
+
+		TEST_F(ObservableTest, ElementAtMaximumIndexCompletesEmpty)
+		{
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::just(1).elementAt(std::numeric_limits<std::size_t>::max()));
+		}
+
+		TEST_F(ObservableTest, ElementAtPreservesErrorBeforeSelectedValue)
+		{
+			EXPECT_CALL(observer, error(failure));
+			subscribe(Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::error(failure)}).elementAt(1));
+		}
+
+		TEST_F(ObservableTest, ElementAtIgnoresErrorAfterSelectedValue)
+		{
+			EXPECT_CALL(observer, next(2));
+			subscribe(Observable<int>::concat(std::array{Observable<int>::fromIterable(std::array{1, 2}), Observable<int>::error(failure)}).elementAt(1));
+		}
+
+		TEST_F(ObservableTest, FirstIgnoresErrorAfterSelectedValue)
+		{
+			EXPECT_CALL(observer, next(1));
+			subscribe(Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::error(failure)}).first());
+		}
+
+		TEST_F(ObservableTest, LastDiscardsBufferedValueOnError)
+		{
+			EXPECT_CALL(observer, error(failure));
+			subscribe(Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::error(failure)}).last());
+		}
+
+		TEST_F(ObservableTest, LastEmitsOnlyAfterAllValuesAreProduced)
+		{
+			StrictMock<MockFunction<void(int)>> produced;
+			InSequence							sequence;
+			EXPECT_CALL(produced, Call(1));
+			EXPECT_CALL(produced, Call(2));
+			EXPECT_CALL(produced, Call(3));
+			EXPECT_CALL(observer, next(3));
+			subscribe(Observable<int>::fromIterable(std::array{1, 2, 3}).doOnNext(produced.AsStdFunction()).last());
+		}
+
+		class ObservableLastTest : public RunLoopTest
+		{
+		};
+
+		TEST_F(ObservableLastTest, WaitsForCompletionAfterLastValue)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(7), Observable<int>::empty().subscribeOn(loop)});
+			const auto subscription = subscribe(source.last());
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(observer, next(7));
+			drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableLastTest, CancellationDiscardsBufferedValue)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(7), Observable<int>::empty().subscribeOn(loop)});
+			const auto subscription = subscribe(source.last());
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		template <typename Case>
 		class ObservableQuantifierTest : public RunLoopTest
 		{
 		protected:

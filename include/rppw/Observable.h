@@ -311,6 +311,29 @@ namespace rppw
 		Observable observeOn(S scheduler) const;
 
 		/**
+		 * @brief Selects the value at a zero-based index.
+		 * @param index Number of values to skip before selecting one.
+		 * @return Maybe containing the selected value, or empty if the source completes first.
+		 * @note Selection cancels upstream immediately. Errors before selection are preserved.
+		 */
+		Maybe<T> elementAt(std::size_t index) const;
+
+		/**
+		 * @brief Selects the first value and cancels upstream immediately.
+		 * @return Maybe containing the first value, or empty for an empty source.
+		 * @note Errors before the first value are preserved.
+		 */
+		Maybe<T> first() const;
+
+		/**
+		 * @brief Selects the last value after normal completion.
+		 * @return Maybe containing the last value, or empty for an empty source.
+		 * @note Retains one value while waiting for completion. An upstream error discards it.
+		 * No value is emitted if upstream never completes. Cancellation is propagated upstream.
+		 */
+		Maybe<T> last() const;
+
+		/**
 		 * @brief Requires exactly one value before upstream completion.
 		 * @return Single that succeeds at completion if exactly one value was received.
 		 * @note Zero or two values produce std::out_of_range through the reactive

@@ -325,6 +325,24 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	Maybe<T> Observable<T>::elementAt(std::size_t index) const
+	{
+		return drop(index).take(1).singleElement();
+	}
+
+	template <detail::Value T>
+	Maybe<T> Observable<T>::first() const
+	{
+		return elementAt(0);
+	}
+
+	template <detail::Value T>
+	Maybe<T> Observable<T>::last() const
+	{
+		return Observable{(source_ | rpp::operators::take_last(1)).as_dynamic()}.singleElement();
+	}
+
+	template <detail::Value T>
 	Single<T> Observable<T>::singleOrError() const
 	{
 		return Single<T>{Observable{detail::cardinality(source_, true, "singleOrError")}};
