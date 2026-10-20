@@ -11,6 +11,8 @@ namespace rppw
 	 * request cancellation. An empty handle is considered disposed.
 	 * @note dispose() and isDisposed() delegate to thread-safe RPP operations.
 	 * This does not permit concurrent assignment to the same handle object.
+	 *
+	 * @include rppw/Disposable.h
 	 */
 	class Disposable
 	{

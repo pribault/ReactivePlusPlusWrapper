@@ -131,8 +131,9 @@ pull requests targeting `develop` or `master`. Four independent jobs:
   Clang, each in Debug, Release and Profile using presets. Builds the library,
   tests, examples and standalone headers, then runs all CTest tests.
   The package is also installed and consumed by an independent project.
-- **Doxygen**: public API validation using [Doxyfile](Doxyfile); every
-  documentation warning is an error. HTML/XML output goes under `build/doxygen`.
+- **Doxygen**: public API validation using
+  [resources/doxygen/Doxyfile](resources/doxygen/Doxyfile); every
+  documentation warning is an error. HTML output goes under `build/doxygen`.
 - **clang-format 21.1.8**: read-only validation of C++ files in
   `include`, `src`, `tests` and `examples`, using [.clang-format](.clang-format).
 
@@ -142,8 +143,9 @@ The vcpkg checkout is pinned to the same commit as the manifest.
 To reproduce quality checks from the root:
 
 ```powershell
+git submodule update --init
 New-Item -ItemType Directory -Force build\doxygen | Out-Null
-doxygen Doxyfile
+doxygen resources\doxygen\Doxyfile
 $files = Get-ChildItem include,src,tests,examples -Recurse -File |
     Where-Object { $_.Extension -in ".h", ".hpp", ".inl", ".inc", ".cpp" }
 clang-format --dry-run --Werror --style=file $files.FullName

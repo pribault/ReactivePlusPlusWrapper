@@ -25,6 +25,8 @@ namespace rppw
 	 * subscribe() on the calling thread.
 	 * @warning Reference captures must outlive processing.
 	 * The caller must synchronize data shared between subscriptions.
+	 *
+	 * @include rppw/Single.h
 	 */
 	template <detail::Value T>
 	class Single
