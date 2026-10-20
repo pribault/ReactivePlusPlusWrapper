@@ -16,6 +16,11 @@ The API provides `camelCase` method chains, explicit conversions,
 cancellable subscriptions and ReactivePlusPlus scheduler integration.
 It is not an exhaustive implementation of RxJava.
 
+`Completable::toObservable<T>()` and `Completable::toMaybe<T>()` expose the
+same deferred operation without emitting any value. Normal completion becomes
+an empty Observable or Maybe; errors and cancellation are preserved.
+The value type defaults to `std::monostate` and need not be default-constructible.
+
 `Observable<T>` supports prefix selection with predicates: `takeWhile` excludes
 the first false value; `takeUntil` includes the first true value and then
 completes. Both cancel upstream immediately at that boundary.

@@ -109,4 +109,16 @@ namespace rppw
 	{
 		return Completable{Observable<std::monostate>{source_}.observeOn(std::move(scheduler))};
 	}
+
+	template <detail::Value T>
+	Observable<T> Completable::toObservable() const
+	{
+		return andThen(Observable<T>::empty());
+	}
+
+	template <detail::Value T>
+	Maybe<T> Completable::toMaybe() const
+	{
+		return Maybe<T>{toObservable<T>()};
+	}
 } // namespace rppw

@@ -344,6 +344,10 @@ namespace rppw::test
 		static_assert(std::same_as<decltype(Single<int>::just(1).ignoreElement()), Completable>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().ignoreElement()), Completable>);
 		static_assert(std::same_as<decltype(Single<int>::just(1).toObservable()), Observable<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().toObservable()), Observable<std::monostate>>);
+		static_assert(std::same_as<decltype(Completable::complete().toMaybe()), Maybe<std::monostate>>);
+		static_assert(std::same_as<decltype(Completable::complete().toObservable<int>()), Observable<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().toMaybe<int>()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Single<int>::just(1).toMaybe()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().toObservable()), Observable<int>>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().toSingle()), Single<int>>);
