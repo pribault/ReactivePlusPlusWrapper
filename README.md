@@ -37,6 +37,13 @@ Otherwise they wait for normal completion. On an empty source, `allOf` and
 subscription; errors before a decisive result are propagated, not converted
 to boolean results.
 
+`Observable<T>::elementAt(index)`, `first()` and `last()` return `Maybe<T>`.
+Indices are zero-based; a missing element produces an empty Maybe.
+`elementAt` and `first` cancel upstream as soon as the selected value arrives.
+`last` retains one value and waits for normal completion; an upstream error
+is propagated instead of returning the retained value. All three methods are
+lazy and execute independently for each subscription.
+
 ```cpp
 // stl
 #include <exception>
