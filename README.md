@@ -44,6 +44,14 @@ Indices are zero-based; a missing element produces an empty Maybe.
 is propagated instead of returning the retained value. All three methods are
 lazy and execute independently for each subscription.
 
+`Observable<T>::count()` returns `Single<std::size_t>` (zero on an empty source).
+`min()` and `max()` return `Maybe<T>` (empty on an empty source), using
+`std::less<>` by default or a supplied const-invocable strict weak ordering.
+Equivalent extrema retain the first occurrence. These aggregations use
+constant storage, wait for normal completion, propagate errors instead of
+partial results, and reset for each subscription. Counter overflow signals
+`std::overflow_error` through the reactive error channel.
+
 ```cpp
 // stl
 #include <exception>

@@ -4,6 +4,7 @@
 #include <concepts>
 #include <cstddef>
 #include <exception>
+#include <functional>
 #include <ranges>
 #include <type_traits>
 #include <utility>
@@ -332,6 +333,40 @@ namespace rppw
 		 * No value is emitted if upstream never completes. Cancellation is propagated upstream.
 		 */
 		Maybe<T> last() const;
+
+		/**
+		 * @brief Counts all values until normal completion.
+		 * @return Single containing the number of values, or zero for an empty source.
+		 * @note Upstream errors discard the partial count. Counter overflow signals
+		 * std::overflow_error through onError. Cancellation is propagated upstream.
+		 */
+		Single<std::size_t> count() const;
+
+		/**
+		 * @brief Selects the greatest value after normal completion.
+		 * @tparam Compare Const-invocable strict weak ordering, defaulting to std::less<>.
+		 * @param compare Comparator stored by value, returning true when its first argument is smaller.
+		 * @return Maybe containing the greatest value, or empty for an empty source.
+		 * Equivalent values retain the first occurrence.
+		 * @note Retains one value. Upstream errors and comparator exceptions discard
+		 * the partial result and signal onError. Cancellation is propagated upstream.
+		 */
+		template <typename Compare = std::less<>>
+			requires std::strict_weak_order<const Compare &, const T &, const T &>
+		Maybe<T> max(Compare compare = {}) const;
+
+		/**
+		 * @brief Selects the smallest value after normal completion.
+		 * @tparam Compare Const-invocable strict weak ordering, defaulting to std::less<>.
+		 * @param compare Comparator stored by value, returning true when its first argument is smaller.
+		 * @return Maybe containing the smallest value, or empty for an empty source.
+		 * Equivalent values retain the first occurrence.
+		 * @note Retains one value. Upstream errors and comparator exceptions discard
+		 * the partial result and signal onError. Cancellation is propagated upstream.
+		 */
+		template <typename Compare = std::less<>>
+			requires std::strict_weak_order<const Compare &, const T &, const T &>
+		Maybe<T> min(Compare compare = {}) const;
 
 		/**
 		 * @brief Requires exactly one value before upstream completion.

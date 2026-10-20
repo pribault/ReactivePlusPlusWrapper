@@ -22,6 +22,206 @@ namespace rppw::test
 		};
 
 		template <typename Case>
+		class ObservableAggregateTest : public RunLoopTest
+		{
+		protected:
+			auto aggregate(const Observable<int> &source)
+			{
+				if constexpr (Case::value == 0)
+					return source.count();
+				else if constexpr (Case::value == 1)
+					return source.max();
+				else
+					return source.min();
+			}
+
+			Disposable subscribeResult(const Observable<int> &source)
+			{
+				if constexpr (Case::value == 0)
+					return subscribe(aggregate(source).map(
+						[](std::size_t value)
+						{
+							return static_cast<int>(value);
+						}));
+				else
+					return subscribe(aggregate(source));
+			}
+
+			static constexpr int expectedValue = Case::value == 0 ? 4 : Case::value == 1 ? 7 : -2;
+		};
+
+		using AggregateCases = ::testing::Types<std::integral_constant<int, 0>, std::integral_constant<int, 1>, std::integral_constant<int, 2>>;
+		TYPED_TEST_SUITE(ObservableAggregateTest, AggregateCases);
+
+		TYPED_TEST(ObservableAggregateTest, AggregatesAllValues)
+		{
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			EXPECT_TRUE(this->subscribeResult(Observable<int>::fromIterable(std::array{4, -2, 7, -2})).isDisposed());
+		}
+
+		TYPED_TEST(ObservableAggregateTest, HandlesEmptySource)
+		{
+			if constexpr (TypeParam::value == 0)
+				EXPECT_CALL(this->observer, next(0));
+			else
+				EXPECT_CALL(this->observer, complete());
+			EXPECT_TRUE(this->subscribeResult(Observable<int>::empty()).isDisposed());
+		}
+
+		TYPED_TEST(ObservableAggregateTest, HandlesSingleValue)
+		{
+			EXPECT_CALL(this->observer, next(TypeParam::value == 0 ? 1 : 9));
+			this->subscribeResult(Observable<int>::just(9));
+		}
+
+		TYPED_TEST(ObservableAggregateTest, ForwardsOriginalError)
+		{
+			EXPECT_CALL(this->observer, error(this->failure));
+			EXPECT_TRUE(this->subscribeResult(Observable<int>::error(this->failure)).isDisposed());
+		}
+
+		TYPED_TEST(ObservableAggregateTest, DiscardsPartialResultOnError)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(9), Observable<int>::error(this->failure)});
+			EXPECT_CALL(this->observer, error(this->failure));
+			this->subscribeResult(source);
+		}
+
+		TYPED_TEST(ObservableAggregateTest, DefersSourceForEachSubscription)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									result = this->aggregate(Observable<int>::defer(factory.AsStdFunction()));
+			InSequence									sequence;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::fromIterable(std::array{4, -2, 7, -2})));
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::fromIterable(std::array{4, -2, 7, -2})));
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			if constexpr (TypeParam::value == 0)
+			{
+				this->subscribe(result.map(
+					[](std::size_t value)
+					{
+						return static_cast<int>(value);
+					}));
+				this->subscribe(result.map(
+					[](std::size_t value)
+					{
+						return static_cast<int>(value);
+					}));
+			}
+			else
+			{
+				this->subscribe(result);
+				this->subscribe(result);
+			}
+		}
+
+		TYPED_TEST(ObservableAggregateTest, WaitsForNormalCompletion)
+		{
+			const auto source =
+				Observable<int>::concat(std::array{Observable<int>::fromIterable(std::array{4, -2, 7, -2}), Observable<int>::empty().subscribeOn(this->loop)});
+			const auto subscription = this->subscribeResult(source);
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(this->observer, next(TestFixture::expectedValue));
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableAggregateTest, CancelsScheduledUpstream)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto subscription = this->subscribeResult(Observable<int>::defer(factory.AsStdFunction()).subscribeOn(this->loop));
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableAggregateTest, CancellationDiscardsPartialResult)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(9), Observable<int>::empty().subscribeOn(this->loop)});
+			const auto subscription = this->subscribeResult(source);
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		template <typename Case>
+		class ObservableExtremumTest : public ReactiveTest
+		{
+		protected:
+			template <detail::Value T, typename Compare>
+			Maybe<T> select(const Observable<T> &source, Compare compare)
+			{
+				if constexpr (Case::value)
+					return source.max(std::move(compare));
+				else
+					return source.min(std::move(compare));
+			}
+		};
+
+		using ExtremumCases = ::testing::Types<std::false_type, std::true_type>;
+		TYPED_TEST_SUITE(ObservableExtremumTest, ExtremumCases);
+
+		TYPED_TEST(ObservableExtremumTest, SupportsReverseOrdering)
+		{
+			EXPECT_CALL(this->observer, next(TypeParam::value ? -2 : 7));
+			this->subscribe(this->select(Observable<int>::fromIterable(std::array{4, -2, 7}), std::greater<>{}));
+		}
+
+		TYPED_TEST(ObservableExtremumTest, PropagatesComparatorException)
+		{
+			StrictMock<MockFunction<bool(const int &, const int &)>> compare;
+			EXPECT_CALL(compare, Call(_, _)).WillOnce(::testing::Throw(std::runtime_error{"compare"}));
+			EXPECT_CALL(this->observer, error(ExceptionContaining<std::runtime_error>("compare")));
+			const auto result = this->select(Observable<int>::fromIterable(std::array{1, 2, 3}), compare.AsStdFunction());
+			EXPECT_TRUE(this->subscribe(result).isDisposed());
+		}
+
+		TYPED_TEST(ObservableExtremumTest, DoesNotCompareEmptySource)
+		{
+			StrictMock<MockFunction<bool(const int &, const int &)>> compare;
+			EXPECT_CALL(this->observer, complete());
+			this->subscribe(this->select(Observable<int>::empty(), compare.AsStdFunction()));
+		}
+
+		TYPED_TEST(ObservableExtremumTest, DoesNotCompareSingleValue)
+		{
+			StrictMock<MockFunction<bool(const int &, const int &)>> compare;
+			EXPECT_CALL(this->observer, next(7));
+			this->subscribe(this->select(Observable<int>::just(7), compare.AsStdFunction()));
+		}
+
+		struct ExtremumValue
+		{
+			explicit ExtremumValue(int key, int id)
+				: key{key}
+				, id{id}
+			{
+			}
+
+			int key;
+			int id;
+		};
+
+		TYPED_TEST(ObservableExtremumTest, KeepsFirstEquivalentNonDefaultConstructibleValue)
+		{
+			const auto source = Observable<ExtremumValue>::fromIterable(std::array{ExtremumValue{5, 1}, ExtremumValue{5, 2}});
+			const auto result = this->select(source,
+											 [](const ExtremumValue &left, const ExtremumValue &right)
+											 {
+												 return left.key < right.key;
+											 });
+			EXPECT_CALL(this->observer, next(1));
+			this->subscribe(result.map(
+				[](const ExtremumValue &value)
+				{
+					return value.id;
+				}));
+		}
+
+		template <typename Case>
 		class ObservableSelectionTest : public RunLoopTest
 		{
 		protected:

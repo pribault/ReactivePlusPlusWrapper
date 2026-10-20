@@ -131,6 +131,19 @@ namespace rppw::test
 		concept AcceptsFilter = requires(const Source &source, F function) { source.filter(function); };
 
 		template <typename F>
+		concept AcceptsExtremumComparator = requires(const Observable<int> &source, F compare) {
+			{ source.min(compare) } -> std::same_as<Maybe<int>>;
+			{ source.max(compare) } -> std::same_as<Maybe<int>>;
+		};
+
+		static_assert(AcceptsExtremumComparator<std::less<>>);
+		static_assert(AcceptsExtremumComparator<std::greater<>>);
+		static_assert(AcceptsExtremumComparator<decltype([](const int &a, const int &b) { return a < b; })>);
+		static_assert(!AcceptsExtremumComparator<decltype([](int, int) {})>);
+		static_assert(!AcceptsExtremumComparator<decltype([](int) { return true; })>);
+		static_assert(!AcceptsExtremumComparator<decltype([flag = false](int, int) mutable { return flag = !flag; })>);
+
+		template <typename F>
 		concept AcceptsPrefixPredicates = requires(const Observable<int> &source, F predicate) {
 			{ source.takeUntil(predicate) } -> std::same_as<Observable<int>>;
 			{ source.takeWhile(predicate) } -> std::same_as<Observable<int>>;
@@ -356,6 +369,9 @@ namespace rppw::test
 		static_assert(std::same_as<decltype(Observable<int>::empty().elementAt(0)), Maybe<int>>);
 		static_assert(std::same_as<decltype(Observable<int>::empty().first()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Observable<int>::empty().last()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().count()), Single<std::size_t>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().max()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().min()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Observable<int>::empty().ignoreElements()), Completable>);
 		static_assert(std::same_as<decltype(Single<int>::just(1).ignoreElement()), Completable>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().ignoreElement()), Completable>);

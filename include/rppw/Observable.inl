@@ -2,6 +2,7 @@
 
 // stl
 #include <functional>
+#include <limits>
 #include <stdexcept>
 #include <variant>
 #include <vector>
@@ -340,6 +341,47 @@ namespace rppw
 	Maybe<T> Observable<T>::last() const
 	{
 		return Observable{(source_ | rpp::operators::take_last(1)).as_dynamic()}.singleElement();
+	}
+
+	template <detail::Value T>
+	Single<std::size_t> Observable<T>::count() const
+	{
+		return Single<std::size_t>{Observable<std::size_t>{(source_ | rpp::operators::reduce(std::size_t{0},
+																							 [](std::size_t count, const T &)
+																							 {
+																								 if (count == std::numeric_limits<std::size_t>::max())
+																									 throw std::overflow_error{
+																										 "Observable::count: counter overflow"};
+																								 return count + 1;
+																							 }))
+															   .as_dynamic()}};
+	}
+
+	template <detail::Value T>
+	template <typename Compare>
+		requires std::strict_weak_order<const Compare &, const T &, const T &>
+	Maybe<T> Observable<T>::max(Compare compare) const
+	{
+		return min(
+			[compare = std::move(compare)](const T &left, const T &right)
+			{
+				return std::invoke(compare, right, left);
+			});
+	}
+
+	template <detail::Value T>
+	template <typename Compare>
+		requires std::strict_weak_order<const Compare &, const T &, const T &>
+	Maybe<T> Observable<T>::min(Compare compare) const
+	{
+		return Maybe<T>{Observable{(source_ | rpp::operators::reduce(
+												  [compare = std::move(compare)](T best, const T &value)
+												  {
+													  if (std::invoke(compare, value, std::as_const(best)))
+														  return value;
+													  return best;
+												  }))
+									   .as_dynamic()}};
 	}
 
 	template <detail::Value T>
