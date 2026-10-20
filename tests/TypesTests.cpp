@@ -130,6 +130,20 @@ namespace rppw::test
 		template <typename Source, typename F>
 		concept AcceptsFilter = requires(const Source &source, F function) { source.filter(function); };
 
+		template <typename F>
+		concept AcceptsPrefixPredicates = requires(const Observable<int> &source, F predicate) {
+			{ source.takeUntil(predicate) } -> std::same_as<Observable<int>>;
+			{ source.takeWhile(predicate) } -> std::same_as<Observable<int>>;
+			{ source.dropUntil(predicate) } -> std::same_as<Observable<int>>;
+			{ source.dropWhile(predicate) } -> std::same_as<Observable<int>>;
+		};
+
+		static_assert(AcceptsPrefixPredicates<decltype([](const int &value) { return value > 0; })>);
+		static_assert(AcceptsPrefixPredicates<decltype([](int value) { return value; })>);
+		static_assert(!AcceptsPrefixPredicates<decltype([](int) {})>);
+		static_assert(!AcceptsPrefixPredicates<decltype([](int &&) { return true; })>);
+		static_assert(!AcceptsPrefixPredicates<decltype([flag = false](int) mutable { return flag = !flag; })>);
+
 		template <typename Source, typename... Callbacks>
 		concept AcceptsSubscribe = requires(const Source &source, Callbacks... callbacks) { source.subscribe(callbacks...); };
 

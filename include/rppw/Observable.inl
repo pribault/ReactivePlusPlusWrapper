@@ -191,6 +191,84 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Observable<T> Observable<T>::takeUntil(F predicate) const
+	{
+		return Observable{rpp::source::create<T>(
+							  [source = source_, predicate = std::move(predicate)](rpp::dynamic_observer<T> observer)
+							  {
+								  const auto upstream = rpp::composite_disposable_wrapper::make();
+								  observer.set_upstream(upstream);
+								  source.subscribe(
+									  upstream,
+									  [observer, predicate](const T &value)
+									  {
+										  const bool stop = std::invoke(predicate, value);
+										  observer.on_next(value);
+										  if (stop)
+											  observer.on_completed();
+									  },
+									  [observer](const std::exception_ptr &error)
+									  {
+										  observer.on_error(error);
+									  },
+									  [observer]
+									  {
+										  observer.on_completed();
+									  });
+							  })
+							  .as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Observable<T> Observable<T>::takeWhile(F predicate) const
+	{
+		return Observable{(source_ | rpp::operators::take_while(
+										 [predicate = std::move(predicate)](const T &value) -> bool
+										 {
+											 return std::invoke(predicate, value);
+										 }))
+							  .as_dynamic()};
+	}
+
+	template <detail::Value T>
+	Observable<T> Observable<T>::drop(std::size_t count) const
+	{
+		return Observable{(source_ | rpp::operators::skip(count)).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Observable<T> Observable<T>::dropUntil(F predicate) const
+	{
+		return dropWhile(
+			[predicate = std::move(predicate)](const T &value)
+			{
+				return !std::invoke(predicate, value);
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::PredicateFor<T> F>
+	Observable<T> Observable<T>::dropWhile(F predicate) const
+	{
+		struct KeepAfterPrefix
+		{
+			F			 predicate;
+			mutable bool dropping = true;
+
+			bool operator()(const T &value) const
+			{
+				if (dropping)
+					dropping = std::invoke(predicate, value);
+				return !dropping;
+			}
+		};
+		return filter(KeepAfterPrefix{std::move(predicate)});
+	}
+
+	template <detail::Value T>
 	template <rpp::schedulers::constraint::scheduler S>
 	Observable<T> Observable<T>::subscribeOn(S scheduler) const
 	{

@@ -207,6 +207,53 @@ namespace rppw
 		Observable take(std::size_t count) const;
 
 		/**
+		 * @brief Emits values through the first value satisfying the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Stop condition evaluated before forwarding each value.
+		 * @return Source including the matching value, then completing and cancelling upstream.
+		 * @note Without a match, all values are forwarded. Predicate exceptions signal onError.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable takeUntil(F predicate) const;
+
+		/**
+		 * @brief Emits values while the predicate holds.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Condition evaluated before forwarding each value.
+		 * @return Source excluding the first nonmatching value, then completing and cancelling upstream.
+		 * @note Predicate exceptions signal onError.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable takeWhile(F predicate) const;
+
+		/**
+		 * @brief Discards the first count values.
+		 * @param count Number of initial values to discard; zero preserves all values.
+		 * @return Source forwarding remaining values and preserving upstream termination.
+		 */
+		Observable drop(std::size_t count) const;
+
+		/**
+		 * @brief Discards values until the predicate first holds.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Start condition, no longer evaluated after its first match.
+		 * @return Source forwarding the first matching value and all subsequent values.
+		 * @note Without a match, no values are forwarded. Predicate exceptions signal onError.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable dropUntil(F predicate) const;
+
+		/**
+		 * @brief Discards values while the predicate holds.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Condition, no longer evaluated after its first false result.
+		 * @return Source forwarding the first nonmatching value and all subsequent values.
+		 * @note Predicate exceptions signal onError. State is independent for each subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable dropWhile(F predicate) const;
+
+		/**
 		 * @brief Schedules the upstream subscription on the supplied scheduler.
 		 * @tparam S ReactivePlusPlus scheduler type.
 		 * @param scheduler Subscription execution context.

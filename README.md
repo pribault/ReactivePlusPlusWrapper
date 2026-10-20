@@ -16,6 +16,15 @@ The API provides `camelCase` method chains, explicit conversions,
 cancellable subscriptions and ReactivePlusPlus scheduler integration.
 It is not an exhaustive implementation of RxJava.
 
+`Observable<T>` supports prefix selection with predicates: `takeWhile` excludes
+the first false value; `takeUntil` includes the first true value and then
+completes. Both cancel upstream immediately at that boundary.
+`drop(count)` discards an initial count. `dropWhile` discards the initial true
+prefix; `dropUntil` discards the initial false prefix. Both predicate-based
+drop operators forward the boundary value and all later values without
+evaluating the predicate again. State resets for each subscription, and
+predicate exceptions use the reactive error channel.
+
 ```cpp
 // stl
 #include <exception>
