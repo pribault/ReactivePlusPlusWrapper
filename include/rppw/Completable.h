@@ -163,6 +163,24 @@ namespace rppw
 		template <rpp::schedulers::constraint::scheduler S>
 		Completable observeOn(S scheduler) const;
 
+		/**
+		 * @brief Exposes completion or an error as a stream without values.
+		 * @tparam T Observable value type, defaulting to std::monostate; no T is constructed.
+		 * @return Cold Observable forwarding termination without emitting a value.
+		 * @note Each subscription executes this source anew. Cancellation is propagated upstream.
+		 */
+		template <detail::Value T = std::monostate>
+		Observable<T> toObservable() const;
+
+		/**
+		 * @brief Exposes normal completion as an empty Maybe, preserving errors.
+		 * @tparam T Maybe value type, defaulting to std::monostate; no T is constructed.
+		 * @return Cold Maybe that completes empty or forwards this source's error.
+		 * @note Each subscription executes this source anew. Cancellation is propagated upstream.
+		 */
+		template <detail::Value T = std::monostate>
+		Maybe<T> toMaybe() const;
+
 	private:
 		explicit Completable(Observable<std::monostate> source);
 		rpp::dynamic_observable<std::monostate> source_;
