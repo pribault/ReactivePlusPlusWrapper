@@ -30,6 +30,8 @@ namespace rppw
 	 * @warning Reference captures must outlive their use, including asynchronous use.
 	 * The caller must synchronize data shared between subscriptions.
 	 * No backpressure mechanism is provided.
+	 *
+	 * @include rppw/Observable.h
 	 */
 	template <detail::Value T>
 	class Observable

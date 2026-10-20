@@ -158,6 +158,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Install Doxygen
         run: |
@@ -167,7 +169,7 @@ jobs:
       - name: Check public API documentation
         run: |
           mkdir -p build/doxygen
-          doxygen Doxyfile
+          doxygen resources/doxygen/Doxyfile
 
   clang-format:
     name: clang-format 21.1.8

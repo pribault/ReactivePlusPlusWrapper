@@ -22,6 +22,8 @@ namespace rppw
 	 * Without a scheduler, synchronous actions run on the thread calling subscribe().
 	 * @warning Reference captures must outlive processing.
 	 * The caller must synchronize data shared between subscriptions.
+	 *
+	 * @include rppw/Completable.h
 	 */
 	class Completable
 	{
