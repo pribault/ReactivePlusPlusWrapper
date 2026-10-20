@@ -1,0 +1,14 @@
+{
+  "name": "reactiveplusplus-wrapper",
+  "version-semver": "0.1.0",
+  "description": "C++20 RxJava-style API over ReactivePlusPlus",
+  "license": "MIT",
+  "builtin-baseline": "40dd49b0c9c7dbd79dc64cad5e82308eae04f67f",
+  "dependencies": ["reactiveplusplus"],
+  "features": {
+    "tests": {
+      "description": "Build GoogleTest and GoogleMock tests",
+      "dependencies": ["gtest"]
+    }
+  }
+}

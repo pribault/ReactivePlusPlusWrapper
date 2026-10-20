@@ -1,0 +1,8 @@
+foreach(example IN ITEMS observable single maybe completable scheduling)
+    add_executable(rppw_${example} ${example}.cpp)
+    target_link_libraries(rppw_${example} PRIVATE ReactivePlusPlusWrapper::ReactivePlusPlusWrapper)
+    if(BUILD_TESTING)
+        add_test(NAME example.${example} COMMAND rppw_${example})
+        set_tests_properties(example.${example} PROPERTIES LABELS examples TIMEOUT 30)
+    endif()
+endforeach()

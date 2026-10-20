@@ -1,0 +1,193 @@
+#pragma once
+
+// stl
+#include <concepts>
+#include <exception>
+#include <optional>
+#include <type_traits>
+#include <utility>
+
+// rpp
+#include <rpp/rpp.hpp>
+
+// rppw
+#include <rppw/Concepts.h>
+#include <rppw/Disposable.h>
+
+namespace rppw
+{
+	/**
+	 * @brief Cold source that succeeds with a value, completes empty or signals an error.
+	 * @tparam T Unqualified value type satisfying std::copyable.
+	 * @details Success and empty completion are distinct terminal outcomes:
+	 * onSuccess is never followed by onComplete. Each subscription executes its own chain.
+	 * Operators do not modify the source; their exceptions are forwarded to onError.
+	 * Without a scheduler, synchronous sources run on the thread calling subscribe().
+	 * @warning Reference captures must outlive processing.
+	 * The caller must synchronize data shared between subscriptions.
+	 */
+	template <detail::Value T>
+	class Maybe
+	{
+	public:
+		/** @brief Type of the optional value. */
+		using value_type = T;
+
+		/**
+		 * @brief Stores a value to emit as success for each subscription.
+		 * @param value Value owned by the source.
+		 * @return Present Maybe.
+		 */
+		static Maybe just(T value);
+
+		/**
+		 * @brief Creates a source that completes without a value.
+		 * @return Maybe invoking only onComplete at subscription time.
+		 */
+		static Maybe empty();
+
+		/**
+		 * @brief Evaluates presence or absence for each subscription.
+		 * @tparam F Const-invocable callable returning `std::optional<T>`.
+		 * @param callable Computation stored by value and invoked only at subscription time.
+		 * @return Present Maybe if the optional has a value, empty otherwise.
+		 * @note Callable exceptions are forwarded to onError.
+		 */
+		template <concepts::FactoryFor<std::optional<T>> F>
+		static Maybe fromCallable(F callable);
+
+		/**
+		 * @brief Creates a source that only forwards the supplied error.
+		 * @param error Non-null exception retained by the source.
+		 * @return Failing Maybe.
+		 * @throws std::invalid_argument If error is null.
+		 */
+		static Maybe error(std::exception_ptr error);
+
+		/**
+		 * @brief Captures an error with std::make_exception_ptr and creates a failing source.
+		 * @tparam E Copy-constructible type satisfying concepts::ExceptionValue.
+		 * @param error Error copied into the exception pointer retained by the source.
+		 * @return Maybe that forwards the captured error for each subscription.
+		 * @note Capture happens immediately; only notification is deferred.
+		 */
+		template <concepts::ExceptionValue E>
+		static Maybe error(E error);
+
+		/**
+		 * @brief Invokes a Maybe factory for each subscription.
+		 * @tparam F Const-invocable callable returning `Maybe<T>`.
+		 * @param factory Factory stored by value.
+		 * @return Deferred source; factory exceptions are forwarded to onError.
+		 */
+		template <concepts::SourceFactoryFor<T, rppw::Maybe> F>
+		static Maybe defer(F factory);
+
+		/**
+		 * @brief Starts processing with three mutually exclusive terminal outcomes.
+		 * @tparam N Type of the callback receiving T.
+		 * @tparam E Type of the callback receiving std::exception_ptr.
+		 * @tparam C Type of the no-argument callback for an absent value.
+		 * @param onSuccess Terminal callback when a value is received.
+		 * @param onError Terminal error callback.
+		 * @param onComplete Terminal callback when the source is empty.
+		 * @return Shared cancellation handle, disposed after success, error or empty completion.
+		 * @pre Callbacks must be const-invocable and must not throw.
+		 * @warning An exception escaping a callback invokes std::terminate.
+		 * @note Callbacks are retained throughout processing. Destroying the handle
+		 * does not cancel the subscription. Cancellation does not interrupt a callback already in progress.
+		 */
+		template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E, concepts::CallbackFor C>
+		Disposable subscribe(N onSuccess, E onError, C onComplete) const;
+
+		/**
+		 * @brief Transforms a present value without invoking the function when empty.
+		 * @tparam F Const-invocable callable producing an admissible, non-reference value.
+		 * @param function Value transformation.
+		 * @return `Maybe<U>`, where U is the decayed result type.
+		 * @note Exceptions from function are forwarded to onError.
+		 */
+		template <concepts::MapperFor<T> F>
+		auto map(F function) const;
+
+		/**
+		 * @brief Chains a Maybe from a present value.
+		 * @tparam F Const-invocable callable returning `Maybe<U>`.
+		 * @param function Second-source factory, not invoked on empty completion or error.
+		 * @return Maybe carrying the second source's result or upstream termination.
+		 * @note Exceptions from function are forwarded to onError.
+		 */
+		template <concepts::FlatMapperFor<T, rppw::Maybe> F>
+		auto flatMap(F function) const;
+
+		/**
+		 * @brief Keeps an accepted value or completes empty.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Retention test, not invoked for an empty source.
+		 * @return Filtered Maybe; upstream and predicate errors are propagated.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Maybe filter(F predicate) const;
+
+		/**
+		 * @brief Schedules the upstream subscription.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param scheduler Subscription context, not necessarily the notification context.
+		 * @return Maybe with a scheduled subscription.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Maybe subscribeOn(S scheduler) const;
+
+		/**
+		 * @brief Schedules delivery of success, empty completion and errors.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param scheduler Downstream delivery context.
+		 * @return Maybe whose notifications are scheduled on scheduler.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Maybe observeOn(S scheduler) const;
+
+		/**
+		 * @brief Exposes the source as zero or one value followed by completion.
+		 * @return Observable preserving values, absence and errors.
+		 */
+		Observable<T> toObservable() const;
+
+		/**
+		 * @brief Requires a value before completion.
+		 * @return Single carrying the value, or std::out_of_range if the source is empty.
+		 * @note Source errors are preserved; absence errors use the reactive error channel.
+		 */
+		Single<T> toSingle() const;
+
+		/**
+		 * @brief Replaces an absent value without replacing errors.
+		 * @param value Fallback value owned by the chain.
+		 * @return Single carrying the present value or value after empty completion.
+		 */
+		Single<T> defaultIfEmpty(T value) const;
+
+		/**
+		 * @brief Discards the optional value and preserves termination.
+		 * @return Completable that completes on success or empty completion, or forwards the error.
+		 */
+		Completable ignoreElement() const;
+
+	private:
+		explicit Maybe(Observable<T> source)
+			: source_{std::move(source)}
+		{
+		}
+		Observable<T> source_;
+		template <detail::Value>
+		friend class Observable;
+		template <detail::Value>
+		friend class Single;
+		template <detail::Value>
+		friend class Maybe;
+		friend class Completable;
+	};
+} // namespace rppw
+
+// rppw
+#include <rppw/Maybe.inl>
