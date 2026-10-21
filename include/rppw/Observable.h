@@ -291,6 +291,54 @@ namespace rppw
 		Observable dropWhile(F predicate) const;
 
 		/**
+		 * @brief Delays values, completion and errors on the supplied scheduler.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param duration Nonnegative delay applied to each notification.
+		 * @param scheduler Notification delivery context; no scheduler is chosen implicitly.
+		 * @return Observable preserving notification order without delaying upstream subscription.
+		 * @throws std::invalid_argument If duration is negative.
+		 * @note Cancellation discards queued notifications and cancels upstream.
+		 * @warning Queuing is unbounded. A blocking scheduler can block the subscribing thread.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Observable delay(rpp::schedulers::duration duration, S scheduler) const;
+
+		/**
+		 * @brief Repeats the source after normal completion up to count total subscriptions.
+		 * @param count Total subscription count; zero completes without subscribing upstream.
+		 * @return Observable forwarding each repetition's values and stopping on the first error.
+		 * @note The counter resets for each subscriber. Cancellation prevents further repetitions.
+		 * No scheduler is added.
+		 */
+		Observable repeat(std::size_t count) const;
+
+		/**
+		 * @brief Repeats the source after every normal completion until cancellation or error.
+		 * @return Observable forwarding values from every repetition.
+		 * @warning Synchronous sources can occupy the subscribing thread indefinitely,
+		 * including empty sources. No scheduler is added.
+		 */
+		Observable repeat() const;
+
+		/**
+		 * @brief Resubscribes after an error up to count additional attempts.
+		 * @param count Maximum retries after the initial subscription; zero does not retry.
+		 * @return Observable forwarding values from every attempt, completing on success,
+		 * or forwarding the last error after exhausting retries.
+		 * @note The counter resets for each subscriber. Cancellation prevents further attempts.
+		 * No scheduler is added; values emitted before a failed attempt are not retracted.
+		 */
+		Observable retry(std::size_t count) const;
+
+		/**
+		 * @brief Resubscribes after errors without a retry limit.
+		 * @return Observable forwarding all attempts' values until normal completion or cancellation.
+		 * @warning A synchronously failing source can occupy the subscribing thread indefinitely.
+		 * No scheduler is added.
+		 */
+		Observable retry() const;
+
+		/**
 		 * @brief Schedules the upstream subscription on the supplied scheduler.
 		 * @tparam S ReactivePlusPlus scheduler type.
 		 * @param scheduler Subscription execution context.

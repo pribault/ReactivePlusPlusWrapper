@@ -1,8 +1,12 @@
 // tests
 #include <support/RunLoopTest.h>
 
+// rpp
+#include <rpp/schedulers/test_scheduler.hpp>
+
 // stl
 #include <array>
+#include <chrono>
 
 namespace rppw::test
 {
@@ -15,6 +19,113 @@ namespace rppw::test
 		class SchedulerTest : public RunLoopTest
 		{
 		};
+
+		class ObservableDelayTest : public ReactiveTest
+		{
+		protected:
+			rpp::schedulers::test_scheduler clock;
+			static constexpr auto			duration = std::chrono::milliseconds{10};
+		};
+
+		TEST_F(ObservableDelayTest, DelaysValuesUntilExactDeadline)
+		{
+			const auto started = clock.now();
+			const auto subscription = subscribe(Observable<int>::fromIterable(std::array{1, 2}).delay(duration, clock));
+			EXPECT_FALSE(subscription.isDisposed());
+			ASSERT_EQ(clock.get_schedulings().size(), 1);
+			EXPECT_EQ(clock.get_schedulings().front(), started + duration);
+			clock.time_advance(duration - std::chrono::nanoseconds{1});
+			InSequence sequence;
+			EXPECT_CALL(observer, next(1));
+			EXPECT_CALL(observer, next(2));
+			EXPECT_CALL(observer, complete());
+			clock.time_advance(std::chrono::nanoseconds{1});
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableDelayTest, DelaysErrorWithoutDiscardingEarlierValues)
+		{
+			const auto source = Observable<int>::concat(std::array{Observable<int>::just(7), Observable<int>::error(failure)});
+			const auto subscription = subscribe(source.delay(duration, clock));
+			clock.time_advance(duration - std::chrono::nanoseconds{1});
+			InSequence sequence;
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, error(failure));
+			clock.time_advance(std::chrono::nanoseconds{1});
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableDelayTest, DelaysEmptyCompletion)
+		{
+			const auto subscription = subscribe(Observable<int>::empty().delay(duration, clock));
+			EXPECT_FALSE(subscription.isDisposed());
+			clock.time_advance(duration - std::chrono::nanoseconds{1});
+			EXPECT_CALL(observer, complete());
+			clock.time_advance(std::chrono::nanoseconds{1});
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableDelayTest, ZeroDurationPreservesNotifications)
+		{
+			InSequence sequence;
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			EXPECT_TRUE(subscribe(Observable<int>::just(7).delay(std::chrono::nanoseconds{0}, clock)).isDisposed());
+		}
+
+		TEST_F(ObservableDelayTest, RejectsNegativeDurationSynchronously)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_THROW(Observable<int>::defer(factory.AsStdFunction()).delay(std::chrono::nanoseconds{-1}, clock), std::invalid_argument);
+			EXPECT_TRUE(clock.get_schedulings().empty());
+		}
+
+		TEST_F(ObservableDelayTest, ExecutesProducerWithoutWaitingForDelivery)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									source = Observable<int>::defer(factory.AsStdFunction()).delay(duration, clock);
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::just(7)));
+			const auto subscription = subscribe(source);
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			clock.time_advance(duration);
+		}
+
+		TEST_F(ObservableDelayTest, CancellationDiscardsQueuedNotifications)
+		{
+			const auto subscription = subscribe(Observable<int>::just(7).delay(duration, clock));
+			subscription.dispose();
+			clock.time_advance(duration);
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(ObservableDelayTest, SchedulesEachSubscriptionIndependently)
+		{
+			const auto source = Observable<int>::just(7).delay(duration, clock);
+			const auto first = subscribe(source);
+			clock.time_advance(duration / 2);
+			const auto second = subscribe(source);
+			InSequence sequence;
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			clock.time_advance(duration / 2);
+			EXPECT_TRUE(first.isDisposed());
+			EXPECT_FALSE(second.isDisposed());
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			clock.time_advance(duration / 2);
+			EXPECT_TRUE(second.isDisposed());
+		}
+
+		TEST_F(SchedulerTest, DelayCancellationCancelsScheduledUpstream)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto subscription = subscribe(Observable<int>::defer(factory.AsStdFunction()).subscribeOn(loop).delay(std::chrono::milliseconds{10}, loop));
+			subscription.dispose();
+			drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
 
 		TEST_F(SchedulerTest, SubscribeOnDefersObservableFactory)
 		{

@@ -20,4 +20,24 @@ namespace rppw
 	{
 		return Completable{Observable<std::monostate>::error(std::move(error))};
 	}
+
+	Completable Completable::repeat(std::size_t count) const
+	{
+		return Completable{Observable<std::monostate>{source_}.repeat(count)};
+	}
+
+	Completable Completable::repeat() const
+	{
+		return Completable{Observable<std::monostate>{source_}.repeat()};
+	}
+
+	Completable Completable::retry(std::size_t count) const
+	{
+		return Completable{Observable<std::monostate>{source_}.retry(count)};
+	}
+
+	Completable Completable::retry() const
+	{
+		return Completable{Observable<std::monostate>{source_}.retry()};
+	}
 } // namespace rppw

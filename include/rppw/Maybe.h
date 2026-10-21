@@ -2,6 +2,7 @@
 
 // stl
 #include <concepts>
+#include <cstddef>
 #include <exception>
 #include <optional>
 #include <type_traits>
@@ -161,6 +162,53 @@ namespace rppw
 		 */
 		template <concepts::PredicateFor<T> F>
 		Maybe filter(F predicate) const;
+
+		/**
+		 * @brief Delays success, empty completion and errors on the supplied scheduler.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param duration Nonnegative notification delay.
+		 * @param scheduler Delivery context; upstream subscription is not delayed.
+		 * @return Maybe preserving all terminal outcomes with delayed delivery.
+		 * @throws std::invalid_argument If duration is negative.
+		 * @note Cancellation discards queued notifications and cancels upstream.
+		 * A blocking scheduler can block the subscribing thread.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Maybe delay(rpp::schedulers::duration duration, S scheduler) const;
+
+		/**
+		 * @brief Repeats success or empty completion up to count total subscriptions.
+		 * @param count Total subscription count; zero completes without subscribing.
+		 * @return Observable emitting present values and stopping on the first error.
+		 * @note Empty completions consume repetitions. Counts reset per subscriber;
+		 * cancellation prevents further subscriptions. No scheduler is added.
+		 */
+		Observable<T> repeat(std::size_t count) const;
+
+		/**
+		 * @brief Repeats success or empty completion until cancellation or error.
+		 * @return Observable emitting present values from every repetition.
+		 * @warning Synchronous repetition, including empty sources, can occupy the
+		 * subscribing thread indefinitely. No scheduler is added.
+		 */
+		Observable<T> repeat() const;
+
+		/**
+		 * @brief Resubscribes after an error up to count additional attempts.
+		 * @param count Maximum retries after the initial attempt; zero does not retry.
+		 * @return Maybe succeeding or completing empty on recovery, or forwarding the last error.
+		 * @note Empty completion is not retried. Counts reset per subscriber;
+		 * cancellation prevents further attempts. No scheduler or backoff is added.
+		 */
+		Maybe retry(std::size_t count) const;
+
+		/**
+		 * @brief Retries errors until success, empty completion or cancellation.
+		 * @return Maybe preserving success or empty completion on recovery.
+		 * @warning Synchronous errors can occupy the subscribing thread indefinitely.
+		 * No scheduler or backoff is added.
+		 */
+		Maybe retry() const;
 
 		/**
 		 * @brief Schedules the upstream subscription.

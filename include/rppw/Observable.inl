@@ -312,6 +312,41 @@ namespace rppw
 
 	template <detail::Value T>
 	template <rpp::schedulers::constraint::scheduler S>
+	Observable<T> Observable<T>::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		if (duration < rpp::schedulers::duration::zero())
+			throw std::invalid_argument{"Observable::delay: negative duration"};
+		return Observable{(source_ | rpp::operators::delay(duration, std::move(scheduler))).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	Observable<T> Observable<T>::repeat(std::size_t count) const
+	{
+		if (count == 0)
+			return empty();
+		return Observable{(source_ | rpp::operators::repeat(count)).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	Observable<T> Observable<T>::repeat() const
+	{
+		return Observable{(source_ | rpp::operators::repeat()).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	Observable<T> Observable<T>::retry(std::size_t count) const
+	{
+		return Observable{(source_ | rpp::operators::retry(count)).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	Observable<T> Observable<T>::retry() const
+	{
+		return Observable{(source_ | rpp::operators::retry()).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <rpp::schedulers::constraint::scheduler S>
 	Observable<T> Observable<T>::subscribeOn(S scheduler) const
 	{
 		return Observable{(source_ | rpp::operators::subscribe_on(std::move(scheduler))).as_dynamic()};
@@ -322,7 +357,7 @@ namespace rppw
 	Observable<T> Observable<T>::observeOn(S scheduler) const
 	{
 		// RPP observe_on forwards errors immediately; zero-delay also schedules errors.
-		return Observable{(source_ | rpp::operators::delay(rpp::schedulers::duration::zero(), std::move(scheduler))).as_dynamic()};
+		return delay(rpp::schedulers::duration::zero(), std::move(scheduler));
 	}
 
 	template <detail::Value T>

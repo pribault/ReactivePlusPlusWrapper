@@ -21,6 +21,242 @@ namespace rppw::test
 		{
 		};
 
+		TEST_F(ObservableTest, RepeatZeroCompletesWithoutSubscribing)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).repeat(0));
+		}
+
+		TEST_F(ObservableTest, RepeatPreservesEachSequenceOrder)
+		{
+			InSequence sequence;
+			EXPECT_CALL(observer, next(1));
+			EXPECT_CALL(observer, next(2));
+			EXPECT_CALL(observer, next(1));
+			EXPECT_CALL(observer, next(2));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::fromIterable(std::array{1, 2}).repeat(2));
+		}
+
+		TEST_F(ObservableTest, RepeatOneSubscribesOnlyOnce)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).repeat(1));
+		}
+
+		TEST_F(ObservableTest, RepeatStopsOnFirstError)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::error(failure)));
+			EXPECT_CALL(observer, error(failure));
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).repeat(3));
+		}
+
+		TEST_F(ObservableTest, RepeatDefersEverySubscription)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									source = Observable<int>::defer(factory.AsStdFunction()).repeat(2);
+			EXPECT_CALL(factory, Call()).Times(4).WillRepeatedly(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7)).Times(4);
+			EXPECT_CALL(observer, complete()).Times(2);
+			subscribe(source);
+			subscribe(source);
+		}
+
+		TEST_F(ObservableTest, RepeatEmptySourceIsStackSafe)
+		{
+			int		   attempts = 0;
+			const auto source = Observable<int>::defer(
+				[&]
+				{
+					++attempts;
+					return Observable<int>::empty();
+				});
+			EXPECT_CALL(observer, complete());
+			subscribe(source.repeat(10000));
+			EXPECT_EQ(attempts, 10000);
+		}
+
+		TEST_F(ObservableTest, UnlimitedRepeatStopsOnDownstreamCancellation)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).Times(3).WillRepeatedly(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7)).Times(3);
+			EXPECT_CALL(observer, complete());
+			EXPECT_TRUE(subscribe(Observable<int>::defer(factory.AsStdFunction()).repeat().take(3)).isDisposed());
+		}
+
+		TEST_F(ObservableTest, MaximumRepeatCountRemainsCancellable)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).Times(2).WillRepeatedly(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7)).Times(2);
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).repeat(std::numeric_limits<std::size_t>::max()).take(2));
+		}
+
+		TEST_F(ObservableTest, RetryZeroMakesOnlyInitialAttempt)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::error(failure)));
+			EXPECT_CALL(observer, error(failure));
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry(0));
+		}
+
+		TEST_F(ObservableTest, RetryExhaustsAdditionalAttemptsBeforeForwardingLastError)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call())
+				.WillOnce(::testing::Return(Observable<int>::error(std::runtime_error{"first"})))
+				.WillOnce(::testing::Return(Observable<int>::error(std::runtime_error{"second"})))
+				.WillOnce(::testing::Return(Observable<int>::error(failure)));
+			EXPECT_CALL(observer, error(failure));
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry(2));
+		}
+
+		TEST_F(ObservableTest, RetryPreservesValuesFromFailedAttempts)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									failed = Observable<int>::concat(std::array{Observable<int>::just(1), Observable<int>::error(failure)});
+			EXPECT_CALL(factory, Call())
+				.WillOnce(::testing::Return(failed))
+				.WillOnce(::testing::Return(failed))
+				.WillOnce(::testing::Return(Observable<int>::just(9)));
+			InSequence sequence;
+			EXPECT_CALL(observer, next(1)).Times(2);
+			EXPECT_CALL(observer, next(9));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry(2));
+		}
+
+		TEST_F(ObservableTest, RetryDoesNotRepeatSuccessfulSource)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry(3));
+		}
+
+		TEST_F(ObservableTest, RetryDoesNotRepeatEmptyCompletion)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::empty()));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry());
+		}
+
+		TEST_F(ObservableTest, RetryDefersAndResetsForEverySubscriber)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									source = Observable<int>::defer(factory.AsStdFunction()).retry(1);
+			EXPECT_CALL(factory, Call()).Times(4).WillRepeatedly(::testing::Return(Observable<int>::error(failure)));
+			EXPECT_CALL(observer, error(failure)).Times(2);
+			subscribe(source);
+			subscribe(source);
+		}
+
+		TEST_F(ObservableTest, RetrySynchronousErrorsAreStackSafe)
+		{
+			int		   attempts = 0;
+			const auto source = Observable<int>::defer(
+				[&]
+				{
+					++attempts;
+					return Observable<int>::error(failure);
+				});
+			EXPECT_CALL(observer, error(failure));
+			subscribe(source.retry(10000));
+			EXPECT_EQ(attempts, 10001);
+		}
+
+		TEST_F(ObservableTest, UnlimitedRetryStopsOnSuccess)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call())
+				.WillOnce(::testing::Return(Observable<int>::error(failure)))
+				.WillOnce(::testing::Return(Observable<int>::error(failure)))
+				.WillOnce(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry());
+		}
+
+		TEST_F(ObservableTest, UnlimitedRetryStopsOnDownstreamCancellation)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto									failed = Observable<int>::concat(std::array{Observable<int>::just(7), Observable<int>::error(failure)});
+			EXPECT_CALL(factory, Call()).Times(3).WillRepeatedly(::testing::Return(failed));
+			EXPECT_CALL(observer, next(7)).Times(3);
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry().take(3));
+		}
+
+		TEST_F(ObservableTest, MaximumRetryCountAllowsRecovery)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			EXPECT_CALL(factory, Call()).WillOnce(::testing::Return(Observable<int>::error(failure))).WillOnce(::testing::Return(Observable<int>::just(7)));
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, complete());
+			subscribe(Observable<int>::defer(factory.AsStdFunction()).retry(std::numeric_limits<std::size_t>::max()));
+		}
+
+		template <typename Case>
+		class ObservableResubscriptionTest : public RunLoopTest
+		{
+		protected:
+			Observable<int> resubscribe(const Observable<int> &source)
+			{
+				if constexpr (Case::value)
+					return source.retry(3);
+				else
+					return source.repeat(3);
+			}
+		};
+
+		using ResubscriptionCases = ::testing::Types<std::false_type, std::true_type>;
+		TYPED_TEST_SUITE(ObservableResubscriptionTest, ResubscriptionCases);
+
+		TYPED_TEST(ObservableResubscriptionTest, CancelsBeforeInitialScheduledAttempt)
+		{
+			StrictMock<MockFunction<Observable<int>()>> factory;
+			const auto subscription = this->subscribe(this->resubscribe(Observable<int>::defer(factory.AsStdFunction()).subscribeOn(this->loop)));
+			subscription.dispose();
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(ObservableResubscriptionTest, CancellationPreventsNextScheduledAttempt)
+		{
+			int		   attempts = 0;
+			const auto source = Observable<int>::defer(
+									[&]
+									{
+										++attempts;
+										if constexpr (TypeParam::value)
+											return Observable<int>::error(this->failure);
+										else
+											return Observable<int>::just(7);
+									})
+									.subscribeOn(this->loop);
+			if constexpr (!TypeParam::value)
+				EXPECT_CALL(this->observer, next(7));
+			const auto subscription = this->subscribe(this->resubscribe(source));
+			this->dispatchUntil(
+				[&]
+				{
+					return attempts == 1;
+				});
+			subscription.dispose();
+			this->drain();
+			EXPECT_EQ(attempts, 1);
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
 		template <typename Case>
 		class ObservableAggregateTest : public RunLoopTest
 		{

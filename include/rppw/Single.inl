@@ -113,6 +113,37 @@ namespace rppw
 
 	template <detail::Value T>
 	template <rpp::schedulers::constraint::scheduler S>
+	Single<T> Single<T>::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		return Single{source_.delay(duration, std::move(scheduler))};
+	}
+
+	template <detail::Value T>
+	Observable<T> Single<T>::repeat(std::size_t count) const
+	{
+		return source_.repeat(count);
+	}
+
+	template <detail::Value T>
+	Observable<T> Single<T>::repeat() const
+	{
+		return source_.repeat();
+	}
+
+	template <detail::Value T>
+	Single<T> Single<T>::retry(std::size_t count) const
+	{
+		return Single{source_.retry(count)};
+	}
+
+	template <detail::Value T>
+	Single<T> Single<T>::retry() const
+	{
+		return Single{source_.retry()};
+	}
+
+	template <detail::Value T>
+	template <rpp::schedulers::constraint::scheduler S>
 	Single<T> Single<T>::subscribeOn(S scheduler) const
 	{
 		return Single{source_.subscribeOn(std::move(scheduler))};

@@ -2,6 +2,7 @@
 
 // stl
 #include <concepts>
+#include <cstddef>
 #include <exception>
 #include <type_traits>
 #include <utility>
@@ -152,6 +153,53 @@ namespace rppw
 		 */
 		template <concepts::PredicateFor<T> F>
 		Maybe<T> filter(F predicate) const;
+
+		/**
+		 * @brief Delays success and errors on the supplied scheduler.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param duration Nonnegative notification delay.
+		 * @param scheduler Delivery context; upstream subscription is not delayed.
+		 * @return Single preserving success and errors with delayed delivery.
+		 * @throws std::invalid_argument If duration is negative.
+		 * @note Cancellation discards queued notifications and cancels upstream.
+		 * A blocking scheduler can block the subscribing thread.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Single delay(rpp::schedulers::duration duration, S scheduler) const;
+
+		/**
+		 * @brief Repeats successful subscriptions up to count times in total.
+		 * @param count Total subscription count; zero completes without subscribing.
+		 * @return Observable emitting each success and stopping on the first error.
+		 * @note Counts reset per subscriber; cancellation prevents further subscriptions.
+		 * No scheduler is added.
+		 */
+		Observable<T> repeat(std::size_t count) const;
+
+		/**
+		 * @brief Repeats successful subscriptions until cancellation or error.
+		 * @return Observable emitting each success.
+		 * @warning Synchronous repetition can occupy the subscribing thread indefinitely.
+		 * No scheduler is added.
+		 */
+		Observable<T> repeat() const;
+
+		/**
+		 * @brief Resubscribes after an error up to count additional attempts.
+		 * @param count Maximum retries after the initial attempt; zero does not retry.
+		 * @return Single succeeding on recovery or forwarding the last error on exhaustion.
+		 * @note Counts reset per subscriber; cancellation prevents further attempts.
+		 * No scheduler or backoff is added.
+		 */
+		Single retry(std::size_t count) const;
+
+		/**
+		 * @brief Retries errors until success or cancellation.
+		 * @return Single preserving the eventual success.
+		 * @warning Synchronous errors can occupy the subscribing thread indefinitely.
+		 * No scheduler or backoff is added.
+		 */
+		Single retry() const;
 
 		/**
 		 * @brief Schedules the upstream subscription without changing the reactive type.
