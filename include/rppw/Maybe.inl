@@ -220,6 +220,12 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	Maybe<T> Maybe<T>::switchIfEmpty(Maybe fallback) const
+	{
+		return Maybe{source_.switchIfEmpty(std::move(fallback.source_))};
+	}
+
+	template <detail::Value T>
 	Completable Maybe<T>::ignoreElement() const
 	{
 		return source_.ignoreElements();

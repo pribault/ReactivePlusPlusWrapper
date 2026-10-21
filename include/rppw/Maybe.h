@@ -249,6 +249,15 @@ namespace rppw
 		Single<T> defaultIfEmpty(T value) const;
 
 		/**
+		 * @brief Subscribes to a fallback only after empty completion.
+		 * @param fallback Maybe stored by value and subscribed only when this source is empty.
+		 * @return Maybe preserving this source's success or error, otherwise forwarding fallback.
+		 * @note Errors do not trigger fallback. Each subscription has independent state.
+		 * Cancellation is propagated to the active source and prevents a pending fallback subscription.
+		 */
+		Maybe switchIfEmpty(Maybe fallback) const;
+
+		/**
 		 * @brief Discards the optional value and preserves termination.
 		 * @return Completable that completes on success or empty completion, or forwards the error.
 		 */

@@ -3,6 +3,7 @@
 // stl
 #include <functional>
 #include <limits>
+#include <memory>
 #include <stdexcept>
 #include <variant>
 #include <vector>
@@ -167,6 +168,27 @@ namespace rppw
 	Observable<T> Observable<T>::filter(F predicate) const
 	{
 		return Observable{(source_ | rpp::operators::filter(std::move(predicate))).as_dynamic()};
+	}
+
+	template <detail::Value T>
+	Observable<T> Observable<T>::switchIfEmpty(Observable fallback) const
+	{
+		return defer(
+			[source = *this, fallback = std::move(fallback)]
+			{
+				const auto seen = std::make_shared<bool>(false);
+				const auto first = source.doOnNext(
+					[seen](const T &) noexcept
+					{
+						*seen = true;
+					});
+				const auto next = defer(
+					[seen, fallback]
+					{
+						return *seen ? empty() : fallback;
+					});
+				return Observable{rpp::source::concat(first.source_, next.source_).as_dynamic()};
+			});
 	}
 
 	template <detail::Value T>
