@@ -52,6 +52,29 @@ constant storage, wait for normal completion, propagate errors instead of
 partial results, and reset for each subscription. Counter overflow signals
 `std::overflow_error` through the reactive error channel.
 
+`Observable<T>::delay(duration, scheduler)` delays all notifications, including
+completion and errors, without delaying upstream subscription. Durations must
+be nonnegative; negative durations throw `std::invalid_argument` synchronously.
+Cancellation discards queued notifications. No implicit scheduler is selected;
+a blocking scheduler can block the subscribing thread, and the queue is unbounded.
+
+`repeat(count)` uses a total subscription count (`0` skips the source, `1` runs
+it once) and stops on errors. `retry(count)` allows that many additional
+subscriptions after errors (`0` only makes the initial attempt), forwarding
+the last error if exhausted. Values from failed attempts remain visible.
+`repeat()` and `retry()` have no limit. Counts reset per subscriber and
+cancellation prevents further subscriptions. No scheduler or backoff is added:
+synchronous infinite repetition, including empty sources, or infinite retries
+can occupy the subscribing thread indefinitely.
+
+`Single<T>`, `Maybe<T>` and `Completable` also provide `delay(duration, scheduler)`,
+`repeat(count)`, `repeat()`, `retry(count)` and `retry()` with the same timing,
+counting and cancellation rules. `delay` and `retry` preserve the source category.
+`repeat` returns `Observable<T>` for Single and Maybe, since repeated successes
+can emit multiple values; for Completable it returns Completable. Empty Maybe
+completion consumes a repetition but is never retried. Normal completion is
+delayed for empty Maybe and Completable, just as success and errors are delayed.
+
 ```cpp
 // stl
 #include <exception>

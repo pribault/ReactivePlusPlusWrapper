@@ -2,6 +2,7 @@
 
 // stl
 #include <concepts>
+#include <cstddef>
 #include <exception>
 #include <type_traits>
 #include <variant>
@@ -144,6 +145,53 @@ namespace rppw
 		 */
 		template <concepts::ReactiveSource R>
 		R andThen(R next) const;
+
+		/**
+		 * @brief Delays completion and errors on the supplied scheduler.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param duration Nonnegative notification delay.
+		 * @param scheduler Delivery context; upstream subscription is not delayed.
+		 * @return Completable preserving termination with delayed delivery.
+		 * @throws std::invalid_argument If duration is negative.
+		 * @note Cancellation discards queued notifications and cancels upstream.
+		 * A blocking scheduler can block the subscribing thread.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Completable delay(rpp::schedulers::duration duration, S scheduler) const;
+
+		/**
+		 * @brief Repeats normal completion up to count total subscriptions.
+		 * @param count Total subscription count; zero completes without subscribing.
+		 * @return Completable completing after all repetitions or forwarding the first error.
+		 * @note Counts reset per subscriber; cancellation prevents further subscriptions.
+		 * No scheduler is added.
+		 */
+		Completable repeat(std::size_t count) const;
+
+		/**
+		 * @brief Repeats normal completion until cancellation or error.
+		 * @return Completable forwarding the first error, otherwise never completing.
+		 * @warning Synchronous repetition can occupy the subscribing thread indefinitely.
+		 * No scheduler is added.
+		 */
+		Completable repeat() const;
+
+		/**
+		 * @brief Resubscribes after an error up to count additional attempts.
+		 * @param count Maximum retries after the initial attempt; zero does not retry.
+		 * @return Completable completing on recovery or forwarding the last error on exhaustion.
+		 * @note Counts reset per subscriber; cancellation prevents further attempts.
+		 * No scheduler or backoff is added.
+		 */
+		Completable retry(std::size_t count) const;
+
+		/**
+		 * @brief Retries errors until normal completion or cancellation.
+		 * @return Completable completing on recovery.
+		 * @warning Synchronous errors can occupy the subscribing thread indefinitely.
+		 * No scheduler or backoff is added.
+		 */
+		Completable retry() const;
 
 		/**
 		 * @brief Schedules the upstream subscription.

@@ -147,6 +147,37 @@ namespace rppw
 
 	template <detail::Value T>
 	template <rpp::schedulers::constraint::scheduler S>
+	Maybe<T> Maybe<T>::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		return Maybe{source_.delay(duration, std::move(scheduler))};
+	}
+
+	template <detail::Value T>
+	Observable<T> Maybe<T>::repeat(std::size_t count) const
+	{
+		return source_.repeat(count);
+	}
+
+	template <detail::Value T>
+	Observable<T> Maybe<T>::repeat() const
+	{
+		return source_.repeat();
+	}
+
+	template <detail::Value T>
+	Maybe<T> Maybe<T>::retry(std::size_t count) const
+	{
+		return Maybe{source_.retry(count)};
+	}
+
+	template <detail::Value T>
+	Maybe<T> Maybe<T>::retry() const
+	{
+		return Maybe{source_.retry()};
+	}
+
+	template <detail::Value T>
+	template <rpp::schedulers::constraint::scheduler S>
 	Maybe<T> Maybe<T>::subscribeOn(S scheduler) const
 	{
 		return Maybe{source_.subscribeOn(std::move(scheduler))};

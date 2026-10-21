@@ -99,6 +99,12 @@ namespace rppw
 	}
 
 	template <rpp::schedulers::constraint::scheduler S>
+	Completable Completable::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		return Completable{Observable<std::monostate>{source_}.delay(duration, std::move(scheduler))};
+	}
+
+	template <rpp::schedulers::constraint::scheduler S>
 	Completable Completable::subscribeOn(S scheduler) const
 	{
 		return Completable{Observable<std::monostate>{source_}.subscribeOn(std::move(scheduler))};
