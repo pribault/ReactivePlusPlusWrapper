@@ -5,6 +5,7 @@ add_executable(ReactivePlusPlusWrapperTests
     CompletableTests.cpp
     CompositionTests.cpp
     DisposableTests.cpp
+    FallbackTests.cpp
     MaybeTests.cpp
     ObservableTests.cpp
     SchedulerTests.cpp

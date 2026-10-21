@@ -16,6 +16,13 @@ The API provides `camelCase` method chains, explicit conversions,
 cancellable subscriptions and ReactivePlusPlus scheduler integration.
 It is not an exhaustive implementation of RxJava.
 
+`Observable<T>::switchIfEmpty(fallback)` and `Maybe<T>::switchIfEmpty(fallback)`
+preserve the source category and subscribe to the supplied source only after
+normal completion without a value. Errors never trigger the fallback.
+Values are forwarded immediately without buffering, state resets per subscriber,
+and cancellation propagates to the active source and prevents a pending switch.
+The fallback is stored by value; use `defer` to postpone its construction work.
+
 `Completable::toObservable<T>()` and `Completable::toMaybe<T>()` expose the
 same deferred operation without emitting any value. Normal completion becomes
 an empty Observable or Maybe; errors and cancellation are preserved.

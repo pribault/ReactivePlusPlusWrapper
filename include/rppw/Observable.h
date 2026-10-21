@@ -189,6 +189,16 @@ namespace rppw
 		Observable filter(F predicate) const;
 
 		/**
+		 * @brief Subscribes to a fallback only after normal completion without values.
+		 * @param fallback Source stored by value and subscribed only when this source is empty.
+		 * @return Observable preserving this source's values, or forwarding the fallback's notifications.
+		 * @note Errors do not trigger fallback. Values are forwarded without buffering.
+		 * State resets per subscription; cancellation is propagated to the active source
+		 * and prevents a pending fallback subscription.
+		 */
+		Observable switchIfEmpty(Observable fallback) const;
+
+		/**
 		 * @brief Tests whether every value satisfies the predicate.
 		 * @tparam F Const-invocable predicate accepting const T&.
 		 * @param predicate Test applied until the first false result.
