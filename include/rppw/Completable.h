@@ -101,6 +101,14 @@ namespace rppw
 		static Completable defer(F factory);
 
 		/**
+		 * @brief Starts processing without a completion callback.
+		 * @return Shared cancellation handle, disposed after termination.
+		 * @note Unhandled errors are logged to stderr without stopping the program.
+		 * Destroying the handle does not cancel the subscription.
+		 */
+		Disposable subscribe() const;
+
+		/**
 		 * @brief Starts processing with terminal completion or an error.
 		 * @tparam C Type of the no-argument completion callback.
 		 * @tparam E Type of the callback receiving std::exception_ptr.

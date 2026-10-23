@@ -87,6 +87,14 @@ namespace rppw
 		static Maybe defer(F factory);
 
 		/**
+		 * @brief Starts processing, ignoring success and empty completion.
+		 * @return Shared cancellation handle, disposed after termination.
+		 * @note Unhandled errors are logged to stderr without stopping the program.
+		 * Destroying the handle does not cancel the subscription.
+		 */
+		Disposable subscribe() const;
+
+		/**
 		 * @brief Starts processing with three mutually exclusive terminal outcomes.
 		 * @tparam N Type of the callback receiving T.
 		 * @tparam E Type of the callback receiving std::exception_ptr.

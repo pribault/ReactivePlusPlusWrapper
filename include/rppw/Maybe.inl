@@ -61,6 +61,12 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	Disposable Maybe<T>::subscribe() const
+	{
+		return source_.take(1).subscribe();
+	}
+
+	template <detail::Value T>
 	template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E, concepts::CallbackFor C>
 	Disposable Maybe<T>::subscribe(N onSuccess, E onError, C onComplete) const
 	{

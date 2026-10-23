@@ -42,6 +42,12 @@ Output: `20`, `40`, then `complete`, each on its own line.
 Building a pipeline describes the work; calling `subscribe` starts it.
 This example runs synchronously and creates no thread.
 
+All four reactive types also offer `subscribe()` without callbacks. It starts
+processing, ignores values and normal completion, and logs unhandled errors to
+`stderr` without stopping the program. The returned `Disposable` can cancel the
+subscription; destroying it does not cancel processing. Use the callback overload
+when errors require application-specific handling.
+
 ## Why use this wrapper?
 
 - **Familiar composition:** chain transformations and conversions using an API

@@ -52,6 +52,12 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	Disposable Single<T>::subscribe() const
+	{
+		return source_.take(1).subscribe();
+	}
+
+	template <detail::Value T>
 	template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E>
 	Disposable Single<T>::subscribe(N onSuccess, E onError) const
 	{

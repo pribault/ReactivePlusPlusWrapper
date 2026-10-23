@@ -13,6 +13,7 @@
 #include <rppw/Maybe.h>
 #include <rppw/Single.h>
 #include <rppw/detail/Operators.inl>
+#include <rppw/detail/Subscription.h>
 
 namespace rppw
 {
@@ -96,6 +97,12 @@ namespace rppw
 			{
 				return std::invoke(factory).source_;
 			})};
+	}
+
+	template <detail::Value T>
+	Disposable Observable<T>::subscribe() const
+	{
+		return subscribe([](T) {}, detail::logUnhandledError, [] {});
 	}
 
 	template <detail::Value T>

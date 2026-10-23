@@ -121,6 +121,14 @@ namespace rppw
 		static Observable defer(F factory);
 
 		/**
+		 * @brief Starts processing, ignoring values and normal completion.
+		 * @return Shared cancellation handle, disposed after termination.
+		 * @note Unhandled errors are logged to stderr without stopping the program.
+		 * Destroying the handle does not cancel the subscription.
+		 */
+		Disposable subscribe() const;
+
+		/**
 		 * @brief Subscribes the three callbacks and starts processing.
 		 * @tparam N Type of the callback receiving a value of type T.
 		 * @tparam E Type of the callback receiving std::exception_ptr.
