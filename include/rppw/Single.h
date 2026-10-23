@@ -44,6 +44,19 @@ namespace rppw
 		static Single just(T value);
 
 		/**
+		 * @brief Invokes a producer with an RPP observer for each subscription.
+		 * @param producer Const-invocable callable receiving rpp::dynamic_observer<T>.
+		 * The observer may be retained for asynchronous delivery.
+		 * @return Cold Single forwarding the first value as terminal success,
+		 * or an error, including exceptions thrown by the producer.
+		 * @pre Emit a value or a non-null error; do not complete without a value.
+		 * @note Notifications must be serialized. Stop after termination or disposal.
+		 * Use observer.set_upstream() for cleanup; captured resources must outlive work.
+		 */
+		template <concepts::CallbackFor<rpp::dynamic_observer<T>> F>
+		static Single create(F producer);
+
+		/**
 		 * @brief Computes a value independently for each subscription.
 		 * @tparam F Const-invocable callable returning exactly T.
 		 * @param callable Computation stored by value, not executed during construction.

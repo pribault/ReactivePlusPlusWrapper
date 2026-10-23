@@ -24,6 +24,25 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::CallbackFor<rpp::dynamic_observer<T>> F>
+	Observable<T> Observable<T>::create(F producer)
+	{
+		return Observable{rpp::source::create<T>(
+							  [producer = std::move(producer)](rpp::dynamic_observer<T> observer)
+							  {
+								  try
+								  {
+									  std::invoke(producer, observer);
+								  }
+								  catch (...)
+								  {
+									  observer.on_error(std::current_exception());
+								  }
+							  })
+							  .as_dynamic()};
+	}
+
+	template <detail::Value T>
 	template <concepts::RangeOf<T> R>
 	Observable<T> Observable<T>::fromIterable(R &&range)
 	{

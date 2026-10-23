@@ -39,6 +39,19 @@ namespace rppw
 		static Completable complete();
 
 		/**
+		 * @brief Invokes a producer with an RPP observer for each subscription.
+		 * @param producer Const-invocable callable receiving
+		 * rpp::dynamic_observer<std::monostate>, retainable for asynchronous delivery.
+		 * @return Cold Completable forwarding completion or errors, including
+		 * producer exceptions. Any on_next notification is ignored.
+		 * @pre Notifications must be serialized; errors must be non-null.
+		 * @note Stop after termination or disposal. Use observer.set_upstream()
+		 * for cleanup; captured resources must outlive asynchronous work.
+		 */
+		template <concepts::CallbackFor<rpp::dynamic_observer<std::monostate>> F>
+		static Completable create(F producer);
+
+		/**
 		 * @brief Subscribes to Completables sequentially in range order.
 		 * @tparam R Input range of Completable.
 		 * @param sources Sources copied into owned storage immediately.

@@ -78,6 +78,32 @@ Include the header for the type you use, or
 [`rppw/ReactivePlusPlusWrapper.h`](include/rppw/ReactivePlusPlusWrapper.h)
 for the complete public API.
 
+## Custom producers
+
+All four types provide `create(producer)`. The const-invocable producer runs
+independently for each subscription and receives an
+`rpp::dynamic_observer<T>` (`std::monostate` for `Completable`):
+
+```cpp
+auto source = rppw::Single<int>::create(
+    [](rpp::dynamic_observer<int> observer)
+    {
+        observer.on_next(42);
+    });
+```
+
+`Single` and `Maybe` terminate on the first value, including when converted to
+`Observable`. `Maybe` also accepts `on_completed()` without a value;
+`Single` producers must emit a value or an error instead.
+`Observable` accepts multiple values followed by `on_completed()`.
+`Completable` ignores values and waits for `on_completed()`.
+
+Producer exceptions are forwarded to the error callback. Observers can be
+retained for asynchronous work. Serialize notifications, pass non-null errors,
+and stop after termination or disposal. Cancellation suppresses notifications
+but does not interrupt work automatically; attach cleanup with
+`observer.set_upstream()`. Captured resources must outlive the work.
+
 ## Quick start
 
 The steps below build the library, examples and tests in **Debug**.
