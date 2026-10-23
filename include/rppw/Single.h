@@ -80,6 +80,14 @@ namespace rppw
 		static Single defer(F factory);
 
 		/**
+		 * @brief Starts processing, ignoring the success value.
+		 * @return Shared cancellation handle; upstream is cancelled after success.
+		 * @note Unhandled errors are logged to stderr without stopping the program.
+		 * Destroying the handle does not cancel the subscription.
+		 */
+		Disposable subscribe() const;
+
+		/**
 		 * @brief Starts processing and receives a single success or an error.
 		 * @tparam N Type of the callback receiving T.
 		 * @tparam E Type of the callback receiving std::exception_ptr.

@@ -21,6 +21,11 @@ namespace rppw
 		return Completable{Observable<std::monostate>::error(std::move(error))};
 	}
 
+	Disposable Completable::subscribe() const
+	{
+		return Observable<std::monostate>{source_}.subscribe();
+	}
+
 	Completable Completable::repeat(std::size_t count) const
 	{
 		return Completable{Observable<std::monostate>{source_}.repeat(count)};
