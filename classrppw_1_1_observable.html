@@ -109,70 +109,169 @@ $(document).ready(function(){initNavTree('classrppw_1_1_observable.html',''); in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:affc72bfb9976cefd8aa45a4e26182452" id="r_affc72bfb9976cefd8aa45a4e26182452"><td class="memItemLeft" align="right" valign="top"><a id="affc72bfb9976cefd8aa45a4e26182452" name="affc72bfb9976cefd8aa45a4e26182452"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = T</td></tr>
+<a class="el" href="classrppw_1_1_observable.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = <a class="el" href="classrppw_1_1_observable.html">T</a></td></tr>
 <tr class="memdesc:affc72bfb9976cefd8aa45a4e26182452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of emitted values. <br /></td></tr>
 <tr class="separator:affc72bfb9976cefd8aa45a4e26182452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a93ecbedd74c98fafba4c8171885b5852" id="r_a93ecbedd74c98fafba4c8171885b5852"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; T &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </td></tr>
-<tr class="memitem:a93ecbedd74c98fafba4c8171885b5852"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a93ecbedd74c98fafba4c8171885b5852">subscribe</a> (N onNext, E onError, C onComplete) const</td></tr>
+<tr class="memitem:a62aa8bec3e5958e6574eca3eb6aaa918" id="r_a62aa8bec3e5958e6574eca3eb6aaa918"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a62aa8bec3e5958e6574eca3eb6aaa918">subscribe</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a62aa8bec3e5958e6574eca3eb6aaa918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts processing, ignoring values and normal completion.  <br /></td></tr>
+<tr class="separator:a62aa8bec3e5958e6574eca3eb6aaa918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93ecbedd74c98fafba4c8171885b5852" id="r_a93ecbedd74c98fafba4c8171885b5852"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </td></tr>
+<tr class="memitem:a93ecbedd74c98fafba4c8171885b5852"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a93ecbedd74c98fafba4c8171885b5852">subscribe</a> (<a class="el" href="classrppw_1_1_observable.html">N</a> <a class="el" href="classrppw_1_1_observable.html">onNext</a>, <a class="el" href="classrppw_1_1_observable.html">E</a> <a class="el" href="classrppw_1_1_observable.html">onError</a>, <a class="el" href="classrppw_1_1_observable.html">C</a> <a class="el" href="classrppw_1_1_observable.html">onComplete</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a93ecbedd74c98fafba4c8171885b5852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes the three callbacks and starts processing.  <br /></td></tr>
 <tr class="separator:a93ecbedd74c98fafba4c8171885b5852"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9600774edf898aad122070dec19cdde2" id="r_a9600774edf898aad122070dec19cdde2"><td class="memTemplParams" colspan="2">template&lt;concepts::MapperFor&lt; T &gt; F&gt; </td></tr>
-<tr class="memitem:a9600774edf898aad122070dec19cdde2"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a9600774edf898aad122070dec19cdde2">map</a> (F function) const</td></tr>
+<tr class="memitem:adb9ab699a7b5c2dd8fef4da5987ee09a" id="r_adb9ab699a7b5c2dd8fef4da5987ee09a"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> std::exception_ptr &amp; &gt; F&gt; </td></tr>
+<tr class="memitem:adb9ab699a7b5c2dd8fef4da5987ee09a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#adb9ab699a7b5c2dd8fef4da5987ee09a">doOnError</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:adb9ab699a7b5c2dd8fef4da5987ee09a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspects an error before forwarding it unchanged.  <br /></td></tr>
+<tr class="separator:adb9ab699a7b5c2dd8fef4da5987ee09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a080ef46674e00f5a203687f8a3f5d6a7" id="r_a080ef46674e00f5a203687f8a3f5d6a7"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor F&gt; </td></tr>
+<tr class="memitem:a080ef46674e00f5a203687f8a3f5d6a7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a080ef46674e00f5a203687f8a3f5d6a7">doOnComplete</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a080ef46674e00f5a203687f8a3f5d6a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes an action before forwarding normal completion.  <br /></td></tr>
+<tr class="separator:a080ef46674e00f5a203687f8a3f5d6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a432f81755255c557094b72f8e051fe49" id="r_a432f81755255c557094b72f8e051fe49"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp; &gt; F&gt; </td></tr>
+<tr class="memitem:a432f81755255c557094b72f8e051fe49"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a432f81755255c557094b72f8e051fe49">doOnNext</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a432f81755255c557094b72f8e051fe49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspects each value before forwarding it unchanged.  <br /></td></tr>
+<tr class="separator:a432f81755255c557094b72f8e051fe49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9600774edf898aad122070dec19cdde2" id="r_a9600774edf898aad122070dec19cdde2"><td class="memTemplParams" colspan="2">template&lt;concepts::MapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a9600774edf898aad122070dec19cdde2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a9600774edf898aad122070dec19cdde2">map</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">function</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a9600774edf898aad122070dec19cdde2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms each value without modifying the source.  <br /></td></tr>
 <tr class="separator:a9600774edf898aad122070dec19cdde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38bbe5f8fea5f409e5c6a697cc12cf17" id="r_a38bbe5f8fea5f409e5c6a697cc12cf17"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </td></tr>
-<tr class="memitem:a38bbe5f8fea5f409e5c6a697cc12cf17"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a38bbe5f8fea5f409e5c6a697cc12cf17">filter</a> (F predicate) const</td></tr>
+<tr class="memitem:a38bbe5f8fea5f409e5c6a697cc12cf17" id="r_a38bbe5f8fea5f409e5c6a697cc12cf17"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a38bbe5f8fea5f409e5c6a697cc12cf17"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a38bbe5f8fea5f409e5c6a697cc12cf17">filter</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a38bbe5f8fea5f409e5c6a697cc12cf17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps only values accepted by the predicate.  <br /></td></tr>
 <tr class="separator:a38bbe5f8fea5f409e5c6a697cc12cf17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a426c6ffab68f669b198ad66a3b6b8fd9" id="r_a426c6ffab68f669b198ad66a3b6b8fd9"><td class="memTemplParams" colspan="2">template&lt;concepts::FlatMapperFor&lt; T, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </td></tr>
-<tr class="memitem:a426c6ffab68f669b198ad66a3b6b8fd9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a426c6ffab68f669b198ad66a3b6b8fd9">flatMap</a> (F function) const</td></tr>
+<tr class="memitem:a3155076eb3e78f06982f77c08a044c39" id="r_a3155076eb3e78f06982f77c08a044c39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a3155076eb3e78f06982f77c08a044c39">switchIfEmpty</a> (<a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">fallback</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a3155076eb3e78f06982f77c08a044c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to a fallback only after normal completion without values.  <br /></td></tr>
+<tr class="separator:a3155076eb3e78f06982f77c08a044c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0df5534d41caef2db084f6008d6296b5" id="r_a0df5534d41caef2db084f6008d6296b5"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a0df5534d41caef2db084f6008d6296b5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">bool</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a0df5534d41caef2db084f6008d6296b5">allOf</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a0df5534d41caef2db084f6008d6296b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether every value satisfies the predicate.  <br /></td></tr>
+<tr class="separator:a0df5534d41caef2db084f6008d6296b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98eed4cf5134210c7e5955d46fa68b6e" id="r_a98eed4cf5134210c7e5955d46fa68b6e"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a98eed4cf5134210c7e5955d46fa68b6e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">bool</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a98eed4cf5134210c7e5955d46fa68b6e">anyOf</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a98eed4cf5134210c7e5955d46fa68b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether at least one value satisfies the predicate.  <br /></td></tr>
+<tr class="separator:a98eed4cf5134210c7e5955d46fa68b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4075d792cb81ef25cd202242bd852e45" id="r_a4075d792cb81ef25cd202242bd852e45"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a4075d792cb81ef25cd202242bd852e45"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">bool</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a4075d792cb81ef25cd202242bd852e45">noneOf</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a4075d792cb81ef25cd202242bd852e45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether no value satisfies the predicate.  <br /></td></tr>
+<tr class="separator:a4075d792cb81ef25cd202242bd852e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a426c6ffab68f669b198ad66a3b6b8fd9" id="r_a426c6ffab68f669b198ad66a3b6b8fd9"><td class="memTemplParams" colspan="2">template&lt;concepts::FlatMapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a426c6ffab68f669b198ad66a3b6b8fd9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a426c6ffab68f669b198ad66a3b6b8fd9">flatMap</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">function</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a426c6ffab68f669b198ad66a3b6b8fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merges the sources produced for each value.  <br /></td></tr>
 <tr class="separator:a426c6ffab68f669b198ad66a3b6b8fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b88034842bf559fa93726b86af36b03" id="r_a9b88034842bf559fa93726b86af36b03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a9b88034842bf559fa93726b86af36b03">take</a> (std::size_t count) const</td></tr>
+<tr class="memitem:a9b88034842bf559fa93726b86af36b03" id="r_a9b88034842bf559fa93726b86af36b03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a9b88034842bf559fa93726b86af36b03">take</a> (std::size_t <a class="el" href="classrppw_1_1_observable.html#ac3cc4dd50821891261665229bd502e40">count</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a9b88034842bf559fa93726b86af36b03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Completes after at most count values and cancels upstream.  <br /></td></tr>
 <tr class="separator:a9b88034842bf559fa93726b86af36b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2351812b27fffdb36058acd9c2e07878" id="r_a2351812b27fffdb36058acd9c2e07878"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a2351812b27fffdb36058acd9c2e07878"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a2351812b27fffdb36058acd9c2e07878">takeUntil</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a2351812b27fffdb36058acd9c2e07878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits values through the first value satisfying the predicate.  <br /></td></tr>
+<tr class="separator:a2351812b27fffdb36058acd9c2e07878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a773ae207b60c685f38fdf93816ef45c7" id="r_a773ae207b60c685f38fdf93816ef45c7"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a773ae207b60c685f38fdf93816ef45c7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a773ae207b60c685f38fdf93816ef45c7">takeWhile</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a773ae207b60c685f38fdf93816ef45c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits values while the predicate holds.  <br /></td></tr>
+<tr class="separator:a773ae207b60c685f38fdf93816ef45c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef5253f1c7e47d80bc19aae5baa7a18d" id="r_aef5253f1c7e47d80bc19aae5baa7a18d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#aef5253f1c7e47d80bc19aae5baa7a18d">drop</a> (std::size_t <a class="el" href="classrppw_1_1_observable.html#ac3cc4dd50821891261665229bd502e40">count</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:aef5253f1c7e47d80bc19aae5baa7a18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards the first count values.  <br /></td></tr>
+<tr class="separator:aef5253f1c7e47d80bc19aae5baa7a18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f26fcf3e7da9605098d972ca893ff9" id="r_a41f26fcf3e7da9605098d972ca893ff9"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a41f26fcf3e7da9605098d972ca893ff9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a41f26fcf3e7da9605098d972ca893ff9">dropUntil</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a41f26fcf3e7da9605098d972ca893ff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards values until the predicate first holds.  <br /></td></tr>
+<tr class="separator:a41f26fcf3e7da9605098d972ca893ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813c633ecd43c45cc8413ff3e099d289" id="r_a813c633ecd43c45cc8413ff3e099d289"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a813c633ecd43c45cc8413ff3e099d289"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a813c633ecd43c45cc8413ff3e099d289">dropWhile</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a813c633ecd43c45cc8413ff3e099d289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards values while the predicate holds.  <br /></td></tr>
+<tr class="separator:a813c633ecd43c45cc8413ff3e099d289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96eb694990f0d87774026fbf90c1314" id="r_af96eb694990f0d87774026fbf90c1314"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
+<tr class="memitem:af96eb694990f0d87774026fbf90c1314"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#af96eb694990f0d87774026fbf90c1314">delay</a> (rpp::schedulers::duration <a class="el" href="classrppw_1_1_observable.html">duration</a>, <a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:af96eb694990f0d87774026fbf90c1314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delays values, completion and errors on the supplied scheduler.  <br /></td></tr>
+<tr class="separator:af96eb694990f0d87774026fbf90c1314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7744f2dae4574dc3095ea84c3db41cc" id="r_ab7744f2dae4574dc3095ea84c3db41cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#ab7744f2dae4574dc3095ea84c3db41cc">repeat</a> (std::size_t <a class="el" href="classrppw_1_1_observable.html#ac3cc4dd50821891261665229bd502e40">count</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ab7744f2dae4574dc3095ea84c3db41cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeats the source after normal completion up to count total subscriptions.  <br /></td></tr>
+<tr class="separator:ab7744f2dae4574dc3095ea84c3db41cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad741d867971718dd3a47d6d0b9b20f7c" id="r_ad741d867971718dd3a47d6d0b9b20f7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#ad741d867971718dd3a47d6d0b9b20f7c">repeat</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ad741d867971718dd3a47d6d0b9b20f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeats the source after every normal completion until cancellation or error.  <br /></td></tr>
+<tr class="separator:ad741d867971718dd3a47d6d0b9b20f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f14ddcbe399de5acba77eafdaa5b27e" id="r_a2f14ddcbe399de5acba77eafdaa5b27e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a2f14ddcbe399de5acba77eafdaa5b27e">retry</a> (std::size_t <a class="el" href="classrppw_1_1_observable.html#ac3cc4dd50821891261665229bd502e40">count</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a2f14ddcbe399de5acba77eafdaa5b27e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resubscribes after an error up to count additional attempts.  <br /></td></tr>
+<tr class="separator:a2f14ddcbe399de5acba77eafdaa5b27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a364e507227fcb5b8d84ab35392ab640e" id="r_a364e507227fcb5b8d84ab35392ab640e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a364e507227fcb5b8d84ab35392ab640e">retry</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a364e507227fcb5b8d84ab35392ab640e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resubscribes after errors without a retry limit.  <br /></td></tr>
+<tr class="separator:a364e507227fcb5b8d84ab35392ab640e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d8f70057a2f705778b4eef451b341b1" id="r_a3d8f70057a2f705778b4eef451b341b1"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
-<tr class="memitem:a3d8f70057a2f705778b4eef451b341b1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a3d8f70057a2f705778b4eef451b341b1">subscribeOn</a> (S scheduler) const</td></tr>
+<tr class="memitem:a3d8f70057a2f705778b4eef451b341b1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a3d8f70057a2f705778b4eef451b341b1">subscribeOn</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a3d8f70057a2f705778b4eef451b341b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules the upstream subscription on the supplied scheduler.  <br /></td></tr>
 <tr class="separator:a3d8f70057a2f705778b4eef451b341b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d01251d053f4bc6af07e280815d1480" id="r_a7d01251d053f4bc6af07e280815d1480"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
-<tr class="memitem:a7d01251d053f4bc6af07e280815d1480"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a7d01251d053f4bc6af07e280815d1480">observeOn</a> (S scheduler) const</td></tr>
+<tr class="memitem:a7d01251d053f4bc6af07e280815d1480"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a7d01251d053f4bc6af07e280815d1480">observeOn</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a7d01251d053f4bc6af07e280815d1480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules values and terminal notifications on the supplied scheduler.  <br /></td></tr>
 <tr class="separator:a7d01251d053f4bc6af07e280815d1480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a85d78e6fc7cd3783c399eb123ace0e" id="r_a5a85d78e6fc7cd3783c399eb123ace0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a5a85d78e6fc7cd3783c399eb123ace0e">singleOrError</a> () const</td></tr>
+<tr class="memitem:a09ac7a5e7c3d3319d62c5159790d4c23" id="r_a09ac7a5e7c3d3319d62c5159790d4c23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a09ac7a5e7c3d3319d62c5159790d4c23">elementAt</a> (std::size_t index) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a09ac7a5e7c3d3319d62c5159790d4c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the value at a zero-based index.  <br /></td></tr>
+<tr class="separator:a09ac7a5e7c3d3319d62c5159790d4c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f110e280cb46308292446652e982ebd" id="r_a2f110e280cb46308292446652e982ebd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a2f110e280cb46308292446652e982ebd">first</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a2f110e280cb46308292446652e982ebd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the first value and cancels upstream immediately.  <br /></td></tr>
+<tr class="separator:a2f110e280cb46308292446652e982ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a381abcae6565ba038d47f85bf470e" id="r_a22a381abcae6565ba038d47f85bf470e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a22a381abcae6565ba038d47f85bf470e">last</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a22a381abcae6565ba038d47f85bf470e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the last value after normal completion.  <br /></td></tr>
+<tr class="separator:a22a381abcae6565ba038d47f85bf470e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3cc4dd50821891261665229bd502e40" id="r_ac3cc4dd50821891261665229bd502e40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; std::size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#ac3cc4dd50821891261665229bd502e40">count</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ac3cc4dd50821891261665229bd502e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts all values until normal completion.  <br /></td></tr>
+<tr class="separator:ac3cc4dd50821891261665229bd502e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23c8cf64206a2d689049121485d319b" id="r_ab23c8cf64206a2d689049121485d319b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classrppw_1_1_observable.html">typename</a> <a class="el" href="classrppw_1_1_observable.html">R</a> , concepts::ReducerFor&lt; <a class="el" href="classrppw_1_1_observable.html">R</a>, <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:ab23c8cf64206a2d689049121485d319b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">R</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#ab23c8cf64206a2d689049121485d319b">reduce</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> <a class="el" href="classrppw_1_1_observable.html">initial</a>, <a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">accumulator</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ab23c8cf64206a2d689049121485d319b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a function to each value, sequentially, producing a single result.  <br /></td></tr>
+<tr class="separator:ab23c8cf64206a2d689049121485d319b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e65804051a699ffadace92145f189cd" id="r_a7e65804051a699ffadace92145f189cd"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classrppw_1_1_observable.html">typename</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a>  = std::less&lt;&gt;&gt; <br />
+requires std::strict_weak_order&lt;<a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;&gt;</td></tr>
+<tr class="memitem:a7e65804051a699ffadace92145f189cd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a7e65804051a699ffadace92145f189cd">max</a> (<a class="el" href="classrppw_1_1_observable.html">Compare</a> <a class="el" href="classrppw_1_1_observable.html">compare</a>={}) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a7e65804051a699ffadace92145f189cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the greatest value after normal completion.  <br /></td></tr>
+<tr class="separator:a7e65804051a699ffadace92145f189cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc9104dbb8ab4024deea64ce101fa06" id="r_aabc9104dbb8ab4024deea64ce101fa06"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classrppw_1_1_observable.html">typename</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a>  = std::less&lt;&gt;&gt; <br />
+requires std::strict_weak_order&lt;<a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;&gt;</td></tr>
+<tr class="memitem:aabc9104dbb8ab4024deea64ce101fa06"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#aabc9104dbb8ab4024deea64ce101fa06">min</a> (<a class="el" href="classrppw_1_1_observable.html">Compare</a> <a class="el" href="classrppw_1_1_observable.html">compare</a>={}) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:aabc9104dbb8ab4024deea64ce101fa06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the smallest value after normal completion.  <br /></td></tr>
+<tr class="separator:aabc9104dbb8ab4024deea64ce101fa06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a85d78e6fc7cd3783c399eb123ace0e" id="r_a5a85d78e6fc7cd3783c399eb123ace0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a5a85d78e6fc7cd3783c399eb123ace0e">singleOrError</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a5a85d78e6fc7cd3783c399eb123ace0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requires exactly one value before upstream completion.  <br /></td></tr>
 <tr class="separator:a5a85d78e6fc7cd3783c399eb123ace0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e2bcae74a914759cab24ff41c3fa4af" id="r_a4e2bcae74a914759cab24ff41c3fa4af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a4e2bcae74a914759cab24ff41c3fa4af">singleElement</a> () const</td></tr>
+<tr class="memitem:a4e2bcae74a914759cab24ff41c3fa4af" id="r_a4e2bcae74a914759cab24ff41c3fa4af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a4e2bcae74a914759cab24ff41c3fa4af">singleElement</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a4e2bcae74a914759cab24ff41c3fa4af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepts at most one value and waits for upstream completion.  <br /></td></tr>
 <tr class="separator:a4e2bcae74a914759cab24ff41c3fa4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a734ade014d09383100060e4067191f" id="r_a3a734ade014d09383100060e4067191f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a3a734ade014d09383100060e4067191f">ignoreElements</a> () const</td></tr>
+<tr class="memitem:a3a734ade014d09383100060e4067191f" id="r_a3a734ade014d09383100060e4067191f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a3a734ade014d09383100060e4067191f">ignoreElements</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a3a734ade014d09383100060e4067191f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ignores values while preserving upstream termination.  <br /></td></tr>
 <tr class="separator:a3a734ade014d09383100060e4067191f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a63286cee2e77aa7cd349b549e60ab36a" id="r_a63286cee2e77aa7cd349b549e60ab36a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a63286cee2e77aa7cd349b549e60ab36a">just</a> (T value)</td></tr>
+<tr class="memitem:a63286cee2e77aa7cd349b549e60ab36a" id="r_a63286cee2e77aa7cd349b549e60ab36a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a63286cee2e77aa7cd349b549e60ab36a">just</a> (<a class="el" href="classrppw_1_1_observable.html">T</a> <a class="el" href="classrppw_1_1_observable.html">value</a>)</td></tr>
 <tr class="memdesc:a63286cee2e77aa7cd349b549e60ab36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that emits the stored value and then completes.  <br /></td></tr>
 <tr class="separator:a63286cee2e77aa7cd349b549e60ab36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a691afacb9e6c9fe8da3e6baeacc25e73" id="r_a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memTemplParams" colspan="2">template&lt;concepts::RangeOf&lt; T &gt; R&gt; </td></tr>
-<tr class="memitem:a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a691afacb9e6c9fe8da3e6baeacc25e73">fromIterable</a> (R &amp;&amp;range)</td></tr>
+<tr class="memitem:a691afacb9e6c9fe8da3e6baeacc25e73" id="r_a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memTemplParams" colspan="2">template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </td></tr>
+<tr class="memitem:a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a691afacb9e6c9fe8da3e6baeacc25e73">fromIterable</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">range</a>)</td></tr>
 <tr class="memdesc:a691afacb9e6c9fe8da3e6baeacc25e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies range elements and defers their emission until subscription.  <br /></td></tr>
 <tr class="separator:a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9688e568356098fdbe5e48db99e8e7ab" id="r_a9688e568356098fdbe5e48db99e8e7ab"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a9688e568356098fdbe5e48db99e8e7ab">empty</a> ()</td></tr>
+<tr class="memitem:a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c" id="r_a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c"><td class="memTemplParams" colspan="2">template&lt;concepts::ObservableSourceRangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </td></tr>
+<tr class="memitem:a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c">concat</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">sources</a>)</td></tr>
+<tr class="memdesc:a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to sources sequentially, preserving their order.  <br /></td></tr>
+<tr class="separator:a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a163211023022020e0a65c94d33c736f7" id="r_a163211023022020e0a65c94d33c736f7"><td class="memTemplParams" colspan="2">template&lt;concepts::ObservableSourceRangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </td></tr>
+<tr class="memitem:a163211023022020e0a65c94d33c736f7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a163211023022020e0a65c94d33c736f7">merge</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">sources</a>)</td></tr>
+<tr class="memdesc:a163211023022020e0a65c94d33c736f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to sources without waiting for preceding sources to complete.  <br /></td></tr>
+<tr class="separator:a163211023022020e0a65c94d33c736f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9688e568356098fdbe5e48db99e8e7ab" id="r_a9688e568356098fdbe5e48db99e8e7ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a9688e568356098fdbe5e48db99e8e7ab">empty</a> ()</td></tr>
 <tr class="memdesc:a9688e568356098fdbe5e48db99e8e7ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that completes without emitting a value.  <br /></td></tr>
 <tr class="separator:a9688e568356098fdbe5e48db99e8e7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad98ac54c71a0cb0300672a221bd03de0" id="r_ad98ac54c71a0cb0300672a221bd03de0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#ad98ac54c71a0cb0300672a221bd03de0">error</a> (std::exception_ptr error)</td></tr>
+<tr class="memitem:ad98ac54c71a0cb0300672a221bd03de0" id="r_ad98ac54c71a0cb0300672a221bd03de0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#ad98ac54c71a0cb0300672a221bd03de0">error</a> (std::exception_ptr error)</td></tr>
 <tr class="memdesc:ad98ac54c71a0cb0300672a221bd03de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that only signals the supplied error.  <br /></td></tr>
 <tr class="separator:ad98ac54c71a0cb0300672a221bd03de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a02e5f1c662e0e369ee696b5f8edbeb" id="r_a7a02e5f1c662e0e369ee696b5f8edbeb"><td class="memTemplParams" colspan="2">template&lt;concepts::ExceptionValue E&gt; </td></tr>
-<tr class="memitem:a7a02e5f1c662e0e369ee696b5f8edbeb"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a7a02e5f1c662e0e369ee696b5f8edbeb">error</a> (E error)</td></tr>
+<tr class="memitem:a7a02e5f1c662e0e369ee696b5f8edbeb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a7a02e5f1c662e0e369ee696b5f8edbeb">error</a> (<a class="el" href="classrppw_1_1_observable.html">E</a> error)</td></tr>
 <tr class="memdesc:a7a02e5f1c662e0e369ee696b5f8edbeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures an error with std::make_exception_ptr and creates a failing source.  <br /></td></tr>
 <tr class="separator:a7a02e5f1c662e0e369ee696b5f8edbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adddbc39c9dfd7dee6adbaeeaf875dbb9" id="r_adddbc39c9dfd7dee6adbaeeaf875dbb9"><td class="memTemplParams" colspan="2">template&lt;concepts::SourceFactoryFor&lt; T, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </td></tr>
-<tr class="memitem:adddbc39c9dfd7dee6adbaeeaf875dbb9"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#adddbc39c9dfd7dee6adbaeeaf875dbb9">defer</a> (F factory)</td></tr>
+<tr class="memitem:adddbc39c9dfd7dee6adbaeeaf875dbb9" id="r_adddbc39c9dfd7dee6adbaeeaf875dbb9"><td class="memTemplParams" colspan="2">template&lt;concepts::SourceFactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </td></tr>
+<tr class="memitem:adddbc39c9dfd7dee6adbaeeaf875dbb9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#adddbc39c9dfd7dee6adbaeeaf875dbb9">defer</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">factory</a>)</td></tr>
 <tr class="memdesc:adddbc39c9dfd7dee6adbaeeaf875dbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new source through the factory for each subscription.  <br /></td></tr>
 <tr class="separator:adddbc39c9dfd7dee6adbaeeaf875dbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -180,14 +279,14 @@ Static Public Member Functions</h2></td></tr>
 Friends</h2></td></tr>
 <tr class="memitem:a12092baab2e5f6b0b9c2018977e7f94c" id="r_a12092baab2e5f6b0b9c2018977e7f94c"><td class="memTemplParams" colspan="2"><a id="a12092baab2e5f6b0b9c2018977e7f94c" name="a12092baab2e5f6b0b9c2018977e7f94c"></a>
 template&lt;detail::Value &gt; </td></tr>
-<tr class="memitem:a12092baab2e5f6b0b9c2018977e7f94c"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Single</b></td></tr>
+<tr class="memitem:a12092baab2e5f6b0b9c2018977e7f94c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Single</b></td></tr>
 <tr class="separator:a12092baab2e5f6b0b9c2018977e7f94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae606ba8c3656041ee7ec7532d02a3bdb" id="r_ae606ba8c3656041ee7ec7532d02a3bdb"><td class="memTemplParams" colspan="2"><a id="ae606ba8c3656041ee7ec7532d02a3bdb" name="ae606ba8c3656041ee7ec7532d02a3bdb"></a>
 template&lt;detail::Value &gt; </td></tr>
-<tr class="memitem:ae606ba8c3656041ee7ec7532d02a3bdb"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Maybe</b></td></tr>
+<tr class="memitem:ae606ba8c3656041ee7ec7532d02a3bdb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Maybe</b></td></tr>
 <tr class="separator:ae606ba8c3656041ee7ec7532d02a3bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f7053bea907d84db2e60646a5237957" id="r_a5f7053bea907d84db2e60646a5237957"><td class="memItemLeft" align="right" valign="top"><a id="a5f7053bea907d84db2e60646a5237957" name="a5f7053bea907d84db2e60646a5237957"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>Completable</b></td></tr>
+<a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Completable</b></td></tr>
 <tr class="separator:a5f7053bea907d84db2e60646a5237957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -199,13 +298,14 @@ class rppw::Observable&lt; T &gt;</div><p>Cold source of zero or more values, fo
   </table>
   </dd>
 </dl>
-<p>Each subscription executes its own chain. Composing operators does not invoke producers. Without an explicit scheduler, synchronous processing runs on the thread calling <a class="el" href="classrppw_1_1_observable.html#a93ecbedd74c98fafba4c8171885b5852" title="Subscribes the three callbacks and starts processing.">subscribe()</a>. Producer and operator exceptions are forwarded through std::exception_ptr. An error or completion terminates the subscription; no further events are delivered. Reactive objects are copyable and share their type-erased RPP representation, which may allocate. Operators return a new chain. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive their use, including asynchronous use. The caller must synchronize data shared between subscriptions. No backpressure mechanism is provided.</dd></dl>
+<p>Each subscription executes its own chain. Composing operators does not invoke producers. Without an explicit scheduler, synchronous processing runs on the thread calling <a class="el" href="classrppw_1_1_observable.html#a62aa8bec3e5958e6574eca3eb6aaa918" title="Starts processing, ignoring values and normal completion.">subscribe()</a>. Producer and operator exceptions are forwarded through std::exception_ptr. An error or completion terminates the subscription; no further events are delivered. Reactive objects are copyable and share their type-erased RPP representation, which may allocate. Operators return a new chain. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive their use, including asynchronous use. The caller must synchronize data shared between subscriptions. No backpressure mechanism is provided.</dd></dl>
 <div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// stl</span></div>
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;exception&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;ranges&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
@@ -223,74 +323,287 @@ class rppw::Observable&lt; T &gt;</div><p>Cold source of zero or more values, fo
 <div class="line">    <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a></div>
 <div class="line">    {</div>
 <div class="line">    <span class="keyword">public</span>:</div>
-<div class="line">        <span class="keyword">using </span><a class="code hl_typedef" href="classrppw_1_1_observable.html#affc72bfb9976cefd8aa45a4e26182452">value_type</a> = T;</div>
+<div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classrppw_1_1_observable.html">value_type</a> = <a class="code hl_class" href="classrppw_1_1_observable.html">T</a>;</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> just(T value);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> just(<a class="code hl_class" href="classrppw_1_1_observable.html">T</a> <a class="code hl_class" href="classrppw_1_1_observable.html">value</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::RangeOf&lt;T&gt; R&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> fromIterable(R &amp;&amp;range);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> fromIterable(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">range</a>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::ObservableSourceRangeOf&lt;T&gt; R&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> concat(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">sources</a>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::ObservableSourceRangeOf&lt;T&gt; R&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> merge(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">sources</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> empty();</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> error(std::exception_ptr error);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue E&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> error(E error);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">E</a> error);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::SourceFactoryFor&lt;T, rppw::Observable&gt; F&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> defer(F factory);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> defer(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">factory</a>);</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;T&gt; N, concepts::CallbackFor&lt;std::exception_ptr &amp;&gt; E, concepts::CallbackFor C&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(N onNext, E onError, C onComplete) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(<a class="code hl_class" href="classrppw_1_1_observable.html">N</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onNext</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">E</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onError</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">C</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onComplete</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;const std::exception_ptr &amp;&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> doOnError(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> doOnComplete(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;const T &amp;&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> doOnNext(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::MapperFor&lt;T&gt; F&gt;</div>
-<div class="line">        <span class="keyword">auto</span> map(F function) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">auto</span> map(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">function</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> filter(F predicate) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> filter(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> switchIfEmpty(<a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> <a class="code hl_class" href="classrppw_1_1_observable.html">fallback</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;bool&gt;</a> allOf(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;bool&gt;</a> anyOf(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;bool&gt;</a> noneOf(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::FlatMapperFor&lt;T, rppw::Observable&gt; F&gt;</div>
-<div class="line">        <span class="keyword">auto</span> flatMap(F function) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">auto</span> flatMap(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">function</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> take(std::size_t count) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> subscribeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> takeUntil(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> takeWhile(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> drop(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> dropUntil(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> dropWhile(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> observeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> delay(rpp::schedulers::duration <a class="code hl_class" href="classrppw_1_1_observable.html">duration</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_single.html">Single&lt;T&gt;</a> singleOrError() <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> repeat(std::size_t count) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe&lt;T&gt;</a> singleElement() <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> repeat() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> ignoreElements() <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> retry(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> retry() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> subscribeOn(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> observeOn(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Maybe&lt;T&gt;</a> elementAt(std::size_t index) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Maybe&lt;T&gt;</a> first() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Maybe&lt;T&gt;</a> last() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;std::size_t&gt;</a> count() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> R, concepts::ReducerFor&lt;R, T&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;R&gt;</a> reduce(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> <a class="code hl_class" href="classrppw_1_1_observable.html">initial</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">accumulator</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
+<div class="line">            <span class="keyword">requires</span> std::strict_weak_order&lt;const Compare &amp;, const T &amp;, const T &amp;&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Maybe&lt;T&gt;</a> max(<a class="code hl_class" href="classrppw_1_1_observable.html">Compare</a> <a class="code hl_class" href="classrppw_1_1_observable.html">compare</a> = {}) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
+<div class="line">            <span class="keyword">requires</span> std::strict_weak_order&lt;const Compare &amp;, const T &amp;, const T &amp;&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Maybe&lt;T&gt;</a> min(<a class="code hl_class" href="classrppw_1_1_observable.html">Compare</a> <a class="code hl_class" href="classrppw_1_1_observable.html">compare</a> = {}) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        Single&lt;T&gt; singleOrError() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        Maybe&lt;T&gt; singleElement() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        Completable ignoreElements() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">private</span>:</div>
-<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a>(rpp::dynamic_observable&lt;T&gt; source)</div>
+<div class="line">        <span class="keyword">explicit</span> Observable(rpp::dynamic_observable&lt;T&gt; source)</div>
 <div class="line">            : source_{std::move(source)}</div>
 <div class="line">        {</div>
 <div class="line">        }</div>
 <div class="line">        rpp::dynamic_observable&lt;T&gt; source_;</div>
 <div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
-<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a>;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span>Observable;</div>
 <div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
-<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_single.html">Single</a>;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span>Single;</div>
 <div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
-<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a>;</div>
-<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a>;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span>Maybe;</div>
+<div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span>Completable;</div>
 <div class="line">    };</div>
 <div class="line">} <span class="comment">// namespace rppw</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Observable.inl&gt;</span></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:29</div></div>
 <div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
-<div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:33</div></div>
-<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:38</div></div>
-<div class="ttc" id="aclassrppw_1_1_observable_html_affc72bfb9976cefd8aa45a4e26182452"><div class="ttname"><a href="classrppw_1_1_observable.html#affc72bfb9976cefd8aa45a4e26182452">rppw::Observable::value_type</a></div><div class="ttdeci">T value_type</div><div class="ttdoc">Type of emitted values.</div><div class="ttdef"><b>Definition</b> Observable.h:41</div></div>
-<div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:33</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0df5534d41caef2db084f6008d6296b5" name="a0df5534d41caef2db084f6008d6296b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0df5534d41caef2db084f6008d6296b5">&#9670;&#160;</a></span>allOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">bool</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::allOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tests whether every value satisfies the predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Test applied until the first false result. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> emitting false at the first failure, or true at normal completion. An empty source produces true. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>A decisive result cancels upstream. Upstream errors and predicate exceptions before that result are forwarded as errors. Evaluation is deferred per subscription. </dd></dl>
+
+</div>
+</div>
+<a id="a98eed4cf5134210c7e5955d46fa68b6e" name="a98eed4cf5134210c7e5955d46fa68b6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98eed4cf5134210c7e5955d46fa68b6e">&#9670;&#160;</a></span>anyOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">bool</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::anyOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tests whether at least one value satisfies the predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Test applied until the first true result. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> emitting true at the first match, or false at normal completion. An empty source produces false. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>A decisive result cancels upstream. Upstream errors and predicate exceptions before that result are forwarded as errors. Evaluation is deferred per subscription. </dd></dl>
+
+</div>
+</div>
+<a id="a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c" name="a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47c6dc1ddfaf4b73eb0ca77ba0e9bd3c">&#9670;&#160;</a></span>concat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::ObservableSourceRangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::concat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sources</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribes to sources sequentially, preserving their order. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Input range of Observable&lt;T&gt;, Single&lt;T&gt; or Maybe&lt;T&gt;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sources</td><td>Homogeneous range copied into owned storage immediately. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> forwarding all values, completing when all sources complete. An empty range completes without values; empty Maybes are skipped. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Subscription is deferred and repeated for each subscriber. An error or cancellation prevents subscription to remaining sources. Range traversal and allocation exceptions are synchronous. </dd></dl>
+
+</div>
+</div>
+<a id="ac3cc4dd50821891261665229bd502e40" name="ac3cc4dd50821891261665229bd502e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3cc4dd50821891261665229bd502e40">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; std::size_t &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Counts all values until normal completion. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> containing the number of values, or zero for an empty source. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Upstream errors discard the partial count. Counter overflow signals std::overflow_error through onError. Cancellation is propagated upstream. </dd></dl>
+
+</div>
+</div>
 <a id="adddbc39c9dfd7dee6adbaeeaf875dbb9" name="adddbc39c9dfd7dee6adbaeeaf875dbb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adddbc39c9dfd7dee6adbaeeaf875dbb9">&#9670;&#160;</a></span>defer()</h2>
 
@@ -299,15 +612,15 @@ class rppw::Observable&lt; T &gt;</div><p>Cold source of zero or more values, fo
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::SourceFactoryFor&lt; T, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </div>
+template&lt;concepts::SourceFactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::defer </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::defer </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>factory</em></td><td>)</td>
           <td></td>
         </tr>
@@ -336,6 +649,311 @@ template&lt;concepts::SourceFactoryFor&lt; T, <a class="el" href="classrppw_1_1_
 
 </div>
 </div>
+<a id="af96eb694990f0d87774026fbf90c1314" name="af96eb694990f0d87774026fbf90c1314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96eb694990f0d87774026fbf90c1314">&#9670;&#160;</a></span>delay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::delay </td>
+          <td>(</td>
+          <td class="paramtype">rpp::schedulers::duration&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
+          <td class="paramname"><em>scheduler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delays values, completion and errors on the supplied scheduler. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>ReactivePlusPlus scheduler type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Nonnegative delay applied to each notification. </td></tr>
+    <tr><td class="paramname">scheduler</td><td>Notification delivery context; no scheduler is chosen implicitly. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> preserving notification order without delaying upstream subscription. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>If duration is negative. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Cancellation discards queued notifications and cancels upstream. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Queuing is unbounded. A blocking scheduler can block the subscribing thread. </dd></dl>
+
+</div>
+</div>
+<a id="a080ef46674e00f5a203687f8a3f5d6a7" name="a080ef46674e00f5a203687f8a3f5d6a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a080ef46674e00f5a203687f8a3f5d6a7">&#9670;&#160;</a></span>doOnComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::doOnComplete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes an action before forwarding normal completion. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable no-argument callback. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value; not invoked on error or cancellation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> preserving all notifications. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
+<a id="adb9ab699a7b5c2dd8fef4da5987ee09a" name="adb9ab699a7b5c2dd8fef4da5987ee09a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9ab699a7b5c2dd8fef4da5987ee09a">&#9670;&#160;</a></span>doOnError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> std::exception_ptr &amp; &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::doOnError </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inspects an error before forwarding it unchanged. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable callback accepting const std::exception_ptr&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value and invoked on each subscription's error. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> preserving all notifications. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
+<a id="a432f81755255c557094b72f8e051fe49" name="a432f81755255c557094b72f8e051fe49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a432f81755255c557094b72f8e051fe49">&#9670;&#160;</a></span>doOnNext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp; &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::doOnNext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inspects each value before forwarding it unchanged. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable callback accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value, invoked only when a value arrives. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> preserving all notifications. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
+<a id="aef5253f1c7e47d80bc19aae5baa7a18d" name="aef5253f1c7e47d80bc19aae5baa7a18d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef5253f1c7e47d80bc19aae5baa7a18d">&#9670;&#160;</a></span>drop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::drop </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Discards the first count values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Number of initial values to discard; zero preserves all values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Source forwarding remaining values and preserving upstream termination. </dd></dl>
+
+</div>
+</div>
+<a id="a41f26fcf3e7da9605098d972ca893ff9" name="a41f26fcf3e7da9605098d972ca893ff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41f26fcf3e7da9605098d972ca893ff9">&#9670;&#160;</a></span>dropUntil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::dropUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Discards values until the predicate first holds. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Start condition, no longer evaluated after its first match. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Source forwarding the first matching value and all subsequent values. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Without a match, no values are forwarded. Predicate exceptions signal onError. </dd></dl>
+
+</div>
+</div>
+<a id="a813c633ecd43c45cc8413ff3e099d289" name="a813c633ecd43c45cc8413ff3e099d289"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a813c633ecd43c45cc8413ff3e099d289">&#9670;&#160;</a></span>dropWhile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::dropWhile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Discards values while the predicate holds. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Condition, no longer evaluated after its first false result. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Source forwarding the first nonmatching value and all subsequent values. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Predicate exceptions signal onError. State is independent for each subscription. </dd></dl>
+
+</div>
+</div>
+<a id="a09ac7a5e7c3d3319d62c5159790d4c23" name="a09ac7a5e7c3d3319d62c5159790d4c23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09ac7a5e7c3d3319d62c5159790d4c23">&#9670;&#160;</a></span>elementAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::elementAt </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the value at a zero-based index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Number of values to skip before selecting one. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> containing the selected value, or empty if the source completes first. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Selection cancels upstream immediately. Errors before selection are preserved. </dd></dl>
+
+</div>
+</div>
 <a id="a9688e568356098fdbe5e48db99e8e7ab" name="a9688e568356098fdbe5e48db99e8e7ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9688e568356098fdbe5e48db99e8e7ab">&#9670;&#160;</a></span>empty()</h2>
 
@@ -348,7 +966,7 @@ template&lt;detail::Value T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::empty </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::empty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -380,9 +998,9 @@ template&lt;concepts::ExceptionValue E&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::error </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::error </td>
           <td>(</td>
-          <td class="paramtype">E&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">E</a>&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
           <td></td>
         </tr>
@@ -424,7 +1042,7 @@ template&lt;detail::Value T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::error </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::error </td>
           <td>(</td>
           <td class="paramtype">std::exception_ptr&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
@@ -463,12 +1081,12 @@ template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </div>
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::filter </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::filter </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>predicate</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -493,6 +1111,29 @@ template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </div>
 
 </div>
 </div>
+<a id="a2f110e280cb46308292446652e982ebd" name="a2f110e280cb46308292446652e982ebd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f110e280cb46308292446652e982ebd">&#9670;&#160;</a></span>first()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::first </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the first value and cancels upstream immediately. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> containing the first value, or empty for an empty source. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Errors before the first value are preserved. </dd></dl>
+
+</div>
+</div>
 <a id="a426c6ffab68f669b198ad66a3b6b8fd9" name="a426c6ffab68f669b198ad66a3b6b8fd9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a426c6ffab68f669b198ad66a3b6b8fd9">&#9670;&#160;</a></span>flatMap()</h2>
 
@@ -501,12 +1142,12 @@ template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::FlatMapperFor&lt; T, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </div>
+template&lt;concepts::FlatMapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a> &gt; F&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::flatMap </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">auto</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::flatMap </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>function</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -540,15 +1181,15 @@ template&lt;concepts::FlatMapperFor&lt; T, <a class="el" href="classrppw_1_1_obs
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::RangeOf&lt; T &gt; R&gt; </div>
+template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::fromIterable </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::fromIterable </td>
           <td>(</td>
-          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>range</em></td><td>)</td>
           <td></td>
         </tr>
@@ -587,7 +1228,7 @@ template&lt;concepts::RangeOf&lt; T &gt; R&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::ignoreElements </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::ignoreElements </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -612,9 +1253,9 @@ template&lt;detail::Value T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::just </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::just </td>
           <td>(</td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">T</a>&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
@@ -637,6 +1278,29 @@ template&lt;detail::Value T&gt; </div>
 
 </div>
 </div>
+<a id="a22a381abcae6565ba038d47f85bf470e" name="a22a381abcae6565ba038d47f85bf470e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a381abcae6565ba038d47f85bf470e">&#9670;&#160;</a></span>last()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::last </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the last value after normal completion. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> containing the last value, or empty for an empty source. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Retains one value while waiting for completion. An upstream error discards it. No value is emitted if upstream never completes. Cancellation is propagated upstream. </dd></dl>
+
+</div>
+</div>
 <a id="a9600774edf898aad122070dec19cdde2" name="a9600774edf898aad122070dec19cdde2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9600774edf898aad122070dec19cdde2">&#9670;&#160;</a></span>map()</h2>
 
@@ -645,12 +1309,12 @@ template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::MapperFor&lt; T &gt; F&gt; </div>
+template&lt;concepts::MapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::map </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">auto</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::map </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>function</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -675,6 +1339,169 @@ template&lt;concepts::MapperFor&lt; T &gt; F&gt; </div>
 
 </div>
 </div>
+<a id="a7e65804051a699ffadace92145f189cd" name="a7e65804051a699ffadace92145f189cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e65804051a699ffadace92145f189cd">&#9670;&#160;</a></span>max()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="classrppw_1_1_observable.html">typename</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a>  = std::less&lt;&gt;&gt; <br />
+requires std::strict_weak_order&lt;<a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;&gt;</div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::max </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">Compare</a>&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>{}</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the greatest value after normal completion. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Compare</td><td>Const-invocable strict weak ordering, defaulting to std::less&lt;&gt;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">compare</td><td>Comparator stored by value, returning true when its first argument is smaller. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> containing the greatest value, or empty for an empty source. Equivalent values retain the first occurrence. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Retains one value. Upstream errors and comparator exceptions discard the partial result and signal onError. Cancellation is propagated upstream. </dd></dl>
+
+</div>
+</div>
+<a id="a163211023022020e0a65c94d33c736f7" name="a163211023022020e0a65c94d33c736f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a163211023022020e0a65c94d33c736f7">&#9670;&#160;</a></span>merge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::ObservableSourceRangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::merge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sources</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribes to sources without waiting for preceding sources to complete. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Input range of Observable&lt;T&gt;, Single&lt;T&gt; or Maybe&lt;T&gt;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sources</td><td>Homogeneous range copied into owned storage immediately. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> completing after all sources, or immediately for an empty range. Empty Maybes contribute no values. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Each subscription restarts the sources. Their own value order is preserved; ordering between sources is unspecified. An error cancels all active sources. Cancellation is propagated to every active source. No scheduler is added. Range traversal and allocation exceptions are synchronous. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>No concurrency limit is imposed. </dd></dl>
+
+</div>
+</div>
+<a id="aabc9104dbb8ab4024deea64ce101fa06" name="aabc9104dbb8ab4024deea64ce101fa06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabc9104dbb8ab4024deea64ce101fa06">&#9670;&#160;</a></span>min()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="classrppw_1_1_observable.html">typename</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a>  = std::less&lt;&gt;&gt; <br />
+requires std::strict_weak_order&lt;<a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">Compare</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;, <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp;&gt;</div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::min </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">Compare</a>&#160;</td>
+          <td class="paramname"><em>compare</em> = <code>{}</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the smallest value after normal completion. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Compare</td><td>Const-invocable strict weak ordering, defaulting to std::less&lt;&gt;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">compare</td><td>Comparator stored by value, returning true when its first argument is smaller. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> containing the smallest value, or empty for an empty source. Equivalent values retain the first occurrence. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Retains one value. Upstream errors and comparator exceptions discard the partial result and signal onError. Cancellation is propagated upstream. </dd></dl>
+
+</div>
+</div>
+<a id="a4075d792cb81ef25cd202242bd852e45" name="a4075d792cb81ef25cd202242bd852e45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4075d792cb81ef25cd202242bd852e45">&#9670;&#160;</a></span>noneOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">bool</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::noneOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tests whether no value satisfies the predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Test applied until the first true result. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> emitting false at the first match, or true at normal completion. An empty source produces true. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>A decisive result cancels upstream. Upstream errors and predicate exceptions before that result are forwarded as errors. Evaluation is deferred per subscription. </dd></dl>
+
+</div>
+</div>
 <a id="a7d01251d053f4bc6af07e280815d1480" name="a7d01251d053f4bc6af07e280815d1480"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7d01251d053f4bc6af07e280815d1480">&#9670;&#160;</a></span>observeOn()</h2>
 
@@ -686,9 +1513,9 @@ template&lt;detail::Value T&gt; </div>
 template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::observeOn </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::observeOn </td>
           <td>(</td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
           <td class="paramname"><em>scheduler</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -714,6 +1541,162 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 
 </div>
 </div>
+<a id="ab23c8cf64206a2d689049121485d319b" name="ab23c8cf64206a2d689049121485d319b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab23c8cf64206a2d689049121485d319b">&#9670;&#160;</a></span>reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="classrppw_1_1_observable.html">typename</a> <a class="el" href="classrppw_1_1_observable.html">R</a> , concepts::ReducerFor&lt; <a class="el" href="classrppw_1_1_observable.html">R</a>, <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">R</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::reduce </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a>&#160;</td>
+          <td class="paramname"><em>initial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>accumulator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies a function to each value, sequentially, producing a single result. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Accumulator/result type, which must be copyable. </td></tr>
+    <tr><td class="paramname">F</td><td>Const-invocable binary reducer: (accumulator, value) -&gt; new accumulator. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">initial</td><td>Initial accumulator value. </td></tr>
+    <tr><td class="paramname">accumulator</td><td>Reducer function stored by value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> emitting the final accumulator value, or the initial value for an empty source. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Upstream errors discard the partial result and signal onError. Reducer exceptions are propagated through the reactive error channel. Cancellation is propagated upstream. Evaluation is deferred per subscription. </dd></dl>
+
+</div>
+</div>
+<a id="ad741d867971718dd3a47d6d0b9b20f7c" name="ad741d867971718dd3a47d6d0b9b20f7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad741d867971718dd3a47d6d0b9b20f7c">&#9670;&#160;</a></span>repeat() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::repeat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repeats the source after every normal completion until cancellation or error. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> forwarding values from every repetition. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Synchronous sources can occupy the subscribing thread indefinitely, including empty sources. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="ab7744f2dae4574dc3095ea84c3db41cc" name="ab7744f2dae4574dc3095ea84c3db41cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7744f2dae4574dc3095ea84c3db41cc">&#9670;&#160;</a></span>repeat() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::repeat </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repeats the source after normal completion up to count total subscriptions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Total subscription count; zero completes without subscribing upstream. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> forwarding each repetition's values and stopping on the first error. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The counter resets for each subscriber. Cancellation prevents further repetitions. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="a364e507227fcb5b8d84ab35392ab640e" name="a364e507227fcb5b8d84ab35392ab640e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a364e507227fcb5b8d84ab35392ab640e">&#9670;&#160;</a></span>retry() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::retry </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resubscribes after errors without a retry limit. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> forwarding all attempts' values until normal completion or cancellation. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>A synchronously failing source can occupy the subscribing thread indefinitely. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="a2f14ddcbe399de5acba77eafdaa5b27e" name="a2f14ddcbe399de5acba77eafdaa5b27e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f14ddcbe399de5acba77eafdaa5b27e">&#9670;&#160;</a></span>retry() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::retry </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resubscribes after an error up to count additional attempts. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Maximum retries after the initial subscription; zero does not retry. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> forwarding values from every attempt, completing on success, or forwarding the last error after exhausting retries. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The counter resets for each subscriber. Cancellation prevents further attempts. No scheduler is added; values emitted before a failed attempt are not retracted. </dd></dl>
+
+</div>
+</div>
 <a id="a4e2bcae74a914759cab24ff41c3fa4af" name="a4e2bcae74a914759cab24ff41c3fa4af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e2bcae74a914759cab24ff41c3fa4af">&#9670;&#160;</a></span>singleElement()</h2>
 
@@ -723,7 +1706,7 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; T &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::singleElement </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::singleElement </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -746,7 +1729,7 @@ template&lt;detail::Value T&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; T &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::singleOrError </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::singleOrError </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -760,32 +1743,55 @@ template&lt;detail::Value T&gt; </div>
 
 </div>
 </div>
+<a id="a62aa8bec3e5958e6574eca3eb6aaa918" name="a62aa8bec3e5958e6574eca3eb6aaa918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62aa8bec3e5958e6574eca3eb6aaa918">&#9670;&#160;</a></span>subscribe() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::subscribe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts processing, ignoring values and normal completion. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared cancellation handle, disposed after termination. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Unhandled errors are logged to stderr without stopping the program. Destroying the handle does not cancel the subscription. </dd></dl>
+
+</div>
+</div>
 <a id="a93ecbedd74c98fafba4c8171885b5852" name="a93ecbedd74c98fafba4c8171885b5852"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93ecbedd74c98fafba4c8171885b5852">&#9670;&#160;</a></span>subscribe()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a93ecbedd74c98fafba4c8171885b5852">&#9670;&#160;</a></span>subscribe() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::CallbackFor&lt; T &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </div>
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::subscribe </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::subscribe </td>
           <td>(</td>
-          <td class="paramtype">N&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">N</a>&#160;</td>
           <td class="paramname"><em>onNext</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">E&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">E</a>&#160;</td>
           <td class="paramname"><em>onError</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">C&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">C</a>&#160;</td>
           <td class="paramname"><em>onComplete</em>&#160;</td>
         </tr>
         <tr>
@@ -831,9 +1837,9 @@ template&lt;detail::Value T&gt; </div>
 template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::subscribeOn </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::subscribeOn </td>
           <td>(</td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
           <td class="paramname"><em>scheduler</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -858,6 +1864,36 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 
 </div>
 </div>
+<a id="a3155076eb3e78f06982f77c08a044c39" name="a3155076eb3e78f06982f77c08a044c39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3155076eb3e78f06982f77c08a044c39">&#9670;&#160;</a></span>switchIfEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::switchIfEmpty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td>
+          <td class="paramname"><em>fallback</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Subscribes to a fallback only after normal completion without values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fallback</td><td>Source stored by value and subscribed only when this source is empty. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> preserving this source's values, or forwarding the fallback's notifications. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Errors do not trigger fallback. Values are forwarded without buffering. State resets per subscription; cancellation is propagated to the active source and prevents a pending fallback subscription. </dd></dl>
+
+</div>
+</div>
 <a id="a9b88034842bf559fa93726b86af36b03" name="a9b88034842bf559fa93726b86af36b03"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b88034842bf559fa93726b86af36b03">&#9670;&#160;</a></span>take()</h2>
 
@@ -867,7 +1903,7 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; T &gt;::take </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::take </td>
           <td>(</td>
           <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>count</em></td><td>)</td>
@@ -884,6 +1920,82 @@ template&lt;detail::Value T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Limited source; a zero count completes without subscribing upstream. </dd></dl>
+
+</div>
+</div>
+<a id="a2351812b27fffdb36058acd9c2e07878" name="a2351812b27fffdb36058acd9c2e07878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2351812b27fffdb36058acd9c2e07878">&#9670;&#160;</a></span>takeUntil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::takeUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Emits values through the first value satisfying the predicate. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Stop condition evaluated before forwarding each value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Source including the matching value, then completing and cancelling upstream. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Without a match, all values are forwarded. Predicate exceptions signal onError. </dd></dl>
+
+</div>
+</div>
+<a id="a773ae207b60c685f38fdf93816ef45c7" name="a773ae207b60c685f38fdf93816ef45c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773ae207b60c685f38fdf93816ef45c7">&#9670;&#160;</a></span>takeWhile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::takeWhile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>predicate</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Emits values while the predicate holds. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable predicate accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">predicate</td><td>Condition evaluated before forwarding each value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Source excluding the first nonmatching value, then completing and cancelling upstream. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Predicate exceptions signal onError. </dd></dl>
 
 </div>
 </div>

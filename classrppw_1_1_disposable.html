@@ -109,13 +109,13 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Disposable</b> ()</td></tr>
 <tr class="memdesc:a7a4205a294bfdbd862a0b4ee11bb2383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty handle, already considered disposed. <br /></td></tr>
 <tr class="separator:a7a4205a294bfdbd862a0b4ee11bb2383"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c6e1fca1135f2251e063e3f010b85fa" id="r_a3c6e1fca1135f2251e063e3f010b85fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_disposable.html#a3c6e1fca1135f2251e063e3f010b85fa">Disposable</a> (rpp::composite_disposable_wrapper disposable)</td></tr>
+<tr class="memitem:a3c6e1fca1135f2251e063e3f010b85fa" id="r_a3c6e1fca1135f2251e063e3f010b85fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_disposable.html#a3c6e1fca1135f2251e063e3f010b85fa">Disposable</a> (rpp::composite_disposable_wrapper <a class="el" href="classrppw_1_1_observable.html">disposable</a>)</td></tr>
 <tr class="memdesc:a3c6e1fca1135f2251e063e3f010b85fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapts an RPP composite disposable by sharing its state.  <br /></td></tr>
 <tr class="separator:a3c6e1fca1135f2251e063e3f010b85fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b4988ef1b564f4e0a4cb3cdcf12f505" id="r_a1b4988ef1b564f4e0a4cb3cdcf12f505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_disposable.html#a1b4988ef1b564f4e0a4cb3cdcf12f505">dispose</a> () const noexcept</td></tr>
+<tr class="memitem:a1b4988ef1b564f4e0a4cb3cdcf12f505" id="r_a1b4988ef1b564f4e0a4cb3cdcf12f505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_disposable.html#a1b4988ef1b564f4e0a4cb3cdcf12f505">dispose</a> () <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">noexcept</a></td></tr>
 <tr class="memdesc:a1b4988ef1b564f4e0a4cb3cdcf12f505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels the subscription and propagates cancellation to upstream resources.  <br /></td></tr>
 <tr class="separator:a1b4988ef1b564f4e0a4cb3cdcf12f505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2894e8a66ce69e39535842931bf5a07" id="r_aa2894e8a66ce69e39535842931bf5a07"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_disposable.html#aa2894e8a66ce69e39535842931bf5a07">isDisposed</a> () const noexcept</td></tr>
+<tr class="memitem:aa2894e8a66ce69e39535842931bf5a07" id="r_aa2894e8a66ce69e39535842931bf5a07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_disposable.html#aa2894e8a66ce69e39535842931bf5a07">isDisposed</a> () <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">noexcept</a></td></tr>
 <tr class="memdesc:aa2894e8a66ce69e39535842931bf5a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the handle is empty, cancelled or terminated.  <br /></td></tr>
 <tr class="separator:aa2894e8a66ce69e39535842931bf5a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -134,17 +134,18 @@ Public Member Functions</h2></td></tr>
 <div class="line">    <span class="keyword">public</span>:</div>
 <div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a>();</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a>(rpp::composite_disposable_wrapper disposable);</div>
+<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a>(rpp::composite_disposable_wrapper <a class="code hl_class" href="classrppw_1_1_observable.html">disposable</a>);</div>
 <div class="line"> </div>
-<div class="line">        <span class="keywordtype">void</span> dispose() const noexcept;</div>
+<div class="line">        <span class="keywordtype">void</span> dispose() <a class="code hl_class" href="classrppw_1_1_observable.html">const</a> <a class="code hl_class" href="classrppw_1_1_observable.html">noexcept</a>;</div>
 <div class="line"> </div>
-<div class="line">        [[nodiscard]] <span class="keywordtype">bool</span> isDisposed() const noexcept;</div>
+<div class="line">        [[<a class="code hl_class" href="classrppw_1_1_observable.html">nodiscard</a>]] <span class="keywordtype">bool</span> isDisposed() <a class="code hl_class" href="classrppw_1_1_observable.html">const</a> <a class="code hl_class" href="classrppw_1_1_observable.html">noexcept</a>;</div>
 <div class="line"> </div>
-<div class="line">    private:</div>
-<div class="line">        rpp::composite_disposable_wrapper disposable_;</div>
+<div class="line">    <a class="code hl_class" href="classrppw_1_1_observable.html">private</a>:</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">rpp</a>::<a class="code hl_class" href="classrppw_1_1_observable.html">composite_disposable_wrapper</a> disposable_;</div>
 <div class="line">    };</div>
 <div class="line">} <span class="comment">// namespace rppw</span></div>
 <div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3c6e1fca1135f2251e063e3f010b85fa" name="a3c6e1fca1135f2251e063e3f010b85fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c6e1fca1135f2251e063e3f010b85fa">&#9670;&#160;</a></span>Disposable()</h2>
@@ -191,7 +192,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void rppw::Disposable::dispose </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">void</a> rppw::Disposable::dispose </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -219,7 +220,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool rppw::Disposable::isDisposed </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">bool</a> rppw::Disposable::isDisposed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

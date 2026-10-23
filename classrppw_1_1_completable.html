@@ -109,47 +109,90 @@ $(document).ready(function(){initNavTree('classrppw_1_1_completable.html',''); i
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ae5eda07885fd761b9fac302a8ffbe326" id="r_ae5eda07885fd761b9fac302a8ffbe326"><td class="memItemLeft" align="right" valign="top"><a id="ae5eda07885fd761b9fac302a8ffbe326" name="ae5eda07885fd761b9fac302a8ffbe326"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = std::monostate</td></tr>
+<a class="el" href="classrppw_1_1_observable.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = std::monostate</td></tr>
 <tr class="memdesc:ae5eda07885fd761b9fac302a8ffbe326"><td class="mdescLeft">&#160;</td><td class="mdescRight">Technical type without a domain value, used for generic composition. <br /></td></tr>
 <tr class="separator:ae5eda07885fd761b9fac302a8ffbe326"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a37e9f5bf6e754a299e0dab866080f2d4" id="r_a37e9f5bf6e754a299e0dab866080f2d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a37e9f5bf6e754a299e0dab866080f2d4">subscribe</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a37e9f5bf6e754a299e0dab866080f2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts processing without a completion callback.  <br /></td></tr>
+<tr class="separator:a37e9f5bf6e754a299e0dab866080f2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a590ea0a5dcab15ada2caec6dcaeb9d49" id="r_a590ea0a5dcab15ada2caec6dcaeb9d49"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor C, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E&gt; </td></tr>
-<tr class="memitem:a590ea0a5dcab15ada2caec6dcaeb9d49"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a590ea0a5dcab15ada2caec6dcaeb9d49">subscribe</a> (C onComplete, E onError) const</td></tr>
+<tr class="memitem:a590ea0a5dcab15ada2caec6dcaeb9d49"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a590ea0a5dcab15ada2caec6dcaeb9d49">subscribe</a> (<a class="el" href="classrppw_1_1_observable.html">C</a> <a class="el" href="classrppw_1_1_observable.html">onComplete</a>, <a class="el" href="classrppw_1_1_observable.html">E</a> <a class="el" href="classrppw_1_1_observable.html">onError</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a590ea0a5dcab15ada2caec6dcaeb9d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts processing with terminal completion or an error.  <br /></td></tr>
 <tr class="separator:a590ea0a5dcab15ada2caec6dcaeb9d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24406c685a9c8f1d75ed213fd7e5ad89" id="r_a24406c685a9c8f1d75ed213fd7e5ad89"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> std::exception_ptr &amp; &gt; F&gt; </td></tr>
+<tr class="memitem:a24406c685a9c8f1d75ed213fd7e5ad89"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a24406c685a9c8f1d75ed213fd7e5ad89">doOnError</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a24406c685a9c8f1d75ed213fd7e5ad89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspects an error before forwarding it unchanged.  <br /></td></tr>
+<tr class="separator:a24406c685a9c8f1d75ed213fd7e5ad89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258780d7853e37686b2d7bc618931600" id="r_a258780d7853e37686b2d7bc618931600"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor F&gt; </td></tr>
+<tr class="memitem:a258780d7853e37686b2d7bc618931600"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a258780d7853e37686b2d7bc618931600">doOnComplete</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a258780d7853e37686b2d7bc618931600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes an action before forwarding normal completion.  <br /></td></tr>
+<tr class="separator:a258780d7853e37686b2d7bc618931600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77e0452772249820424855dd3c4184e7" id="r_a77e0452772249820424855dd3c4184e7"><td class="memTemplParams" colspan="2">template&lt;concepts::ReactiveSource R&gt; </td></tr>
-<tr class="memitem:a77e0452772249820424855dd3c4184e7"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a77e0452772249820424855dd3c4184e7">andThen</a> (R next) const</td></tr>
+<tr class="memitem:a77e0452772249820424855dd3c4184e7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">R</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a77e0452772249820424855dd3c4184e7">andThen</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> <a class="el" href="classrppw_1_1_observable.html">next</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a77e0452772249820424855dd3c4184e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to the second source only after this source completes normally.  <br /></td></tr>
 <tr class="separator:a77e0452772249820424855dd3c4184e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ef7087e68021ae79566eade29127e1" id="r_a83ef7087e68021ae79566eade29127e1"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
+<tr class="memitem:a83ef7087e68021ae79566eade29127e1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a83ef7087e68021ae79566eade29127e1">delay</a> (rpp::schedulers::duration <a class="el" href="classrppw_1_1_observable.html">duration</a>, <a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a83ef7087e68021ae79566eade29127e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delays completion and errors on the supplied scheduler.  <br /></td></tr>
+<tr class="separator:a83ef7087e68021ae79566eade29127e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a938659363c97bf5404ed604af213d87b" id="r_a938659363c97bf5404ed604af213d87b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a938659363c97bf5404ed604af213d87b">repeat</a> (std::size_t count) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a938659363c97bf5404ed604af213d87b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeats normal completion up to count total subscriptions.  <br /></td></tr>
+<tr class="separator:a938659363c97bf5404ed604af213d87b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd89bae98edb65df123820782ab6848" id="r_a4dd89bae98edb65df123820782ab6848"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a4dd89bae98edb65df123820782ab6848">repeat</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a4dd89bae98edb65df123820782ab6848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeats normal completion until cancellation or error.  <br /></td></tr>
+<tr class="separator:a4dd89bae98edb65df123820782ab6848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39dd32885e76328f41d0df964c4d26af" id="r_a39dd32885e76328f41d0df964c4d26af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a39dd32885e76328f41d0df964c4d26af">retry</a> (std::size_t count) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a39dd32885e76328f41d0df964c4d26af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resubscribes after an error up to count additional attempts.  <br /></td></tr>
+<tr class="separator:a39dd32885e76328f41d0df964c4d26af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e574c51b9afd35f29eb6b875eecf5e" id="r_aa7e574c51b9afd35f29eb6b875eecf5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#aa7e574c51b9afd35f29eb6b875eecf5e">retry</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:aa7e574c51b9afd35f29eb6b875eecf5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retries errors until normal completion or cancellation.  <br /></td></tr>
+<tr class="separator:aa7e574c51b9afd35f29eb6b875eecf5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d2b52ae4ed82738cfbf7e7082ce667c" id="r_a3d2b52ae4ed82738cfbf7e7082ce667c"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
-<tr class="memitem:a3d2b52ae4ed82738cfbf7e7082ce667c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a3d2b52ae4ed82738cfbf7e7082ce667c">subscribeOn</a> (S scheduler) const</td></tr>
+<tr class="memitem:a3d2b52ae4ed82738cfbf7e7082ce667c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a3d2b52ae4ed82738cfbf7e7082ce667c">subscribeOn</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a3d2b52ae4ed82738cfbf7e7082ce667c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules the upstream subscription.  <br /></td></tr>
 <tr class="separator:a3d2b52ae4ed82738cfbf7e7082ce667c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0814845bf85ffb1b8983d21b210c7aac" id="r_a0814845bf85ffb1b8983d21b210c7aac"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
-<tr class="memitem:a0814845bf85ffb1b8983d21b210c7aac"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a0814845bf85ffb1b8983d21b210c7aac">observeOn</a> (S scheduler) const</td></tr>
+<tr class="memitem:a0814845bf85ffb1b8983d21b210c7aac"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a0814845bf85ffb1b8983d21b210c7aac">observeOn</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a0814845bf85ffb1b8983d21b210c7aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules completion and error delivery.  <br /></td></tr>
 <tr class="separator:a0814845bf85ffb1b8983d21b210c7aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dac2009fff00c57e9c8c062e2291ccb" id="r_a8dac2009fff00c57e9c8c062e2291ccb"><td class="memTemplParams" colspan="2">template&lt;detail::Value T = std::monostate&gt; </td></tr>
+<tr class="memitem:a8dac2009fff00c57e9c8c062e2291ccb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a8dac2009fff00c57e9c8c062e2291ccb">toObservable</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a8dac2009fff00c57e9c8c062e2291ccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exposes completion or an error as a stream without values.  <br /></td></tr>
+<tr class="separator:a8dac2009fff00c57e9c8c062e2291ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12be392e3ccfd91ba2667ffba5f4efde" id="r_a12be392e3ccfd91ba2667ffba5f4efde"><td class="memTemplParams" colspan="2">template&lt;detail::Value T = std::monostate&gt; </td></tr>
+<tr class="memitem:a12be392e3ccfd91ba2667ffba5f4efde"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a12be392e3ccfd91ba2667ffba5f4efde">toMaybe</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a12be392e3ccfd91ba2667ffba5f4efde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exposes normal completion as an empty <a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a>, preserving errors.  <br /></td></tr>
+<tr class="separator:a12be392e3ccfd91ba2667ffba5f4efde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a23e25a9581cf3c1492f2796089b8f548" id="r_a23e25a9581cf3c1492f2796089b8f548"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a23e25a9581cf3c1492f2796089b8f548">complete</a> ()</td></tr>
+<tr class="memitem:a23e25a9581cf3c1492f2796089b8f548" id="r_a23e25a9581cf3c1492f2796089b8f548"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a23e25a9581cf3c1492f2796089b8f548">complete</a> ()</td></tr>
 <tr class="memdesc:a23e25a9581cf3c1492f2796089b8f548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that completes without executing an action.  <br /></td></tr>
 <tr class="separator:a23e25a9581cf3c1492f2796089b8f548"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a947a21fed35b2768682bf55679986578" id="r_a947a21fed35b2768682bf55679986578"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a947a21fed35b2768682bf55679986578">error</a> (std::exception_ptr error)</td></tr>
+<tr class="memitem:a1881c132aaa5b69bd4cf31f60d44aa45" id="r_a1881c132aaa5b69bd4cf31f60d44aa45"><td class="memTemplParams" colspan="2">template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_completable.html">Completable</a> &gt; R&gt; </td></tr>
+<tr class="memitem:a1881c132aaa5b69bd4cf31f60d44aa45"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a1881c132aaa5b69bd4cf31f60d44aa45">concat</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">sources</a>)</td></tr>
+<tr class="memdesc:a1881c132aaa5b69bd4cf31f60d44aa45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to Completables sequentially in range order.  <br /></td></tr>
+<tr class="separator:a1881c132aaa5b69bd4cf31f60d44aa45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf958e3e0f9809c196f1c88956576d7b" id="r_adf958e3e0f9809c196f1c88956576d7b"><td class="memTemplParams" colspan="2">template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_completable.html">Completable</a> &gt; R&gt; </td></tr>
+<tr class="memitem:adf958e3e0f9809c196f1c88956576d7b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#adf958e3e0f9809c196f1c88956576d7b">merge</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">sources</a>)</td></tr>
+<tr class="memdesc:adf958e3e0f9809c196f1c88956576d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to Completables without waiting for preceding completions.  <br /></td></tr>
+<tr class="separator:adf958e3e0f9809c196f1c88956576d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a947a21fed35b2768682bf55679986578" id="r_a947a21fed35b2768682bf55679986578"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a947a21fed35b2768682bf55679986578">error</a> (std::exception_ptr error)</td></tr>
 <tr class="memdesc:a947a21fed35b2768682bf55679986578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that only forwards the supplied error.  <br /></td></tr>
 <tr class="separator:a947a21fed35b2768682bf55679986578"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4467aaa598804a3476f3b0044588c14c" id="r_a4467aaa598804a3476f3b0044588c14c"><td class="memTemplParams" colspan="2">template&lt;concepts::ExceptionValue E&gt; </td></tr>
-<tr class="memitem:a4467aaa598804a3476f3b0044588c14c"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a4467aaa598804a3476f3b0044588c14c">error</a> (E error)</td></tr>
+<tr class="memitem:a4467aaa598804a3476f3b0044588c14c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a4467aaa598804a3476f3b0044588c14c">error</a> (<a class="el" href="classrppw_1_1_observable.html">E</a> error)</td></tr>
 <tr class="memdesc:a4467aaa598804a3476f3b0044588c14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures an error with std::make_exception_ptr and creates a failing source.  <br /></td></tr>
 <tr class="separator:a4467aaa598804a3476f3b0044588c14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8338601ee3f9194cd52a583fbf72354" id="r_aa8338601ee3f9194cd52a583fbf72354"><td class="memTemplParams" colspan="2">template&lt;concepts::FactoryFor&lt; void &gt; F&gt; </td></tr>
-<tr class="memitem:aa8338601ee3f9194cd52a583fbf72354"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#aa8338601ee3f9194cd52a583fbf72354">fromAction</a> (F action)</td></tr>
+<tr class="memitem:aa8338601ee3f9194cd52a583fbf72354" id="r_aa8338601ee3f9194cd52a583fbf72354"><td class="memTemplParams" colspan="2">template&lt;concepts::FactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">void</a> &gt; F&gt; </td></tr>
+<tr class="memitem:aa8338601ee3f9194cd52a583fbf72354"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#aa8338601ee3f9194cd52a583fbf72354">fromAction</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>)</td></tr>
 <tr class="memdesc:aa8338601ee3f9194cd52a583fbf72354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes an action and completes independently for each subscription.  <br /></td></tr>
 <tr class="separator:aa8338601ee3f9194cd52a583fbf72354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa61597d2c1ba4bc8400a7bef3119fb1c" id="r_aa61597d2c1ba4bc8400a7bef3119fb1c"><td class="memTemplParams" colspan="2">template&lt;concepts::FactoryFor&lt; <a class="el" href="classrppw_1_1_completable.html">Completable</a> &gt; F&gt; </td></tr>
-<tr class="memitem:aa61597d2c1ba4bc8400a7bef3119fb1c"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#aa61597d2c1ba4bc8400a7bef3119fb1c">defer</a> (F factory)</td></tr>
+<tr class="memitem:aa61597d2c1ba4bc8400a7bef3119fb1c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#aa61597d2c1ba4bc8400a7bef3119fb1c">defer</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">factory</a>)</td></tr>
 <tr class="memdesc:aa61597d2c1ba4bc8400a7bef3119fb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the effective source through a factory for each subscription.  <br /></td></tr>
 <tr class="separator:aa61597d2c1ba4bc8400a7bef3119fb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -157,16 +200,17 @@ Static Public Member Functions</h2></td></tr>
 Friends</h2></td></tr>
 <tr class="memitem:a27f95a64d702be94ff1315af66ab9748" id="r_a27f95a64d702be94ff1315af66ab9748"><td class="memTemplParams" colspan="2"><a id="a27f95a64d702be94ff1315af66ab9748" name="a27f95a64d702be94ff1315af66ab9748"></a>
 template&lt;detail::Value &gt; </td></tr>
-<tr class="memitem:a27f95a64d702be94ff1315af66ab9748"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Observable</b></td></tr>
+<tr class="memitem:a27f95a64d702be94ff1315af66ab9748"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Observable</b></td></tr>
 <tr class="separator:a27f95a64d702be94ff1315af66ab9748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Cold source that completes without a value or signals an error. </p>
-<p>Each subscription executes its own chain. Actions are deferred until subscription; their exceptions are forwarded through std::exception_ptr. Without a scheduler, synchronous actions run on the thread calling <a class="el" href="classrppw_1_1_completable.html#a590ea0a5dcab15ada2caec6dcaeb9d49" title="Starts processing with terminal completion or an error.">subscribe()</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive processing. The caller must synchronize data shared between subscriptions.</dd></dl>
+<p>Each subscription executes its own chain. Actions are deferred until subscription; their exceptions are forwarded through std::exception_ptr. Without a scheduler, synchronous actions run on the thread calling <a class="el" href="classrppw_1_1_completable.html#a37e9f5bf6e754a299e0dab866080f2d4" title="Starts processing without a completion callback.">subscribe()</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive processing. The caller must synchronize data shared between subscriptions.</dd></dl>
 <div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// stl</span></div>
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;exception&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;variant&gt;</span></div>
@@ -187,31 +231,62 @@ template&lt;detail::Value &gt; </td></tr>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> complete();</div>
 <div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::RangeOf&lt;Completable&gt; R&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> concat(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">sources</a>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::RangeOf&lt;Completable&gt; R&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> merge(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">sources</a>);</div>
+<div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> error(std::exception_ptr error);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue E&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> error(E error);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">E</a> error);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::FactoryFor&lt;<span class="keywordtype">void</span>&gt; F&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> fromAction(F action);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> fromAction(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::FactoryFor&lt;Completable&gt; F&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> defer(F factory);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> defer(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">factory</a>);</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor C, concepts::CallbackFor&lt;std::exception_ptr &amp;&gt; E&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(C onComplete, E onError) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(<a class="code hl_class" href="classrppw_1_1_observable.html">C</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onComplete</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">E</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onError</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;const std::exception_ptr &amp;&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> doOnError(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> doOnComplete(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::ReactiveSource R&gt;</div>
-<div class="line">        R andThen(R next) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">R</a> andThen(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> <a class="code hl_class" href="classrppw_1_1_observable.html">next</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> subscribeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> delay(rpp::schedulers::duration <a class="code hl_class" href="classrppw_1_1_observable.html">duration</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> repeat(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> repeat() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> retry(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> retry() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> observeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> subscribeOn(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> observeOn(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;detail::Value T = std::monostate&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> toObservable() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;detail::Value T = std::monostate&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Maybe&lt;T&gt;</a> toMaybe() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">private</span>:</div>
-<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a>(<a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;std::monostate&gt;</a> source);</div>
+<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a>(<a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;std::monostate&gt;</a> <a class="code hl_class" href="classrppw_1_1_observable.html">source</a>);</div>
 <div class="line">        rpp::dynamic_observable&lt;std::monostate&gt; source_;</div>
 <div class="line">        <span class="keyword">template</span> &lt;detail::Value&gt;</div>
 <div class="line">        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a>;</div>
@@ -220,10 +295,10 @@ template&lt;detail::Value &gt; </td></tr>
 <div class="line"> </div>
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Completable.inl&gt;</span></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:29</div></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html_ae5eda07885fd761b9fac302a8ffbe326"><div class="ttname"><a href="classrppw_1_1_completable.html#ae5eda07885fd761b9fac302a8ffbe326">rppw::Completable::value_type</a></div><div class="ttdeci">std::monostate value_type</div><div class="ttdoc">Technical type without a domain value, used for generic composition.</div><div class="ttdef"><b>Definition</b> Completable.h:32</div></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:30</div></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html_ae5eda07885fd761b9fac302a8ffbe326"><div class="ttname"><a href="classrppw_1_1_completable.html#ae5eda07885fd761b9fac302a8ffbe326">rppw::Completable::value_type</a></div><div class="ttdeci">std::monostate value_type</div><div class="ttdoc">Technical type without a domain value, used for generic composition.</div><div class="ttdef"><b>Definition</b> Completable.h:33</div></div>
 <div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
-<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:38</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a77e0452772249820424855dd3c4184e7" name="a77e0452772249820424855dd3c4184e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77e0452772249820424855dd3c4184e7">&#9670;&#160;</a></span>andThen()</h2>
@@ -234,9 +309,9 @@ template&lt;detail::Value &gt; </td></tr>
 template&lt;concepts::ReactiveSource R&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">R rppw::Completable::andThen </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">R</a> rppw::Completable::andThen </td>
           <td>(</td>
-          <td class="paramtype">R&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a>&#160;</td>
           <td class="paramname"><em>next</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -271,7 +346,7 @@ template&lt;concepts::ReactiveSource R&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::complete </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::complete </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -289,6 +364,50 @@ template&lt;concepts::ReactiveSource R&gt; </div>
 
 </div>
 </div>
+<a id="a1881c132aaa5b69bd4cf31f60d44aa45" name="a1881c132aaa5b69bd4cf31f60d44aa45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1881c132aaa5b69bd4cf31f60d44aa45">&#9670;&#160;</a></span>concat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_completable.html">Completable</a> &gt; R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::concat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sources</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribes to Completables sequentially in range order. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Input range of <a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sources</td><td>Sources copied into owned storage immediately. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> completing after all sources, including an empty range. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Each subscription restarts the chain. An error or cancellation prevents subscription to remaining sources. Range traversal and allocation exceptions are synchronous. </dd></dl>
+
+</div>
+</div>
 <a id="aa61597d2c1ba4bc8400a7bef3119fb1c" name="aa61597d2c1ba4bc8400a7bef3119fb1c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa61597d2c1ba4bc8400a7bef3119fb1c">&#9670;&#160;</a></span>defer()</h2>
 
@@ -301,9 +420,9 @@ template&lt;concepts::FactoryFor&lt; <a class="el" href="classrppw_1_1_completab
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::defer </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::defer </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>factory</em></td><td>)</td>
           <td></td>
         </tr>
@@ -332,6 +451,131 @@ template&lt;concepts::FactoryFor&lt; <a class="el" href="classrppw_1_1_completab
 
 </div>
 </div>
+<a id="a83ef7087e68021ae79566eade29127e1" name="a83ef7087e68021ae79566eade29127e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83ef7087e68021ae79566eade29127e1">&#9670;&#160;</a></span>delay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::delay </td>
+          <td>(</td>
+          <td class="paramtype">rpp::schedulers::duration&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
+          <td class="paramname"><em>scheduler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delays completion and errors on the supplied scheduler. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>ReactivePlusPlus scheduler type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Nonnegative notification delay. </td></tr>
+    <tr><td class="paramname">scheduler</td><td>Delivery context; upstream subscription is not delayed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> preserving termination with delayed delivery. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>If duration is negative. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Cancellation discards queued notifications and cancels upstream. A blocking scheduler can block the subscribing thread. </dd></dl>
+
+</div>
+</div>
+<a id="a258780d7853e37686b2d7bc618931600" name="a258780d7853e37686b2d7bc618931600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a258780d7853e37686b2d7bc618931600">&#9670;&#160;</a></span>doOnComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::CallbackFor F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::doOnComplete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes an action before forwarding normal completion. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable no-argument callback. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value; not invoked on error or cancellation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> preserving completion and errors. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
+<a id="a24406c685a9c8f1d75ed213fd7e5ad89" name="a24406c685a9c8f1d75ed213fd7e5ad89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24406c685a9c8f1d75ed213fd7e5ad89">&#9670;&#160;</a></span>doOnError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> std::exception_ptr &amp; &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::doOnError </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inspects an error before forwarding it unchanged. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable callback accepting const std::exception_ptr&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value and invoked on each subscription's error. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> preserving completion and errors. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
 <a id="a4467aaa598804a3476f3b0044588c14c" name="a4467aaa598804a3476f3b0044588c14c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4467aaa598804a3476f3b0044588c14c">&#9670;&#160;</a></span>error() <span class="overload">[1/2]</span></h2>
 
@@ -344,9 +588,9 @@ template&lt;concepts::ExceptionValue E&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::error </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::error </td>
           <td>(</td>
-          <td class="paramtype">E&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">E</a>&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
           <td></td>
         </tr>
@@ -386,7 +630,7 @@ template&lt;concepts::ExceptionValue E&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::error </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::error </td>
           <td>(</td>
           <td class="paramtype">std::exception_ptr&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
@@ -423,15 +667,15 @@ template&lt;concepts::ExceptionValue E&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::FactoryFor&lt; void &gt; F&gt; </div>
+template&lt;concepts::FactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">void</a> &gt; F&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::fromAction </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::fromAction </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>action</em></td><td>)</td>
           <td></td>
         </tr>
@@ -461,6 +705,51 @@ template&lt;concepts::FactoryFor&lt; void &gt; F&gt; </div>
 
 </div>
 </div>
+<a id="adf958e3e0f9809c196f1c88956576d7b" name="adf958e3e0f9809c196f1c88956576d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf958e3e0f9809c196f1c88956576d7b">&#9670;&#160;</a></span>merge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_completable.html">Completable</a> &gt; R&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::merge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sources</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribes to Completables without waiting for preceding completions. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">R</td><td>Input range of <a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sources</td><td>Sources copied into owned storage immediately. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> completing after all sources, including an empty range. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Each subscription restarts the sources. An error or cancellation cancels all active sources. No scheduler is added. Range traversal and allocation exceptions are synchronous. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>No concurrency limit is imposed. </dd></dl>
+
+</div>
+</div>
 <a id="a0814845bf85ffb1b8983d21b210c7aac" name="a0814845bf85ffb1b8983d21b210c7aac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0814845bf85ffb1b8983d21b210c7aac">&#9670;&#160;</a></span>observeOn()</h2>
 
@@ -472,7 +761,7 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::observeOn </td>
           <td>(</td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
           <td class="paramname"><em>scheduler</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -496,8 +785,127 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 
 </div>
 </div>
+<a id="a4dd89bae98edb65df123820782ab6848" name="a4dd89bae98edb65df123820782ab6848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd89bae98edb65df123820782ab6848">&#9670;&#160;</a></span>repeat() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::repeat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repeats normal completion until cancellation or error. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> forwarding the first error, otherwise never completing. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Synchronous repetition can occupy the subscribing thread indefinitely. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="a938659363c97bf5404ed604af213d87b" name="a938659363c97bf5404ed604af213d87b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a938659363c97bf5404ed604af213d87b">&#9670;&#160;</a></span>repeat() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::repeat </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repeats normal completion up to count total subscriptions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Total subscription count; zero completes without subscribing. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> completing after all repetitions or forwarding the first error. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Counts reset per subscriber; cancellation prevents further subscriptions. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="aa7e574c51b9afd35f29eb6b875eecf5e" name="aa7e574c51b9afd35f29eb6b875eecf5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e574c51b9afd35f29eb6b875eecf5e">&#9670;&#160;</a></span>retry() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::retry </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retries errors until normal completion or cancellation. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> completing on recovery. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Synchronous errors can occupy the subscribing thread indefinitely. No scheduler or backoff is added. </dd></dl>
+
+</div>
+</div>
+<a id="a39dd32885e76328f41d0df964c4d26af" name="a39dd32885e76328f41d0df964c4d26af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39dd32885e76328f41d0df964c4d26af">&#9670;&#160;</a></span>retry() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::retry </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resubscribes after an error up to count additional attempts. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Maximum retries after the initial attempt; zero does not retry. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> completing on recovery or forwarding the last error on exhaustion. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Counts reset per subscriber; cancellation prevents further attempts. No scheduler or backoff is added. </dd></dl>
+
+</div>
+</div>
+<a id="a37e9f5bf6e754a299e0dab866080f2d4" name="a37e9f5bf6e754a299e0dab866080f2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e9f5bf6e754a299e0dab866080f2d4">&#9670;&#160;</a></span>subscribe() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> rppw::Completable::subscribe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts processing without a completion callback. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared cancellation handle, disposed after termination. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Unhandled errors are logged to stderr without stopping the program. Destroying the handle does not cancel the subscription. </dd></dl>
+
+</div>
+</div>
 <a id="a590ea0a5dcab15ada2caec6dcaeb9d49" name="a590ea0a5dcab15ada2caec6dcaeb9d49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a590ea0a5dcab15ada2caec6dcaeb9d49">&#9670;&#160;</a></span>subscribe()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a590ea0a5dcab15ada2caec6dcaeb9d49">&#9670;&#160;</a></span>subscribe() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,13 +915,13 @@ template&lt;concepts::CallbackFor C, concepts::CallbackFor&lt; std::exception_pt
         <tr>
           <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> rppw::Completable::subscribe </td>
           <td>(</td>
-          <td class="paramtype">C&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">C</a>&#160;</td>
           <td class="paramname"><em>onComplete</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">E&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">E</a>&#160;</td>
           <td class="paramname"><em>onError</em>&#160;</td>
         </tr>
         <tr>
@@ -557,7 +965,7 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::subscribeOn </td>
           <td>(</td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
           <td class="paramname"><em>scheduler</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -578,6 +986,64 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> with a scheduled subscription. </dd></dl>
+
+</div>
+</div>
+<a id="a12be392e3ccfd91ba2667ffba5f4efde" name="a12be392e3ccfd91ba2667ffba5f4efde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12be392e3ccfd91ba2667ffba5f4efde">&#9670;&#160;</a></span>toMaybe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T = std::monostate&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; rppw::Completable::toMaybe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exposes normal completion as an empty <a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a>, preserving errors. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> value type, defaulting to std::monostate; no T is constructed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cold <a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> that completes empty or forwards this source's error. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Each subscription executes this source anew. Cancellation is propagated upstream. </dd></dl>
+
+</div>
+</div>
+<a id="a8dac2009fff00c57e9c8c062e2291ccb" name="a8dac2009fff00c57e9c8c062e2291ccb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dac2009fff00c57e9c8c062e2291ccb">&#9670;&#160;</a></span>toObservable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T = std::monostate&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; rppw::Completable::toObservable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exposes completion or an error as a stream without values. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> value type, defaulting to std::monostate; no T is constructed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cold <a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> forwarding termination without emitting a value. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Each subscription executes this source anew. Cancellation is propagated upstream. </dd></dl>
 
 </div>
 </div>

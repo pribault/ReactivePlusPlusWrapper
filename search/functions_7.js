@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['map_0',['map',['../classrppw_1_1_maybe.html#ae8751d84e5d5fcab7e23be32eb83a457',1,'rppw::Maybe::map()'],['../classrppw_1_1_observable.html#a9600774edf898aad122070dec19cdde2',1,'rppw::Observable::map()'],['../classrppw_1_1_single.html#a88f6f293c5938b1b8ad8c1f8b2ab2992',1,'rppw::Single::map()']]]
+  ['last_0',['last',['../classrppw_1_1_observable.html#a22a381abcae6565ba038d47f85bf470e',1,'rppw::Observable']]]
 ];

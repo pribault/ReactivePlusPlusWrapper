@@ -109,70 +109,104 @@ $(document).ready(function(){initNavTree('classrppw_1_1_maybe.html',''); initRes
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a0fac5e9412123d69a38cc6a24aaf0f2b" id="r_a0fac5e9412123d69a38cc6a24aaf0f2b"><td class="memItemLeft" align="right" valign="top"><a id="a0fac5e9412123d69a38cc6a24aaf0f2b" name="a0fac5e9412123d69a38cc6a24aaf0f2b"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = T</td></tr>
+<a class="el" href="classrppw_1_1_observable.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = <a class="el" href="classrppw_1_1_observable.html">T</a></td></tr>
 <tr class="memdesc:a0fac5e9412123d69a38cc6a24aaf0f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the optional value. <br /></td></tr>
 <tr class="separator:a0fac5e9412123d69a38cc6a24aaf0f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d8ec47d2ee9b3d2d298f19b7cb42310" id="r_a3d8ec47d2ee9b3d2d298f19b7cb42310"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; T &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </td></tr>
-<tr class="memitem:a3d8ec47d2ee9b3d2d298f19b7cb42310"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3d8ec47d2ee9b3d2d298f19b7cb42310">subscribe</a> (N onSuccess, E onError, C onComplete) const</td></tr>
+<tr class="memitem:a020cb577bc3c8f7331164d886b092ce5" id="r_a020cb577bc3c8f7331164d886b092ce5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a020cb577bc3c8f7331164d886b092ce5">subscribe</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a020cb577bc3c8f7331164d886b092ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts processing, ignoring success and empty completion.  <br /></td></tr>
+<tr class="separator:a020cb577bc3c8f7331164d886b092ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8ec47d2ee9b3d2d298f19b7cb42310" id="r_a3d8ec47d2ee9b3d2d298f19b7cb42310"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </td></tr>
+<tr class="memitem:a3d8ec47d2ee9b3d2d298f19b7cb42310"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3d8ec47d2ee9b3d2d298f19b7cb42310">subscribe</a> (<a class="el" href="classrppw_1_1_observable.html">N</a> <a class="el" href="classrppw_1_1_observable.html">onSuccess</a>, <a class="el" href="classrppw_1_1_observable.html">E</a> <a class="el" href="classrppw_1_1_observable.html">onError</a>, <a class="el" href="classrppw_1_1_observable.html">C</a> <a class="el" href="classrppw_1_1_observable.html">onComplete</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a3d8ec47d2ee9b3d2d298f19b7cb42310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts processing with three mutually exclusive terminal outcomes.  <br /></td></tr>
 <tr class="separator:a3d8ec47d2ee9b3d2d298f19b7cb42310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8751d84e5d5fcab7e23be32eb83a457" id="r_ae8751d84e5d5fcab7e23be32eb83a457"><td class="memTemplParams" colspan="2">template&lt;concepts::MapperFor&lt; T &gt; F&gt; </td></tr>
-<tr class="memitem:ae8751d84e5d5fcab7e23be32eb83a457"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ae8751d84e5d5fcab7e23be32eb83a457">map</a> (F function) const</td></tr>
+<tr class="memitem:ab924311828ad7e9f311e1bdaced1bfd6" id="r_ab924311828ad7e9f311e1bdaced1bfd6"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> std::exception_ptr &amp; &gt; F&gt; </td></tr>
+<tr class="memitem:ab924311828ad7e9f311e1bdaced1bfd6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ab924311828ad7e9f311e1bdaced1bfd6">doOnError</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ab924311828ad7e9f311e1bdaced1bfd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspects an error before forwarding it unchanged.  <br /></td></tr>
+<tr class="separator:ab924311828ad7e9f311e1bdaced1bfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6350f787e36de00412080244c0606b6" id="r_ad6350f787e36de00412080244c0606b6"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor F&gt; </td></tr>
+<tr class="memitem:ad6350f787e36de00412080244c0606b6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ad6350f787e36de00412080244c0606b6">doOnComplete</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ad6350f787e36de00412080244c0606b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes an action before success or empty completion.  <br /></td></tr>
+<tr class="separator:ad6350f787e36de00412080244c0606b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe9b0b1e166d0aee497fd33210285fe" id="r_a6fe9b0b1e166d0aee497fd33210285fe"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp; &gt; F&gt; </td></tr>
+<tr class="memitem:a6fe9b0b1e166d0aee497fd33210285fe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a6fe9b0b1e166d0aee497fd33210285fe">doOnSuccess</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a6fe9b0b1e166d0aee497fd33210285fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspects a present value before forwarding success unchanged.  <br /></td></tr>
+<tr class="separator:a6fe9b0b1e166d0aee497fd33210285fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8751d84e5d5fcab7e23be32eb83a457" id="r_ae8751d84e5d5fcab7e23be32eb83a457"><td class="memTemplParams" colspan="2">template&lt;concepts::MapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:ae8751d84e5d5fcab7e23be32eb83a457"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ae8751d84e5d5fcab7e23be32eb83a457">map</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">function</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:ae8751d84e5d5fcab7e23be32eb83a457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms a present value without invoking the function when empty.  <br /></td></tr>
 <tr class="separator:ae8751d84e5d5fcab7e23be32eb83a457"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57cf7ac9a31e995f6e97cab3abef85f2" id="r_a57cf7ac9a31e995f6e97cab3abef85f2"><td class="memTemplParams" colspan="2">template&lt;concepts::FlatMapperFor&lt; T, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </td></tr>
-<tr class="memitem:a57cf7ac9a31e995f6e97cab3abef85f2"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a57cf7ac9a31e995f6e97cab3abef85f2">flatMap</a> (F function) const</td></tr>
+<tr class="memitem:a57cf7ac9a31e995f6e97cab3abef85f2" id="r_a57cf7ac9a31e995f6e97cab3abef85f2"><td class="memTemplParams" colspan="2">template&lt;concepts::FlatMapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a57cf7ac9a31e995f6e97cab3abef85f2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">auto</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a57cf7ac9a31e995f6e97cab3abef85f2">flatMap</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">function</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a57cf7ac9a31e995f6e97cab3abef85f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains a <a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> from a present value.  <br /></td></tr>
 <tr class="separator:a57cf7ac9a31e995f6e97cab3abef85f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0903a611204074421e8d45aad0a90bf7" id="r_a0903a611204074421e8d45aad0a90bf7"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </td></tr>
-<tr class="memitem:a0903a611204074421e8d45aad0a90bf7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a0903a611204074421e8d45aad0a90bf7">filter</a> (F predicate) const</td></tr>
+<tr class="memitem:a0903a611204074421e8d45aad0a90bf7" id="r_a0903a611204074421e8d45aad0a90bf7"><td class="memTemplParams" colspan="2">template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a0903a611204074421e8d45aad0a90bf7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a0903a611204074421e8d45aad0a90bf7">filter</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">predicate</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a0903a611204074421e8d45aad0a90bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps an accepted value or completes empty.  <br /></td></tr>
 <tr class="separator:a0903a611204074421e8d45aad0a90bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8ad4837af0c089a56e2a22db1bcf5a5" id="r_ac8ad4837af0c089a56e2a22db1bcf5a5"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
+<tr class="memitem:ac8ad4837af0c089a56e2a22db1bcf5a5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ac8ad4837af0c089a56e2a22db1bcf5a5">delay</a> (rpp::schedulers::duration <a class="el" href="classrppw_1_1_observable.html">duration</a>, <a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ac8ad4837af0c089a56e2a22db1bcf5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delays success, empty completion and errors on the supplied scheduler.  <br /></td></tr>
+<tr class="separator:ac8ad4837af0c089a56e2a22db1bcf5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a207b1af3fb77642cfbe1baa2f47ac828" id="r_a207b1af3fb77642cfbe1baa2f47ac828"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a207b1af3fb77642cfbe1baa2f47ac828">repeat</a> (std::size_t count) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a207b1af3fb77642cfbe1baa2f47ac828"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeats success or empty completion up to count total subscriptions.  <br /></td></tr>
+<tr class="separator:a207b1af3fb77642cfbe1baa2f47ac828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a550f17cca831a9aaaab1c320d576c598" id="r_a550f17cca831a9aaaab1c320d576c598"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a550f17cca831a9aaaab1c320d576c598">repeat</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a550f17cca831a9aaaab1c320d576c598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeats success or empty completion until cancellation or error.  <br /></td></tr>
+<tr class="separator:a550f17cca831a9aaaab1c320d576c598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a7f9388507bb1c90c193a3cd621dd44" id="r_a5a7f9388507bb1c90c193a3cd621dd44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a5a7f9388507bb1c90c193a3cd621dd44">retry</a> (std::size_t count) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a5a7f9388507bb1c90c193a3cd621dd44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resubscribes after an error up to count additional attempts.  <br /></td></tr>
+<tr class="separator:a5a7f9388507bb1c90c193a3cd621dd44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cea504d5f0744f34f3c059bce7ee117" id="r_a9cea504d5f0744f34f3c059bce7ee117"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a9cea504d5f0744f34f3c059bce7ee117">retry</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:a9cea504d5f0744f34f3c059bce7ee117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retries errors until success, empty completion or cancellation.  <br /></td></tr>
+<tr class="separator:a9cea504d5f0744f34f3c059bce7ee117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2738b63c08a6460171e456b4b15b78f9" id="r_a2738b63c08a6460171e456b4b15b78f9"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
-<tr class="memitem:a2738b63c08a6460171e456b4b15b78f9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2738b63c08a6460171e456b4b15b78f9">subscribeOn</a> (S scheduler) const</td></tr>
+<tr class="memitem:a2738b63c08a6460171e456b4b15b78f9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2738b63c08a6460171e456b4b15b78f9">subscribeOn</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a2738b63c08a6460171e456b4b15b78f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules the upstream subscription.  <br /></td></tr>
 <tr class="separator:a2738b63c08a6460171e456b4b15b78f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68bddc84b3c51cdff7b39af5850f5d23" id="r_a68bddc84b3c51cdff7b39af5850f5d23"><td class="memTemplParams" colspan="2">template&lt;rpp::schedulers::constraint::scheduler S&gt; </td></tr>
-<tr class="memitem:a68bddc84b3c51cdff7b39af5850f5d23"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a68bddc84b3c51cdff7b39af5850f5d23">observeOn</a> (S scheduler) const</td></tr>
+<tr class="memitem:a68bddc84b3c51cdff7b39af5850f5d23"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a68bddc84b3c51cdff7b39af5850f5d23">observeOn</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">scheduler</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a68bddc84b3c51cdff7b39af5850f5d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schedules delivery of success, empty completion and errors.  <br /></td></tr>
 <tr class="separator:a68bddc84b3c51cdff7b39af5850f5d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d18806bfa49e791c372e26da71f4791" id="r_a4d18806bfa49e791c372e26da71f4791"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a4d18806bfa49e791c372e26da71f4791">toObservable</a> () const</td></tr>
+<tr class="memitem:a4d18806bfa49e791c372e26da71f4791" id="r_a4d18806bfa49e791c372e26da71f4791"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a4d18806bfa49e791c372e26da71f4791">toObservable</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a4d18806bfa49e791c372e26da71f4791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exposes the source as zero or one value followed by completion.  <br /></td></tr>
 <tr class="separator:a4d18806bfa49e791c372e26da71f4791"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf2cbb33c9570814e25f1e353d52097d" id="r_aaf2cbb33c9570814e25f1e353d52097d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#aaf2cbb33c9570814e25f1e353d52097d">toSingle</a> () const</td></tr>
+<tr class="memitem:aaf2cbb33c9570814e25f1e353d52097d" id="r_aaf2cbb33c9570814e25f1e353d52097d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#aaf2cbb33c9570814e25f1e353d52097d">toSingle</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:aaf2cbb33c9570814e25f1e353d52097d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requires a value before completion.  <br /></td></tr>
 <tr class="separator:aaf2cbb33c9570814e25f1e353d52097d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5630a7fff2ae53b35d4b35d2b57c4dcb" id="r_a5630a7fff2ae53b35d4b35d2b57c4dcb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a5630a7fff2ae53b35d4b35d2b57c4dcb">defaultIfEmpty</a> (T value) const</td></tr>
+<tr class="memitem:a5630a7fff2ae53b35d4b35d2b57c4dcb" id="r_a5630a7fff2ae53b35d4b35d2b57c4dcb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a5630a7fff2ae53b35d4b35d2b57c4dcb">defaultIfEmpty</a> (<a class="el" href="classrppw_1_1_observable.html">T</a> <a class="el" href="classrppw_1_1_observable.html">value</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a5630a7fff2ae53b35d4b35d2b57c4dcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces an absent value without replacing errors.  <br /></td></tr>
 <tr class="separator:a5630a7fff2ae53b35d4b35d2b57c4dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d90930e23b8f4d61bddaf86f2ca0567" id="r_a3d90930e23b8f4d61bddaf86f2ca0567"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3d90930e23b8f4d61bddaf86f2ca0567">ignoreElement</a> () const</td></tr>
+<tr class="memitem:ad44f6a67241f6bd092af225d893a9faa" id="r_ad44f6a67241f6bd092af225d893a9faa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ad44f6a67241f6bd092af225d893a9faa">switchIfEmpty</a> (<a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_observable.html">fallback</a>) <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
+<tr class="memdesc:ad44f6a67241f6bd092af225d893a9faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to a fallback only after empty completion.  <br /></td></tr>
+<tr class="separator:ad44f6a67241f6bd092af225d893a9faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d90930e23b8f4d61bddaf86f2ca0567" id="r_a3d90930e23b8f4d61bddaf86f2ca0567"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3d90930e23b8f4d61bddaf86f2ca0567">ignoreElement</a> () <a class="el" href="classrppw_1_1_observable.html">const</a></td></tr>
 <tr class="memdesc:a3d90930e23b8f4d61bddaf86f2ca0567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discards the optional value and preserves termination.  <br /></td></tr>
 <tr class="separator:a3d90930e23b8f4d61bddaf86f2ca0567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a3956ed0125f39ab847d3e44e402f6a52" id="r_a3956ed0125f39ab847d3e44e402f6a52"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3956ed0125f39ab847d3e44e402f6a52">just</a> (T value)</td></tr>
+<tr class="memitem:a3956ed0125f39ab847d3e44e402f6a52" id="r_a3956ed0125f39ab847d3e44e402f6a52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3956ed0125f39ab847d3e44e402f6a52">just</a> (<a class="el" href="classrppw_1_1_observable.html">T</a> <a class="el" href="classrppw_1_1_observable.html">value</a>)</td></tr>
 <tr class="memdesc:a3956ed0125f39ab847d3e44e402f6a52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores a value to emit as success for each subscription.  <br /></td></tr>
 <tr class="separator:a3956ed0125f39ab847d3e44e402f6a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a4362e61a95a5ae396a917e8606f7c8" id="r_a0a4362e61a95a5ae396a917e8606f7c8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a0a4362e61a95a5ae396a917e8606f7c8">empty</a> ()</td></tr>
+<tr class="memitem:a0a4362e61a95a5ae396a917e8606f7c8" id="r_a0a4362e61a95a5ae396a917e8606f7c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a0a4362e61a95a5ae396a917e8606f7c8">empty</a> ()</td></tr>
 <tr class="memdesc:a0a4362e61a95a5ae396a917e8606f7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that completes without a value.  <br /></td></tr>
 <tr class="separator:a0a4362e61a95a5ae396a917e8606f7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9abb40c092c474a40816080a6fc43bf3" id="r_a9abb40c092c474a40816080a6fc43bf3"><td class="memTemplParams" colspan="2">template&lt;concepts::FactoryFor&lt; std::optional&lt; T &gt; &gt; F&gt; </td></tr>
-<tr class="memitem:a9abb40c092c474a40816080a6fc43bf3"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a9abb40c092c474a40816080a6fc43bf3">fromCallable</a> (F callable)</td></tr>
+<tr class="memitem:a9abb40c092c474a40816080a6fc43bf3" id="r_a9abb40c092c474a40816080a6fc43bf3"><td class="memTemplParams" colspan="2">template&lt;concepts::FactoryFor&lt; std::optional&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; &gt; F&gt; </td></tr>
+<tr class="memitem:a9abb40c092c474a40816080a6fc43bf3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a9abb40c092c474a40816080a6fc43bf3">fromCallable</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">callable</a>)</td></tr>
 <tr class="memdesc:a9abb40c092c474a40816080a6fc43bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates presence or absence for each subscription.  <br /></td></tr>
 <tr class="separator:a9abb40c092c474a40816080a6fc43bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2aa707fcdf4046b9f83f890a4e57af2b" id="r_a2aa707fcdf4046b9f83f890a4e57af2b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2aa707fcdf4046b9f83f890a4e57af2b">error</a> (std::exception_ptr error)</td></tr>
+<tr class="memitem:a2aa707fcdf4046b9f83f890a4e57af2b" id="r_a2aa707fcdf4046b9f83f890a4e57af2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2aa707fcdf4046b9f83f890a4e57af2b">error</a> (std::exception_ptr error)</td></tr>
 <tr class="memdesc:a2aa707fcdf4046b9f83f890a4e57af2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that only forwards the supplied error.  <br /></td></tr>
 <tr class="separator:a2aa707fcdf4046b9f83f890a4e57af2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3c3de4601ebeb20f0f34059e2603cf8" id="r_ad3c3de4601ebeb20f0f34059e2603cf8"><td class="memTemplParams" colspan="2">template&lt;concepts::ExceptionValue E&gt; </td></tr>
-<tr class="memitem:ad3c3de4601ebeb20f0f34059e2603cf8"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ad3c3de4601ebeb20f0f34059e2603cf8">error</a> (E error)</td></tr>
+<tr class="memitem:ad3c3de4601ebeb20f0f34059e2603cf8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#ad3c3de4601ebeb20f0f34059e2603cf8">error</a> (<a class="el" href="classrppw_1_1_observable.html">E</a> error)</td></tr>
 <tr class="memdesc:ad3c3de4601ebeb20f0f34059e2603cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures an error with std::make_exception_ptr and creates a failing source.  <br /></td></tr>
 <tr class="separator:ad3c3de4601ebeb20f0f34059e2603cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2581d34bee5cb5d84dff34b3aae02c00" id="r_a2581d34bee5cb5d84dff34b3aae02c00"><td class="memTemplParams" colspan="2">template&lt;concepts::SourceFactoryFor&lt; T, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </td></tr>
-<tr class="memitem:a2581d34bee5cb5d84dff34b3aae02c00"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2581d34bee5cb5d84dff34b3aae02c00">defer</a> (F factory)</td></tr>
+<tr class="memitem:a2581d34bee5cb5d84dff34b3aae02c00" id="r_a2581d34bee5cb5d84dff34b3aae02c00"><td class="memTemplParams" colspan="2">template&lt;concepts::SourceFactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </td></tr>
+<tr class="memitem:a2581d34bee5cb5d84dff34b3aae02c00"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2581d34bee5cb5d84dff34b3aae02c00">defer</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">factory</a>)</td></tr>
 <tr class="memdesc:a2581d34bee5cb5d84dff34b3aae02c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes a <a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> factory for each subscription.  <br /></td></tr>
 <tr class="separator:a2581d34bee5cb5d84dff34b3aae02c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -180,14 +214,14 @@ Static Public Member Functions</h2></td></tr>
 Friends</h2></td></tr>
 <tr class="memitem:a27f95a64d702be94ff1315af66ab9748" id="r_a27f95a64d702be94ff1315af66ab9748"><td class="memTemplParams" colspan="2"><a id="a27f95a64d702be94ff1315af66ab9748" name="a27f95a64d702be94ff1315af66ab9748"></a>
 template&lt;detail::Value &gt; </td></tr>
-<tr class="memitem:a27f95a64d702be94ff1315af66ab9748"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Observable</b></td></tr>
+<tr class="memitem:a27f95a64d702be94ff1315af66ab9748"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Observable</b></td></tr>
 <tr class="separator:a27f95a64d702be94ff1315af66ab9748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12092baab2e5f6b0b9c2018977e7f94c" id="r_a12092baab2e5f6b0b9c2018977e7f94c"><td class="memTemplParams" colspan="2"><a id="a12092baab2e5f6b0b9c2018977e7f94c" name="a12092baab2e5f6b0b9c2018977e7f94c"></a>
 template&lt;detail::Value &gt; </td></tr>
-<tr class="memitem:a12092baab2e5f6b0b9c2018977e7f94c"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Single</b></td></tr>
+<tr class="memitem:a12092baab2e5f6b0b9c2018977e7f94c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Single</b></td></tr>
 <tr class="separator:a12092baab2e5f6b0b9c2018977e7f94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f7053bea907d84db2e60646a5237957" id="r_a5f7053bea907d84db2e60646a5237957"><td class="memItemLeft" align="right" valign="top"><a id="a5f7053bea907d84db2e60646a5237957" name="a5f7053bea907d84db2e60646a5237957"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>Completable</b></td></tr>
+<a class="el" href="classrppw_1_1_observable.html">class</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Completable</b></td></tr>
 <tr class="separator:a5f7053bea907d84db2e60646a5237957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -199,11 +233,12 @@ class rppw::Maybe&lt; T &gt;</div><p>Cold source that succeeds with a value, com
   </table>
   </dd>
 </dl>
-<p>Success and empty completion are distinct terminal outcomes: onSuccess is never followed by onComplete. Each subscription executes its own chain. Operators do not modify the source; their exceptions are forwarded to onError. Without a scheduler, synchronous sources run on the thread calling <a class="el" href="classrppw_1_1_maybe.html#a3d8ec47d2ee9b3d2d298f19b7cb42310" title="Starts processing with three mutually exclusive terminal outcomes.">subscribe()</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive processing. The caller must synchronize data shared between subscriptions.</dd></dl>
+<p>Success and empty completion are distinct terminal outcomes: onSuccess is never followed by onComplete. Each subscription executes its own chain. Operators do not modify the source; their exceptions are forwarded to onError. Without a scheduler, synchronous sources run on the thread calling <a class="el" href="classrppw_1_1_maybe.html#a020cb577bc3c8f7331164d886b092ce5" title="Starts processing, ignoring success and empty completion.">subscribe()</a>. </p><dl class="section warning"><dt>Warning</dt><dd>Reference captures must outlive processing. The caller must synchronize data shared between subscriptions.</dd></dl>
 <div class="fragment"><div class="line"><span class="preprocessor">#pragma once</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// stl</span></div>
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;exception&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
@@ -222,52 +257,76 @@ class rppw::Maybe&lt; T &gt;</div><p>Cold source that succeeds with a value, com
 <div class="line">    <span class="keyword">class </span><a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a></div>
 <div class="line">    {</div>
 <div class="line">    <span class="keyword">public</span>:</div>
-<div class="line">        <span class="keyword">using </span><a class="code hl_typedef" href="classrppw_1_1_maybe.html#a0fac5e9412123d69a38cc6a24aaf0f2b">value_type</a> = T;</div>
+<div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classrppw_1_1_observable.html">value_type</a> = <a class="code hl_class" href="classrppw_1_1_observable.html">T</a>;</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> just(T value);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> just(<a class="code hl_class" href="classrppw_1_1_observable.html">T</a> <a class="code hl_class" href="classrppw_1_1_observable.html">value</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> empty();</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::FactoryFor&lt;std::optional&lt;T&gt;&gt; F&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> fromCallable(F callable);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> fromCallable(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">callable</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> error(std::exception_ptr error);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue E&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> error(E error);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">E</a> error);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::SourceFactoryFor&lt;T, rppw::Maybe&gt; F&gt;</div>
-<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> defer(F factory);</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> defer(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">factory</a>);</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;T&gt; N, concepts::CallbackFor&lt;std::exception_ptr &amp;&gt; E, concepts::CallbackFor C&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(N onSuccess, E onError, C onComplete) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_disposable.html">Disposable</a> subscribe(<a class="code hl_class" href="classrppw_1_1_observable.html">N</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onSuccess</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">E</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onError</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">C</a> <a class="code hl_class" href="classrppw_1_1_observable.html">onComplete</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;const std::exception_ptr &amp;&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> doOnError(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> doOnComplete(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;const T &amp;&gt; F&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> doOnSuccess(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::MapperFor&lt;T&gt; F&gt;</div>
-<div class="line">        <span class="keyword">auto</span> map(F function) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">auto</span> map(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">function</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::FlatMapperFor&lt;T, rppw::Maybe&gt; F&gt;</div>
-<div class="line">        <span class="keyword">auto</span> flatMap(F function) <span class="keyword">const</span>;</div>
+<div class="line">        <span class="keyword">auto</span> flatMap(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">function</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::PredicateFor&lt;T&gt; F&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> filter(F predicate) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> filter(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">predicate</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> subscribeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> delay(rpp::schedulers::duration <a class="code hl_class" href="classrppw_1_1_observable.html">duration</a>, <a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> repeat(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> repeat() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> retry(std::size_t count) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> retry() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> observeOn(S scheduler) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> subscribeOn(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;rpp::schedulers::constra<span class="keywordtype">int</span>::scheduler S&gt;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> observeOn(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">scheduler</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> toObservable() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_single.html">Single&lt;T&gt;</a> toSingle() <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;T&gt;</a> toSingle() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">        <a class="code hl_class" href="classrppw_1_1_single.html">Single&lt;T&gt;</a> defaultIfEmpty(T value) <span class="keyword">const</span>;</div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Single&lt;T&gt;</a> defaultIfEmpty(<a class="code hl_class" href="classrppw_1_1_observable.html">T</a> <a class="code hl_class" href="classrppw_1_1_observable.html">value</a>) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> switchIfEmpty(<a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> <a class="code hl_class" href="classrppw_1_1_observable.html">fallback</a>) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">        <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> ignoreElement() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">private</span>:</div>
-<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a>(<a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> source)</div>
-<div class="line">            : source_{std::move(source)}</div>
+<div class="line">        <span class="keyword">explicit</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a>(<a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> <a class="code hl_class" href="classrppw_1_1_observable.html">source</a>)</div>
+<div class="line">            : source_{<a class="code hl_class" href="classrppw_1_1_observable.html">std</a>::<a class="code hl_class" href="classrppw_1_1_observable.html">move</a>(<a class="code hl_class" href="classrppw_1_1_observable.html">source</a>)}</div>
 <div class="line">        {</div>
 <div class="line">        }</div>
 <div class="line">        <a class="code hl_class" href="classrppw_1_1_observable.html">Observable&lt;T&gt;</a> source_;</div>
@@ -283,12 +342,11 @@ class rppw::Maybe&lt; T &gt;</div><p>Cold source that succeeds with a value, com
 <div class="line"> </div>
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Maybe.inl&gt;</span></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:29</div></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:30</div></div>
 <div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
-<div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:33</div></div>
-<div class="ttc" id="aclassrppw_1_1_maybe_html_a0fac5e9412123d69a38cc6a24aaf0f2b"><div class="ttname"><a href="classrppw_1_1_maybe.html#a0fac5e9412123d69a38cc6a24aaf0f2b">rppw::Maybe::value_type</a></div><div class="ttdeci">T value_type</div><div class="ttdoc">Type of the optional value.</div><div class="ttdef"><b>Definition</b> Maybe.h:36</div></div>
-<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:38</div></div>
-<div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:33</div></div>
+<div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:34</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
+<div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:34</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5630a7fff2ae53b35d4b35d2b57c4dcb" name="a5630a7fff2ae53b35d4b35d2b57c4dcb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5630a7fff2ae53b35d4b35d2b57c4dcb">&#9670;&#160;</a></span>defaultIfEmpty()</h2>
@@ -299,9 +357,9 @@ class rppw::Maybe&lt; T &gt;</div><p>Cold source that succeeds with a value, com
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; T &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::defaultIfEmpty </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::defaultIfEmpty </td>
           <td>(</td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">T</a>&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -327,15 +385,15 @@ template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::SourceFactoryFor&lt; T, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </div>
+template&lt;concepts::SourceFactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::defer </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::defer </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>factory</em></td><td>)</td>
           <td></td>
         </tr>
@@ -364,6 +422,175 @@ template&lt;concepts::SourceFactoryFor&lt; T, <a class="el" href="classrppw_1_1_
 
 </div>
 </div>
+<a id="ac8ad4837af0c089a56e2a22db1bcf5a5" name="ac8ad4837af0c089a56e2a22db1bcf5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8ad4837af0c089a56e2a22db1bcf5a5">&#9670;&#160;</a></span>delay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::delay </td>
+          <td>(</td>
+          <td class="paramtype">rpp::schedulers::duration&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
+          <td class="paramname"><em>scheduler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delays success, empty completion and errors on the supplied scheduler. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>ReactivePlusPlus scheduler type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Nonnegative notification delay. </td></tr>
+    <tr><td class="paramname">scheduler</td><td>Delivery context; upstream subscription is not delayed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> preserving all terminal outcomes with delayed delivery. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>If duration is negative. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Cancellation discards queued notifications and cancels upstream. A blocking scheduler can block the subscribing thread. </dd></dl>
+
+</div>
+</div>
+<a id="ad6350f787e36de00412080244c0606b6" name="ad6350f787e36de00412080244c0606b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6350f787e36de00412080244c0606b6">&#9670;&#160;</a></span>doOnComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::doOnComplete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes an action before success or empty completion. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable no-argument callback. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value and invoked once per normal termination. Not invoked on error or cancellation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> preserving the distinction between success and empty completion. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
+<a id="ab924311828ad7e9f311e1bdaced1bfd6" name="ab924311828ad7e9f311e1bdaced1bfd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab924311828ad7e9f311e1bdaced1bfd6">&#9670;&#160;</a></span>doOnError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> std::exception_ptr &amp; &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::doOnError </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inspects an error before forwarding it unchanged. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable callback accepting const std::exception_ptr&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value and invoked on each subscription's error. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> preserving all terminal outcomes. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
+<a id="a6fe9b0b1e166d0aee497fd33210285fe" name="a6fe9b0b1e166d0aee497fd33210285fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe9b0b1e166d0aee497fd33210285fe">&#9670;&#160;</a></span>doOnSuccess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">const</a> <a class="el" href="classrppw_1_1_observable.html">T</a> &amp; &gt; F&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::doOnSuccess </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inspects a present value before forwarding success unchanged. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable callback accepting const T&amp;. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>Callback stored by value; not invoked when empty, on error or cancellation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> preserving all terminal outcomes. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The callback must not throw; an escaping exception invokes std::terminate. </dd></dl>
+
+</div>
+</div>
 <a id="a0a4362e61a95a5ae396a917e8606f7c8" name="a0a4362e61a95a5ae396a917e8606f7c8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a4362e61a95a5ae396a917e8606f7c8">&#9670;&#160;</a></span>empty()</h2>
 
@@ -376,7 +603,7 @@ template&lt;detail::Value T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::empty </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::empty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -408,9 +635,9 @@ template&lt;concepts::ExceptionValue E&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::error </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::error </td>
           <td>(</td>
-          <td class="paramtype">E&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">E</a>&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
           <td></td>
         </tr>
@@ -452,7 +679,7 @@ template&lt;detail::Value T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::error </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::error </td>
           <td>(</td>
           <td class="paramtype">std::exception_ptr&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
@@ -491,12 +718,12 @@ template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </div>
+template&lt;concepts::PredicateFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::filter </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::filter </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>predicate</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -528,12 +755,12 @@ template&lt;concepts::PredicateFor&lt; T &gt; F&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::FlatMapperFor&lt; T, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </div>
+template&lt;concepts::FlatMapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a> &gt; F&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::flatMap </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">auto</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::flatMap </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>function</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -566,15 +793,15 @@ template&lt;concepts::FlatMapperFor&lt; T, <a class="el" href="classrppw_1_1_may
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::FactoryFor&lt; std::optional&lt; T &gt; &gt; F&gt; </div>
+template&lt;concepts::FactoryFor&lt; std::optional&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; &gt; F&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::fromCallable </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::fromCallable </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>callable</em></td><td>)</td>
           <td></td>
         </tr>
@@ -613,7 +840,7 @@ template&lt;concepts::FactoryFor&lt; std::optional&lt; T &gt; &gt; F&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::ignoreElement </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_completable.html">Completable</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::ignoreElement </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -638,9 +865,9 @@ template&lt;detail::Value T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::just </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::just </td>
           <td>(</td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">T</a>&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
@@ -671,12 +898,12 @@ template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::MapperFor&lt; T &gt; F&gt; </div>
+template&lt;concepts::MapperFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; F&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::map </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">auto</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::map </td>
           <td>(</td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
           <td class="paramname"><em>function</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -712,9 +939,9 @@ template&lt;detail::Value T&gt; </div>
 template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::observeOn </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::observeOn </td>
           <td>(</td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
           <td class="paramname"><em>scheduler</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -738,32 +965,161 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 
 </div>
 </div>
+<a id="a550f17cca831a9aaaab1c320d576c598" name="a550f17cca831a9aaaab1c320d576c598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a550f17cca831a9aaaab1c320d576c598">&#9670;&#160;</a></span>repeat() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::repeat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repeats success or empty completion until cancellation or error. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> emitting present values from every repetition. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Synchronous repetition, including empty sources, can occupy the subscribing thread indefinitely. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="a207b1af3fb77642cfbe1baa2f47ac828" name="a207b1af3fb77642cfbe1baa2f47ac828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a207b1af3fb77642cfbe1baa2f47ac828">&#9670;&#160;</a></span>repeat() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::repeat </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Repeats success or empty completion up to count total subscriptions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Total subscription count; zero completes without subscribing. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_observable.html" title="Cold source of zero or more values, followed by completion or an error.">Observable</a> emitting present values and stopping on the first error. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Empty completions consume repetitions. Counts reset per subscriber; cancellation prevents further subscriptions. No scheduler is added. </dd></dl>
+
+</div>
+</div>
+<a id="a9cea504d5f0744f34f3c059bce7ee117" name="a9cea504d5f0744f34f3c059bce7ee117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cea504d5f0744f34f3c059bce7ee117">&#9670;&#160;</a></span>retry() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::retry </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retries errors until success, empty completion or cancellation. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> preserving success or empty completion on recovery. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Synchronous errors can occupy the subscribing thread indefinitely. No scheduler or backoff is added. </dd></dl>
+
+</div>
+</div>
+<a id="a5a7f9388507bb1c90c193a3cd621dd44" name="a5a7f9388507bb1c90c193a3cd621dd44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a7f9388507bb1c90c193a3cd621dd44">&#9670;&#160;</a></span>retry() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::retry </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resubscribes after an error up to count additional attempts. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Maximum retries after the initial attempt; zero does not retry. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> succeeding or completing empty on recovery, or forwarding the last error. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Empty completion is not retried. Counts reset per subscriber; cancellation prevents further attempts. No scheduler or backoff is added. </dd></dl>
+
+</div>
+</div>
+<a id="a020cb577bc3c8f7331164d886b092ce5" name="a020cb577bc3c8f7331164d886b092ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020cb577bc3c8f7331164d886b092ce5">&#9670;&#160;</a></span>subscribe() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::subscribe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts processing, ignoring success and empty completion. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared cancellation handle, disposed after termination. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Unhandled errors are logged to stderr without stopping the program. Destroying the handle does not cancel the subscription. </dd></dl>
+
+</div>
+</div>
 <a id="a3d8ec47d2ee9b3d2d298f19b7cb42310" name="a3d8ec47d2ee9b3d2d298f19b7cb42310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d8ec47d2ee9b3d2d298f19b7cb42310">&#9670;&#160;</a></span>subscribe()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d8ec47d2ee9b3d2d298f19b7cb42310">&#9670;&#160;</a></span>subscribe() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;detail::Value T&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::CallbackFor&lt; T &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </div>
+template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; N, concepts::CallbackFor&lt; std::exception_ptr &amp; &gt; E, concepts::CallbackFor C&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::subscribe </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_disposable.html">Disposable</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::subscribe </td>
           <td>(</td>
-          <td class="paramtype">N&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">N</a>&#160;</td>
           <td class="paramname"><em>onSuccess</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">E&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">E</a>&#160;</td>
           <td class="paramname"><em>onError</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">C&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">C</a>&#160;</td>
           <td class="paramname"><em>onComplete</em>&#160;</td>
         </tr>
         <tr>
@@ -809,9 +1165,9 @@ template&lt;detail::Value T&gt; </div>
 template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::subscribeOn </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::subscribeOn </td>
           <td>(</td>
-          <td class="paramtype">S&#160;</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
           <td class="paramname"><em>scheduler</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -835,6 +1191,36 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 
 </div>
 </div>
+<a id="ad44f6a67241f6bd092af225d893a9faa" name="ad44f6a67241f6bd092af225d893a9faa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad44f6a67241f6bd092af225d893a9faa">&#9670;&#160;</a></span>switchIfEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::switchIfEmpty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;&#160;</td>
+          <td class="paramname"><em>fallback</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Subscribes to a fallback only after empty completion. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fallback</td><td><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> stored by value and subscribed only when this source is empty. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> preserving this source's success or error, otherwise forwarding fallback. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Errors do not trigger fallback. Each subscription has independent state. Cancellation is propagated to the active source and prevents a pending fallback subscription. </dd></dl>
+
+</div>
+</div>
 <a id="a4d18806bfa49e791c372e26da71f4791" name="a4d18806bfa49e791c372e26da71f4791"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d18806bfa49e791c372e26da71f4791">&#9670;&#160;</a></span>toObservable()</h2>
 
@@ -844,7 +1230,7 @@ template&lt;rpp::schedulers::constraint::scheduler S&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; T &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::toObservable </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::toObservable </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -866,7 +1252,7 @@ template&lt;detail::Value T&gt; </div>
 template&lt;detail::Value T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; T &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; T &gt;::toSingle </td>
+          <td class="memname"><a class="el" href="classrppw_1_1_single.html">Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::toSingle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

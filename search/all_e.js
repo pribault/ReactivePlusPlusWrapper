@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['take_0',['take',['../classrppw_1_1_observable.html#a9b88034842bf559fa93726b86af36b03',1,'rppw::Observable']]],
-  ['the_20right_20reactive_20type_1',['Choose the right reactive type',['../index.html#autotoc_md1',1,'']]],
-  ['tomaybe_2',['toMaybe',['../classrppw_1_1_single.html#ad295de6f3f72b4e8f27c05a8b6ca3a23',1,'rppw::Single']]],
-  ['toobservable_3',['toobservable',['../classrppw_1_1_maybe.html#a4d18806bfa49e791c372e26da71f4791',1,'rppw::Maybe::toObservable()'],['../classrppw_1_1_single.html#a2511c6ac107e1a407b012957b4023aac',1,'rppw::Single::toObservable()']]],
-  ['tosingle_4',['toSingle',['../classrppw_1_1_maybe.html#aaf2cbb33c9570814e25f1e353d52097d',1,'rppw::Maybe']]],
-  ['type_5',['Choose the right reactive type',['../index.html#autotoc_md1',1,'']]]
+  ['single_0',['Single',['../classrppw_1_1_single.html',1,'rppw']]],
+  ['singleelement_1',['singleElement',['../classrppw_1_1_observable.html#a4e2bcae74a914759cab24ff41c3fa4af',1,'rppw::Observable']]],
+  ['singleorerror_2',['singleOrError',['../classrppw_1_1_observable.html#a5a85d78e6fc7cd3783c399eb123ace0e',1,'rppw::Observable']]],
+  ['subscribe_3',['subscribe',['../classrppw_1_1_observable.html#a93ecbedd74c98fafba4c8171885b5852',1,'rppw::Observable::subscribe()'],['../classrppw_1_1_single.html#a7e4a92c000722653dfcf72bc48cd282a',1,'rppw::Single::subscribe(N onSuccess, E onError) const'],['../classrppw_1_1_single.html#af80967f410eacd262b2df4933362d2e3',1,'rppw::Single::subscribe() const'],['../classrppw_1_1_observable.html#a62aa8bec3e5958e6574eca3eb6aaa918',1,'rppw::Observable::subscribe()'],['../classrppw_1_1_maybe.html#a3d8ec47d2ee9b3d2d298f19b7cb42310',1,'rppw::Maybe::subscribe(N onSuccess, E onError, C onComplete) const'],['../classrppw_1_1_maybe.html#a020cb577bc3c8f7331164d886b092ce5',1,'rppw::Maybe::subscribe() const'],['../classrppw_1_1_completable.html#a590ea0a5dcab15ada2caec6dcaeb9d49',1,'rppw::Completable::subscribe(C onComplete, E onError) const'],['../classrppw_1_1_completable.html#a37e9f5bf6e754a299e0dab866080f2d4',1,'rppw::Completable::subscribe() const']]],
+  ['subscribeon_4',['subscribeon',['../classrppw_1_1_completable.html#a3d2b52ae4ed82738cfbf7e7082ce667c',1,'rppw::Completable::subscribeOn()'],['../classrppw_1_1_maybe.html#a2738b63c08a6460171e456b4b15b78f9',1,'rppw::Maybe::subscribeOn()'],['../classrppw_1_1_observable.html#a3d8f70057a2f705778b4eef451b341b1',1,'rppw::Observable::subscribeOn()'],['../classrppw_1_1_single.html#a52db82df37a010ee27efa6e9391d79d3',1,'rppw::Single::subscribeOn()']]],
+  ['switchifempty_5',['switchifempty',['../classrppw_1_1_maybe.html#ad44f6a67241f6bd092af225d893a9faa',1,'rppw::Maybe::switchIfEmpty()'],['../classrppw_1_1_observable.html#a3155076eb3e78f06982f77c08a044c39',1,'rppw::Observable::switchIfEmpty()']]]
 ];

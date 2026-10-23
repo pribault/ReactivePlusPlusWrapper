@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['take_0',['take',['../classrppw_1_1_observable.html#a9b88034842bf559fa93726b86af36b03',1,'rppw::Observable']]],
-  ['tomaybe_1',['toMaybe',['../classrppw_1_1_single.html#ad295de6f3f72b4e8f27c05a8b6ca3a23',1,'rppw::Single']]],
-  ['toobservable_2',['toobservable',['../classrppw_1_1_maybe.html#a4d18806bfa49e791c372e26da71f4791',1,'rppw::Maybe::toObservable()'],['../classrppw_1_1_single.html#a2511c6ac107e1a407b012957b4023aac',1,'rppw::Single::toObservable()']]],
-  ['tosingle_3',['toSingle',['../classrppw_1_1_maybe.html#aaf2cbb33c9570814e25f1e353d52097d',1,'rppw::Maybe']]]
+  ['observeon_0',['observeon',['../classrppw_1_1_completable.html#a0814845bf85ffb1b8983d21b210c7aac',1,'rppw::Completable::observeOn()'],['../classrppw_1_1_maybe.html#a68bddc84b3c51cdff7b39af5850f5d23',1,'rppw::Maybe::observeOn()'],['../classrppw_1_1_observable.html#a7d01251d053f4bc6af07e280815d1480',1,'rppw::Observable::observeOn()'],['../classrppw_1_1_single.html#ac59b02ba15df862c09357199c1399485',1,'rppw::Single::observeOn()']]]
 ];
