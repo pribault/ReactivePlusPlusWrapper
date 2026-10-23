@@ -1,5 +1,5 @@
 // tests
-#include <support/ReactiveTest.h>
+#include <support/RunLoopTest.h>
 
 // stl
 #include <array>
@@ -15,6 +15,123 @@ namespace rppw::test
 		class CompletableTest : public ReactiveTest
 		{
 		};
+
+		template <typename Case>
+		class CompletableConversionTest : public RunLoopTest
+		{
+		protected:
+			auto convert(const Completable &source)
+			{
+				if constexpr (Case::value)
+					return source.toMaybe<int>();
+				else
+					return source.toObservable<int>();
+			}
+		};
+
+		using CompletableConversionCases = ::testing::Types<std::false_type, std::true_type>;
+		TYPED_TEST_SUITE(CompletableConversionTest, CompletableConversionCases);
+
+		TYPED_TEST(CompletableConversionTest, CompletesWithoutEmittingValue)
+		{
+			EXPECT_CALL(this->observer, complete());
+			EXPECT_TRUE(this->subscribe(this->convert(Completable::complete())).isDisposed());
+		}
+
+		TYPED_TEST(CompletableConversionTest, PreservesOriginalError)
+		{
+			EXPECT_CALL(this->observer, error(this->failure));
+			EXPECT_TRUE(this->subscribe(this->convert(Completable::error(this->failure))).isDisposed());
+		}
+
+		TYPED_TEST(CompletableConversionTest, DefersActionForEverySubscription)
+		{
+			StrictMock<MockFunction<void()>> action;
+			const auto						 source = this->convert(Completable::fromAction(action.AsStdFunction()));
+			InSequence						 sequence;
+			EXPECT_CALL(action, Call());
+			EXPECT_CALL(this->observer, complete());
+			EXPECT_CALL(action, Call());
+			EXPECT_CALL(this->observer, complete());
+			this->subscribe(source);
+			this->subscribe(source);
+		}
+
+		TYPED_TEST(CompletableConversionTest, PropagatesActionException)
+		{
+			const auto source = this->convert(Completable::fromAction(
+				[]
+				{
+					throw std::runtime_error{"action"};
+				}));
+			EXPECT_CALL(this->observer, error(ExceptionContaining<std::runtime_error>("action")));
+			this->subscribe(source);
+		}
+
+		TYPED_TEST(CompletableConversionTest, PropagatesCancellationToScheduledAction)
+		{
+			StrictMock<MockFunction<void()>> action;
+			const auto subscription = this->subscribe(this->convert(Completable::fromAction(action.AsStdFunction()).subscribeOn(this->loop)));
+			EXPECT_FALSE(subscription.isDisposed());
+			subscription.dispose();
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(CompletableConversionTest, WaitsForScheduledCompletion)
+		{
+			const auto subscription = this->subscribe(this->convert(Completable::complete().observeOn(this->loop)));
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(this->observer, complete());
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TYPED_TEST(CompletableConversionTest, PreservesScheduledError)
+		{
+			const auto subscription = this->subscribe(this->convert(Completable::error(this->failure).observeOn(this->loop)));
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(this->observer, error(this->failure));
+			this->drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		struct NonDefaultValue
+		{
+			explicit NonDefaultValue(int) {}
+		};
+
+		TEST_F(CompletableTest, ConvertsToObservableWithoutConstructingValue)
+		{
+			EXPECT_CALL(observer, complete());
+			subscribe(Completable::complete().toObservable<NonDefaultValue>().ignoreElements());
+		}
+
+		TEST_F(CompletableTest, ConvertsToMaybeWithoutConstructingValue)
+		{
+			EXPECT_CALL(observer, complete());
+			subscribe(Completable::complete().toMaybe<NonDefaultValue>().toObservable().ignoreElements());
+		}
+
+		TEST_F(CompletableTest, DefaultObservableConversionEmitsNoMonostate)
+		{
+			EXPECT_CALL(observer, complete());
+			subscribe(Completable::complete().toObservable().map(
+				[](std::monostate)
+				{
+					return 1;
+				}));
+		}
+
+		TEST_F(CompletableTest, DefaultMaybeConversionEmitsNoMonostate)
+		{
+			EXPECT_CALL(observer, complete());
+			subscribe(Completable::complete().toMaybe().map(
+				[](std::monostate)
+				{
+					return 1;
+				}));
+		}
 
 		TEST_F(CompletableTest, CompletesWithoutValues)
 		{

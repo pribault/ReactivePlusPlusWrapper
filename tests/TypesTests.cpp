@@ -130,11 +130,67 @@ namespace rppw::test
 		template <typename Source, typename F>
 		concept AcceptsFilter = requires(const Source &source, F function) { source.filter(function); };
 
+		template <typename F>
+		concept AcceptsExtremumComparator = requires(const Observable<int> &source, F compare) {
+			{ source.min(compare) } -> std::same_as<Maybe<int>>;
+			{ source.max(compare) } -> std::same_as<Maybe<int>>;
+		};
+
+		static_assert(AcceptsExtremumComparator<std::less<>>);
+		static_assert(AcceptsExtremumComparator<std::greater<>>);
+		static_assert(AcceptsExtremumComparator<decltype([](const int &a, const int &b) { return a < b; })>);
+		static_assert(!AcceptsExtremumComparator<decltype([](int, int) {})>);
+		static_assert(!AcceptsExtremumComparator<decltype([](int) { return true; })>);
+		static_assert(!AcceptsExtremumComparator<decltype([flag = false](int, int) mutable { return flag = !flag; })>);
+
+		template <typename F>
+		concept AcceptsPrefixPredicates = requires(const Observable<int> &source, F predicate) {
+			{ source.takeUntil(predicate) } -> std::same_as<Observable<int>>;
+			{ source.takeWhile(predicate) } -> std::same_as<Observable<int>>;
+			{ source.dropUntil(predicate) } -> std::same_as<Observable<int>>;
+			{ source.dropWhile(predicate) } -> std::same_as<Observable<int>>;
+		};
+
+		template <typename F>
+		concept AcceptsQuantifierPredicates = requires(const Observable<int> &source, F predicate) {
+			{ source.allOf(predicate) } -> std::same_as<Single<bool>>;
+			{ source.anyOf(predicate) } -> std::same_as<Single<bool>>;
+			{ source.noneOf(predicate) } -> std::same_as<Single<bool>>;
+		};
+
+		static_assert(AcceptsQuantifierPredicates<decltype([](const int &value) { return value > 0; })>);
+		static_assert(AcceptsQuantifierPredicates<decltype([](int value) { return value; })>);
+		static_assert(!AcceptsQuantifierPredicates<decltype([](int) {})>);
+		static_assert(!AcceptsQuantifierPredicates<decltype([](int &&) { return true; })>);
+		static_assert(!AcceptsQuantifierPredicates<decltype([flag = false](int) mutable { return flag = !flag; })>);
+
+		static_assert(AcceptsPrefixPredicates<decltype([](const int &value) { return value > 0; })>);
+		static_assert(AcceptsPrefixPredicates<decltype([](int value) { return value; })>);
+		static_assert(!AcceptsPrefixPredicates<decltype([](int) {})>);
+		static_assert(!AcceptsPrefixPredicates<decltype([](int &&) { return true; })>);
+		static_assert(!AcceptsPrefixPredicates<decltype([flag = false](int) mutable { return flag = !flag; })>);
+
 		template <typename Source, typename... Callbacks>
 		concept AcceptsSubscribe = requires(const Source &source, Callbacks... callbacks) { source.subscribe(callbacks...); };
 
 		template <typename R>
 		concept AcceptsRange = requires(R &&range) { Observable<int>::fromIterable(std::forward<R>(range)); };
+
+		template <typename R>
+		concept AcceptsObservableComposition = requires(R &&sources) {
+			{ Observable<int>::concat(std::forward<R>(sources)) } -> std::same_as<Observable<int>>;
+			{ Observable<int>::merge(std::forward<R>(sources)) } -> std::same_as<Observable<int>>;
+		};
+
+		static_assert(AcceptsObservableComposition<std::vector<Observable<int>>>);
+		static_assert(AcceptsObservableComposition<const std::vector<Observable<int>> &>);
+		static_assert(AcceptsObservableComposition<std::vector<Single<int>> &>);
+		static_assert(AcceptsObservableComposition<std::vector<Maybe<int>>>);
+		static_assert(AcceptsObservableComposition<std::ranges::empty_view<Observable<int>>>);
+		static_assert(!AcceptsObservableComposition<std::vector<Observable<long>>>);
+		static_assert(!AcceptsObservableComposition<std::vector<Completable>>);
+		static_assert(!AcceptsObservableComposition<std::vector<int>>);
+		static_assert(!AcceptsObservableComposition<int>);
 
 		template <typename R>
 		concept AcceptsAndThen = requires(R source) { Completable::complete().andThen(source); };
@@ -308,12 +364,44 @@ namespace rppw::test
 									   })),
 								   Maybe<int>>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().defaultIfEmpty(1)), Single<int>>);
+		static_assert(std::same_as<decltype(Maybe<int>::empty().switchIfEmpty(Maybe<int>::just(1))), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().switchIfEmpty(Observable<int>::just(1))), Observable<int>>);
 		static_assert(std::same_as<decltype(Observable<int>::empty().singleOrError()), Single<int>>);
 		static_assert(std::same_as<decltype(Observable<int>::empty().singleElement()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().elementAt(0)), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().first()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().last()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().count()), Single<std::size_t>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().repeat()), Observable<int>>);
+		static_assert(std::same_as<decltype(Single<int>::just(1).repeat()), Observable<int>>);
+		static_assert(std::same_as<decltype(Single<int>::just(1).repeat(0)), Observable<int>>);
+		static_assert(std::same_as<decltype(Maybe<int>::empty().repeat()), Observable<int>>);
+		static_assert(std::same_as<decltype(Maybe<int>::empty().repeat(0)), Observable<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().repeat()), Completable>);
+		static_assert(std::same_as<decltype(Completable::complete().repeat(0)), Completable>);
+		static_assert(std::same_as<decltype(Single<int>::just(1).retry()), Single<int>>);
+		static_assert(std::same_as<decltype(Single<int>::just(1).retry(0)), Single<int>>);
+		static_assert(std::same_as<decltype(Maybe<int>::empty().retry()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Maybe<int>::empty().retry(0)), Maybe<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().retry()), Completable>);
+		static_assert(std::same_as<decltype(Completable::complete().retry(0)), Completable>);
+		static_assert(std::same_as<decltype(Single<int>::just(1).delay(rpp::schedulers::duration::zero(), rpp::schedulers::run_loop{})), Single<int>>);
+		static_assert(std::same_as<decltype(Maybe<int>::empty().delay(rpp::schedulers::duration::zero(), rpp::schedulers::run_loop{})), Maybe<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().delay(rpp::schedulers::duration::zero(), rpp::schedulers::run_loop{})), Completable>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().repeat(0)), Observable<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().retry()), Observable<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().retry(0)), Observable<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().delay(rpp::schedulers::duration::zero(), rpp::schedulers::run_loop{})), Observable<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().max()), Maybe<int>>);
+		static_assert(std::same_as<decltype(Observable<int>::empty().min()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Observable<int>::empty().ignoreElements()), Completable>);
 		static_assert(std::same_as<decltype(Single<int>::just(1).ignoreElement()), Completable>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().ignoreElement()), Completable>);
 		static_assert(std::same_as<decltype(Single<int>::just(1).toObservable()), Observable<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().toObservable()), Observable<std::monostate>>);
+		static_assert(std::same_as<decltype(Completable::complete().toMaybe()), Maybe<std::monostate>>);
+		static_assert(std::same_as<decltype(Completable::complete().toObservable<int>()), Observable<int>>);
+		static_assert(std::same_as<decltype(Completable::complete().toMaybe<int>()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Single<int>::just(1).toMaybe()), Maybe<int>>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().toObservable()), Observable<int>>);
 		static_assert(std::same_as<decltype(Maybe<int>::empty().toSingle()), Single<int>>);

@@ -61,6 +61,12 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	Disposable Maybe<T>::subscribe() const
+	{
+		return source_.take(1).subscribe();
+	}
+
+	template <detail::Value T>
 	template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E, concepts::CallbackFor C>
 	Disposable Maybe<T>::subscribe(N onSuccess, E onError, C onComplete) const
 	{
@@ -77,6 +83,44 @@ namespace rppw
 				if (!*seen)
 					std::invoke(onComplete);
 			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Maybe<T> Maybe<T>::doOnError(F action) const
+	{
+		return Maybe{source_.doOnError(std::move(action))};
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor F>
+	Maybe<T> Maybe<T>::doOnComplete(F action) const
+	{
+		return defer(
+			[source = source_, action = std::move(action)]
+			{
+				const auto seen = std::make_shared<bool>(false);
+				return Maybe{source
+								 .doOnNext(
+									 [seen, action](const T &) noexcept
+									 {
+										 *seen = true;
+										 std::invoke(action);
+									 })
+								 .doOnComplete(
+									 [seen, action]() noexcept
+									 {
+										 if (!*seen)
+											 std::invoke(action);
+									 })};
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const T &> F>
+	Maybe<T> Maybe<T>::doOnSuccess(F action) const
+	{
+		return Maybe{source_.doOnNext(std::move(action))};
 	}
 
 	template <detail::Value T>
@@ -105,6 +149,37 @@ namespace rppw
 	Maybe<T> Maybe<T>::filter(F predicate) const
 	{
 		return Maybe{source_.filter(std::move(predicate))};
+	}
+
+	template <detail::Value T>
+	template <rpp::schedulers::constraint::scheduler S>
+	Maybe<T> Maybe<T>::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		return Maybe{source_.delay(duration, std::move(scheduler))};
+	}
+
+	template <detail::Value T>
+	Observable<T> Maybe<T>::repeat(std::size_t count) const
+	{
+		return source_.repeat(count);
+	}
+
+	template <detail::Value T>
+	Observable<T> Maybe<T>::repeat() const
+	{
+		return source_.repeat();
+	}
+
+	template <detail::Value T>
+	Maybe<T> Maybe<T>::retry(std::size_t count) const
+	{
+		return Maybe{source_.retry(count)};
+	}
+
+	template <detail::Value T>
+	Maybe<T> Maybe<T>::retry() const
+	{
+		return Maybe{source_.retry()};
 	}
 
 	template <detail::Value T>
@@ -148,6 +223,12 @@ namespace rppw
 												return item.value_or(value);
 											}))
 										   .as_dynamic()}};
+	}
+
+	template <detail::Value T>
+	Maybe<T> Maybe<T>::switchIfEmpty(Maybe fallback) const
+	{
+		return Maybe{source_.switchIfEmpty(std::move(fallback.source_))};
 	}
 
 	template <detail::Value T>

@@ -4,6 +4,7 @@
 #include <concepts>
 #include <cstddef>
 #include <exception>
+#include <functional>
 #include <ranges>
 #include <type_traits>
 #include <utility>
@@ -59,6 +60,34 @@ namespace rppw
 		static Observable fromIterable(R &&range);
 
 		/**
+		 * @brief Subscribes to sources sequentially, preserving their order.
+		 * @tparam R Input range of Observable<T>, Single<T> or Maybe<T>.
+		 * @param sources Homogeneous range copied into owned storage immediately.
+		 * @return Observable forwarding all values, completing when all sources complete.
+		 * An empty range completes without values; empty Maybes are skipped.
+		 * @note Subscription is deferred and repeated for each subscriber.
+		 * An error or cancellation prevents subscription to remaining sources.
+		 * Range traversal and allocation exceptions are synchronous.
+		 */
+		template <concepts::ObservableSourceRangeOf<T> R>
+		static Observable concat(R &&sources);
+
+		/**
+		 * @brief Subscribes to sources without waiting for preceding sources to complete.
+		 * @tparam R Input range of Observable<T>, Single<T> or Maybe<T>.
+		 * @param sources Homogeneous range copied into owned storage immediately.
+		 * @return Observable completing after all sources, or immediately for an empty range.
+		 * Empty Maybes contribute no values.
+		 * @note Each subscription restarts the sources. Their own value order is preserved;
+		 * ordering between sources is unspecified. An error cancels all active sources.
+		 * Cancellation is propagated to every active source. No scheduler is added.
+		 * Range traversal and allocation exceptions are synchronous.
+		 * @warning No concurrency limit is imposed.
+		 */
+		template <concepts::ObservableSourceRangeOf<T> R>
+		static Observable merge(R &&sources);
+
+		/**
 		 * @brief Creates a source that completes without emitting a value.
 		 * @return Empty source.
 		 */
@@ -92,6 +121,14 @@ namespace rppw
 		static Observable defer(F factory);
 
 		/**
+		 * @brief Starts processing, ignoring values and normal completion.
+		 * @return Shared cancellation handle, disposed after termination.
+		 * @note Unhandled errors are logged to stderr without stopping the program.
+		 * Destroying the handle does not cancel the subscription.
+		 */
+		Disposable subscribe() const;
+
+		/**
 		 * @brief Subscribes the three callbacks and starts processing.
 		 * @tparam N Type of the callback receiving a value of type T.
 		 * @tparam E Type of the callback receiving std::exception_ptr.
@@ -108,6 +145,36 @@ namespace rppw
 		 */
 		template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E, concepts::CallbackFor C>
 		Disposable subscribe(N onNext, E onError, C onComplete) const;
+
+		/**
+		 * @brief Inspects an error before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const std::exception_ptr&.
+		 * @param action Callback stored by value and invoked on each subscription's error.
+		 * @return Observable preserving all notifications.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const std::exception_ptr &> F>
+		Observable doOnError(F action) const;
+
+		/**
+		 * @brief Executes an action before forwarding normal completion.
+		 * @tparam F Const-invocable no-argument callback.
+		 * @param action Callback stored by value; not invoked on error or cancellation.
+		 * @return Observable preserving all notifications.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor F>
+		Observable doOnComplete(F action) const;
+
+		/**
+		 * @brief Inspects each value before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const T&.
+		 * @param action Callback stored by value, invoked only when a value arrives.
+		 * @return Observable preserving all notifications.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const T &> F>
+		Observable doOnNext(F action) const;
 
 		/**
 		 * @brief Transforms each value without modifying the source.
@@ -130,6 +197,52 @@ namespace rppw
 		Observable filter(F predicate) const;
 
 		/**
+		 * @brief Subscribes to a fallback only after normal completion without values.
+		 * @param fallback Source stored by value and subscribed only when this source is empty.
+		 * @return Observable preserving this source's values, or forwarding the fallback's notifications.
+		 * @note Errors do not trigger fallback. Values are forwarded without buffering.
+		 * State resets per subscription; cancellation is propagated to the active source
+		 * and prevents a pending fallback subscription.
+		 */
+		Observable switchIfEmpty(Observable fallback) const;
+
+		/**
+		 * @brief Tests whether every value satisfies the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Test applied until the first false result.
+		 * @return Single emitting false at the first failure, or true at normal completion.
+		 * An empty source produces true.
+		 * @note A decisive result cancels upstream. Upstream errors and predicate exceptions
+		 * before that result are forwarded as errors. Evaluation is deferred per subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Single<bool> allOf(F predicate) const;
+
+		/**
+		 * @brief Tests whether at least one value satisfies the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Test applied until the first true result.
+		 * @return Single emitting true at the first match, or false at normal completion.
+		 * An empty source produces false.
+		 * @note A decisive result cancels upstream. Upstream errors and predicate exceptions
+		 * before that result are forwarded as errors. Evaluation is deferred per subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Single<bool> anyOf(F predicate) const;
+
+		/**
+		 * @brief Tests whether no value satisfies the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Test applied until the first true result.
+		 * @return Single emitting false at the first match, or true at normal completion.
+		 * An empty source produces true.
+		 * @note A decisive result cancels upstream. Upstream errors and predicate exceptions
+		 * before that result are forwarded as errors. Evaluation is deferred per subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Single<bool> noneOf(F predicate) const;
+
+		/**
 		 * @brief Merges the sources produced for each value.
 		 * @tparam F Const-invocable callable returning `Observable<U>`.
 		 * @param function Inner-source factory.
@@ -147,6 +260,101 @@ namespace rppw
 		 * @return Limited source; a zero count completes without subscribing upstream.
 		 */
 		Observable take(std::size_t count) const;
+
+		/**
+		 * @brief Emits values through the first value satisfying the predicate.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Stop condition evaluated before forwarding each value.
+		 * @return Source including the matching value, then completing and cancelling upstream.
+		 * @note Without a match, all values are forwarded. Predicate exceptions signal onError.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable takeUntil(F predicate) const;
+
+		/**
+		 * @brief Emits values while the predicate holds.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Condition evaluated before forwarding each value.
+		 * @return Source excluding the first nonmatching value, then completing and cancelling upstream.
+		 * @note Predicate exceptions signal onError.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable takeWhile(F predicate) const;
+
+		/**
+		 * @brief Discards the first count values.
+		 * @param count Number of initial values to discard; zero preserves all values.
+		 * @return Source forwarding remaining values and preserving upstream termination.
+		 */
+		Observable drop(std::size_t count) const;
+
+		/**
+		 * @brief Discards values until the predicate first holds.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Start condition, no longer evaluated after its first match.
+		 * @return Source forwarding the first matching value and all subsequent values.
+		 * @note Without a match, no values are forwarded. Predicate exceptions signal onError.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable dropUntil(F predicate) const;
+
+		/**
+		 * @brief Discards values while the predicate holds.
+		 * @tparam F Const-invocable predicate accepting const T&.
+		 * @param predicate Condition, no longer evaluated after its first false result.
+		 * @return Source forwarding the first nonmatching value and all subsequent values.
+		 * @note Predicate exceptions signal onError. State is independent for each subscription.
+		 */
+		template <concepts::PredicateFor<T> F>
+		Observable dropWhile(F predicate) const;
+
+		/**
+		 * @brief Delays values, completion and errors on the supplied scheduler.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param duration Nonnegative delay applied to each notification.
+		 * @param scheduler Notification delivery context; no scheduler is chosen implicitly.
+		 * @return Observable preserving notification order without delaying upstream subscription.
+		 * @throws std::invalid_argument If duration is negative.
+		 * @note Cancellation discards queued notifications and cancels upstream.
+		 * @warning Queuing is unbounded. A blocking scheduler can block the subscribing thread.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Observable delay(rpp::schedulers::duration duration, S scheduler) const;
+
+		/**
+		 * @brief Repeats the source after normal completion up to count total subscriptions.
+		 * @param count Total subscription count; zero completes without subscribing upstream.
+		 * @return Observable forwarding each repetition's values and stopping on the first error.
+		 * @note The counter resets for each subscriber. Cancellation prevents further repetitions.
+		 * No scheduler is added.
+		 */
+		Observable repeat(std::size_t count) const;
+
+		/**
+		 * @brief Repeats the source after every normal completion until cancellation or error.
+		 * @return Observable forwarding values from every repetition.
+		 * @warning Synchronous sources can occupy the subscribing thread indefinitely,
+		 * including empty sources. No scheduler is added.
+		 */
+		Observable repeat() const;
+
+		/**
+		 * @brief Resubscribes after an error up to count additional attempts.
+		 * @param count Maximum retries after the initial subscription; zero does not retry.
+		 * @return Observable forwarding values from every attempt, completing on success,
+		 * or forwarding the last error after exhausting retries.
+		 * @note The counter resets for each subscriber. Cancellation prevents further attempts.
+		 * No scheduler is added; values emitted before a failed attempt are not retracted.
+		 */
+		Observable retry(std::size_t count) const;
+
+		/**
+		 * @brief Resubscribes after errors without a retry limit.
+		 * @return Observable forwarding all attempts' values until normal completion or cancellation.
+		 * @warning A synchronously failing source can occupy the subscribing thread indefinitely.
+		 * No scheduler is added.
+		 */
+		Observable retry() const;
 
 		/**
 		 * @brief Schedules the upstream subscription on the supplied scheduler.
@@ -168,6 +376,77 @@ namespace rppw
 		 */
 		template <rpp::schedulers::constraint::scheduler S>
 		Observable observeOn(S scheduler) const;
+
+		/**
+		 * @brief Selects the value at a zero-based index.
+		 * @param index Number of values to skip before selecting one.
+		 * @return Maybe containing the selected value, or empty if the source completes first.
+		 * @note Selection cancels upstream immediately. Errors before selection are preserved.
+		 */
+		Maybe<T> elementAt(std::size_t index) const;
+
+		/**
+		 * @brief Selects the first value and cancels upstream immediately.
+		 * @return Maybe containing the first value, or empty for an empty source.
+		 * @note Errors before the first value are preserved.
+		 */
+		Maybe<T> first() const;
+
+		/**
+		 * @brief Selects the last value after normal completion.
+		 * @return Maybe containing the last value, or empty for an empty source.
+		 * @note Retains one value while waiting for completion. An upstream error discards it.
+		 * No value is emitted if upstream never completes. Cancellation is propagated upstream.
+		 */
+		Maybe<T> last() const;
+
+		/**
+		 * @brief Counts all values until normal completion.
+		 * @return Single containing the number of values, or zero for an empty source.
+		 * @note Upstream errors discard the partial count. Counter overflow signals
+		 * std::overflow_error through onError. Cancellation is propagated upstream.
+		 */
+		Single<std::size_t> count() const;
+
+		/**
+		 * @brief Applies a function to each value, sequentially, producing a single result.
+		 * @tparam R Accumulator/result type, which must be copyable.
+		 * @tparam F Const-invocable binary reducer: (accumulator, value) -> new accumulator.
+		 * @param initial Initial accumulator value.
+		 * @param accumulator Reducer function stored by value.
+		 * @return Single emitting the final accumulator value, or the initial value for an empty source.
+		 * @note Upstream errors discard the partial result and signal onError.
+		 * Reducer exceptions are propagated through the reactive error channel.
+		 * Cancellation is propagated upstream. Evaluation is deferred per subscription.
+		 */
+		template <typename R, concepts::ReducerFor<R, T> F>
+		Single<R> reduce(R initial, F accumulator) const;
+
+		/**
+		 * @brief Selects the greatest value after normal completion.
+		 * @tparam Compare Const-invocable strict weak ordering, defaulting to std::less<>.
+		 * @param compare Comparator stored by value, returning true when its first argument is smaller.
+		 * @return Maybe containing the greatest value, or empty for an empty source.
+		 * Equivalent values retain the first occurrence.
+		 * @note Retains one value. Upstream errors and comparator exceptions discard
+		 * the partial result and signal onError. Cancellation is propagated upstream.
+		 */
+		template <typename Compare = std::less<>>
+			requires std::strict_weak_order<const Compare &, const T &, const T &>
+		Maybe<T> max(Compare compare = {}) const;
+
+		/**
+		 * @brief Selects the smallest value after normal completion.
+		 * @tparam Compare Const-invocable strict weak ordering, defaulting to std::less<>.
+		 * @param compare Comparator stored by value, returning true when its first argument is smaller.
+		 * @return Maybe containing the smallest value, or empty for an empty source.
+		 * Equivalent values retain the first occurrence.
+		 * @note Retains one value. Upstream errors and comparator exceptions discard
+		 * the partial result and signal onError. Cancellation is propagated upstream.
+		 */
+		template <typename Compare = std::less<>>
+			requires std::strict_weak_order<const Compare &, const T &, const T &>
+		Maybe<T> min(Compare compare = {}) const;
 
 		/**
 		 * @brief Requires exactly one value before upstream completion.

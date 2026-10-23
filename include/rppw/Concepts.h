@@ -79,12 +79,32 @@ namespace rppw::concepts
 							std::same_as<std::invoke_result_t<const F &, T>, Source<typename std::invoke_result_t<const F &, T>::value_type>>;
 
 	/**
+	 * @brief Const-invocable binary reducer: (accumulator, value) -> new accumulator.
+	 * @tparam F Callable type accepting accumulator and const T&.
+	 * @tparam R Accumulator/result type.
+	 * @tparam T Source value type.
+	 */
+	template <typename F, typename R, typename T>
+	concept ReducerFor = std::invocable<const F &, R, const T &> && std::convertible_to<std::invoke_result_t<const F &, R, const T &>, R>;
+
+	/**
 	 * @brief Input range whose elements are convertible to the requested type.
 	 * @tparam R Range type, possibly a reference.
 	 * @tparam T Target value type.
 	 */
 	template <typename R, typename T>
 	concept RangeOf = std::ranges::input_range<R> && std::convertible_to<std::ranges::range_reference_t<R>, T>;
+
+	/**
+	 * @brief Homogeneous input range of Observable<T>, Single<T> or Maybe<T>.
+	 * @tparam R Range type, possibly a reference.
+	 * @tparam T Exact source value type.
+	 * @note Keeps self-type constraints outside Observable for Clang 15 compatibility.
+	 */
+	template <typename R, typename T>
+	concept ObservableSourceRangeOf =
+		std::ranges::input_range<R> && (std::same_as<std::ranges::range_value_t<R>, Observable<T>> || std::same_as<std::ranges::range_value_t<R>, Single<T>> ||
+										std::same_as<std::ranges::range_value_t<R>, Maybe<T>>);
 
 	/**
 	 * @brief One of the wrapper's four reactive categories, without implicit conversion.

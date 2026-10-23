@@ -52,10 +52,41 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	Disposable Single<T>::subscribe() const
+	{
+		return source_.take(1).subscribe();
+	}
+
+	template <detail::Value T>
 	template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E>
 	Disposable Single<T>::subscribe(N onSuccess, E onError) const
 	{
 		return source_.take(1).subscribe(std::move(onSuccess), std::move(onError), [] {});
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Single<T> Single<T>::doOnError(F action) const
+	{
+		return Single{source_.doOnError(std::move(action))};
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor F>
+	Single<T> Single<T>::doOnComplete(F action) const
+	{
+		return doOnSuccess(
+			[action = std::move(action)](const T &) noexcept
+			{
+				std::invoke(action);
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CallbackFor<const T &> F>
+	Single<T> Single<T>::doOnSuccess(F action) const
+	{
+		return Single{source_.doOnNext(std::move(action))};
 	}
 
 	template <detail::Value T>
@@ -84,6 +115,37 @@ namespace rppw
 	Maybe<T> Single<T>::filter(F predicate) const
 	{
 		return Maybe<T>{source_.filter(std::move(predicate))};
+	}
+
+	template <detail::Value T>
+	template <rpp::schedulers::constraint::scheduler S>
+	Single<T> Single<T>::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		return Single{source_.delay(duration, std::move(scheduler))};
+	}
+
+	template <detail::Value T>
+	Observable<T> Single<T>::repeat(std::size_t count) const
+	{
+		return source_.repeat(count);
+	}
+
+	template <detail::Value T>
+	Observable<T> Single<T>::repeat() const
+	{
+		return source_.repeat();
+	}
+
+	template <detail::Value T>
+	Single<T> Single<T>::retry(std::size_t count) const
+	{
+		return Single{source_.retry(count)};
+	}
+
+	template <detail::Value T>
+	Single<T> Single<T>::retry() const
+	{
+		return Single{source_.retry()};
 	}
 
 	template <detail::Value T>

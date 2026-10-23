@@ -11,6 +11,30 @@
 
 namespace rppw
 {
+	template <concepts::RangeOf<Completable> R>
+	Completable Completable::concat(R &&sources)
+	{
+		const auto inner = Observable<Completable>::fromIterable(std::forward<R>(sources))
+							   .map(
+								   [](const Completable &source)
+								   {
+									   return source.source_;
+								   });
+		return Completable{Observable<std::monostate>{(inner.source_ | rpp::operators::concat()).as_dynamic()}};
+	}
+
+	template <concepts::RangeOf<Completable> R>
+	Completable Completable::merge(R &&sources)
+	{
+		const auto inner = Observable<Completable>::fromIterable(std::forward<R>(sources))
+							   .map(
+								   [](const Completable &source)
+								   {
+									   return source.source_;
+								   });
+		return Completable{Observable<std::monostate>{(inner.source_ | rpp::operators::merge()).as_dynamic()}};
+	}
+
 	template <concepts::ExceptionValue E>
 	Completable Completable::error(E error)
 	{
@@ -44,6 +68,18 @@ namespace rppw
 		return Observable<std::monostate>{source_}.subscribe([](std::monostate) {}, std::move(onError), std::move(onComplete));
 	}
 
+	template <concepts::CallbackFor<const std::exception_ptr &> F>
+	Completable Completable::doOnError(F action) const
+	{
+		return Completable{Observable<std::monostate>{source_}.doOnError(std::move(action))};
+	}
+
+	template <concepts::CallbackFor F>
+	Completable Completable::doOnComplete(F action) const
+	{
+		return Completable{Observable<std::monostate>{source_}.doOnComplete(std::move(action))};
+	}
+
 	template <concepts::ReactiveSource R>
 	R Completable::andThen(R next) const
 	{
@@ -63,6 +99,12 @@ namespace rppw
 	}
 
 	template <rpp::schedulers::constraint::scheduler S>
+	Completable Completable::delay(rpp::schedulers::duration duration, S scheduler) const
+	{
+		return Completable{Observable<std::monostate>{source_}.delay(duration, std::move(scheduler))};
+	}
+
+	template <rpp::schedulers::constraint::scheduler S>
 	Completable Completable::subscribeOn(S scheduler) const
 	{
 		return Completable{Observable<std::monostate>{source_}.subscribeOn(std::move(scheduler))};
@@ -72,5 +114,17 @@ namespace rppw
 	Completable Completable::observeOn(S scheduler) const
 	{
 		return Completable{Observable<std::monostate>{source_}.observeOn(std::move(scheduler))};
+	}
+
+	template <detail::Value T>
+	Observable<T> Completable::toObservable() const
+	{
+		return andThen(Observable<T>::empty());
+	}
+
+	template <detail::Value T>
+	Maybe<T> Completable::toMaybe() const
+	{
+		return Maybe<T>{toObservable<T>()};
 	}
 } // namespace rppw

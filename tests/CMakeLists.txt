@@ -3,13 +3,21 @@ include(GoogleTest)
 
 add_executable(ReactivePlusPlusWrapperTests
     CompletableTests.cpp
+    CompositionTests.cpp
     DisposableTests.cpp
+    FallbackTests.cpp
     MaybeTests.cpp
     ObservableTests.cpp
     SchedulerTests.cpp
+    SideEffectTests.cpp
     SingleTests.cpp
+    SubscribeTests.cpp
+    TimingTests.cpp
     TypesTests.cpp)
 target_include_directories(ReactivePlusPlusWrapperTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+if(MSVC)
+    target_compile_options(ReactivePlusPlusWrapperTests PRIVATE /bigobj)
+endif()
 set(test_main GTest::gtest_main)
 get_target_property(gmock_library_type GTest::gmock TYPE)
 if(WIN32 AND gmock_library_type STREQUAL "SHARED_LIBRARY")

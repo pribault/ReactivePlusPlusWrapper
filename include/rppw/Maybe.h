@@ -2,6 +2,7 @@
 
 // stl
 #include <concepts>
+#include <cstddef>
 #include <exception>
 #include <optional>
 #include <type_traits>
@@ -86,6 +87,14 @@ namespace rppw
 		static Maybe defer(F factory);
 
 		/**
+		 * @brief Starts processing, ignoring success and empty completion.
+		 * @return Shared cancellation handle, disposed after termination.
+		 * @note Unhandled errors are logged to stderr without stopping the program.
+		 * Destroying the handle does not cancel the subscription.
+		 */
+		Disposable subscribe() const;
+
+		/**
 		 * @brief Starts processing with three mutually exclusive terminal outcomes.
 		 * @tparam N Type of the callback receiving T.
 		 * @tparam E Type of the callback receiving std::exception_ptr.
@@ -101,6 +110,37 @@ namespace rppw
 		 */
 		template <concepts::CallbackFor<T> N, concepts::CallbackFor<std::exception_ptr &> E, concepts::CallbackFor C>
 		Disposable subscribe(N onSuccess, E onError, C onComplete) const;
+
+		/**
+		 * @brief Inspects an error before forwarding it unchanged.
+		 * @tparam F Const-invocable callback accepting const std::exception_ptr&.
+		 * @param action Callback stored by value and invoked on each subscription's error.
+		 * @return Maybe preserving all terminal outcomes.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const std::exception_ptr &> F>
+		Maybe doOnError(F action) const;
+
+		/**
+		 * @brief Executes an action before success or empty completion.
+		 * @tparam F Const-invocable no-argument callback.
+		 * @param action Callback stored by value and invoked once per normal termination.
+		 * Not invoked on error or cancellation.
+		 * @return Maybe preserving the distinction between success and empty completion.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor F>
+		Maybe doOnComplete(F action) const;
+
+		/**
+		 * @brief Inspects a present value before forwarding success unchanged.
+		 * @tparam F Const-invocable callback accepting const T&.
+		 * @param action Callback stored by value; not invoked when empty, on error or cancellation.
+		 * @return Maybe preserving all terminal outcomes.
+		 * @pre The callback must not throw; an escaping exception invokes std::terminate.
+		 */
+		template <concepts::CallbackFor<const T &> F>
+		Maybe doOnSuccess(F action) const;
 
 		/**
 		 * @brief Transforms a present value without invoking the function when empty.
@@ -130,6 +170,53 @@ namespace rppw
 		 */
 		template <concepts::PredicateFor<T> F>
 		Maybe filter(F predicate) const;
+
+		/**
+		 * @brief Delays success, empty completion and errors on the supplied scheduler.
+		 * @tparam S ReactivePlusPlus scheduler type.
+		 * @param duration Nonnegative notification delay.
+		 * @param scheduler Delivery context; upstream subscription is not delayed.
+		 * @return Maybe preserving all terminal outcomes with delayed delivery.
+		 * @throws std::invalid_argument If duration is negative.
+		 * @note Cancellation discards queued notifications and cancels upstream.
+		 * A blocking scheduler can block the subscribing thread.
+		 */
+		template <rpp::schedulers::constraint::scheduler S>
+		Maybe delay(rpp::schedulers::duration duration, S scheduler) const;
+
+		/**
+		 * @brief Repeats success or empty completion up to count total subscriptions.
+		 * @param count Total subscription count; zero completes without subscribing.
+		 * @return Observable emitting present values and stopping on the first error.
+		 * @note Empty completions consume repetitions. Counts reset per subscriber;
+		 * cancellation prevents further subscriptions. No scheduler is added.
+		 */
+		Observable<T> repeat(std::size_t count) const;
+
+		/**
+		 * @brief Repeats success or empty completion until cancellation or error.
+		 * @return Observable emitting present values from every repetition.
+		 * @warning Synchronous repetition, including empty sources, can occupy the
+		 * subscribing thread indefinitely. No scheduler is added.
+		 */
+		Observable<T> repeat() const;
+
+		/**
+		 * @brief Resubscribes after an error up to count additional attempts.
+		 * @param count Maximum retries after the initial attempt; zero does not retry.
+		 * @return Maybe succeeding or completing empty on recovery, or forwarding the last error.
+		 * @note Empty completion is not retried. Counts reset per subscriber;
+		 * cancellation prevents further attempts. No scheduler or backoff is added.
+		 */
+		Maybe retry(std::size_t count) const;
+
+		/**
+		 * @brief Retries errors until success, empty completion or cancellation.
+		 * @return Maybe preserving success or empty completion on recovery.
+		 * @warning Synchronous errors can occupy the subscribing thread indefinitely.
+		 * No scheduler or backoff is added.
+		 */
+		Maybe retry() const;
 
 		/**
 		 * @brief Schedules the upstream subscription.
@@ -168,6 +255,15 @@ namespace rppw
 		 * @return Single carrying the present value or value after empty completion.
 		 */
 		Single<T> defaultIfEmpty(T value) const;
+
+		/**
+		 * @brief Subscribes to a fallback only after empty completion.
+		 * @param fallback Maybe stored by value and subscribed only when this source is empty.
+		 * @return Maybe preserving this source's success or error, otherwise forwarding fallback.
+		 * @note Errors do not trigger fallback. Each subscription has independent state.
+		 * Cancellation is propagated to the active source and prevents a pending fallback subscription.
+		 */
+		Maybe switchIfEmpty(Maybe fallback) const;
 
 		/**
 		 * @brief Discards the optional value and preserves termination.
