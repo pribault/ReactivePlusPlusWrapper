@@ -4,6 +4,7 @@ include(GoogleTest)
 add_executable(ReactivePlusPlusWrapperTests
     CompletableTests.cpp
     CompositionTests.cpp
+    CreateTests.cpp
     DisposableTests.cpp
     FallbackTests.cpp
     MaybeTests.cpp

@@ -17,6 +17,13 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::CallbackFor<rpp::dynamic_observer<T>> F>
+	Single<T> Single<T>::create(F producer)
+	{
+		return Single{Observable<T>::create(std::move(producer)).take(1)};
+	}
+
+	template <detail::Value T>
 	template <concepts::FactoryFor<T> F>
 	Single<T> Single<T>::fromCallable(F callable)
 	{

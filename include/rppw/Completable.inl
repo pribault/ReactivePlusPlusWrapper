@@ -11,6 +11,12 @@
 
 namespace rppw
 {
+	template <concepts::CallbackFor<rpp::dynamic_observer<std::monostate>> F>
+	Completable Completable::create(F producer)
+	{
+		return Completable{Observable<std::monostate>::create(std::move(producer))};
+	}
+
 	template <concepts::RangeOf<Completable> R>
 	Completable Completable::concat(R &&sources)
 	{

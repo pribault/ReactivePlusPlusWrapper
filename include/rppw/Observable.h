@@ -49,6 +49,19 @@ namespace rppw
 		static Observable just(T value);
 
 		/**
+		 * @brief Invokes a producer with an RPP observer for each subscription.
+		 * @param producer Const-invocable callable stored by value. The observer may
+		 * be retained for asynchronous delivery; producer exceptions reach onError.
+		 * @return Cold source forwarding values, completion and errors.
+		 * @pre Notifications must be serialized; errors must be non-null.
+		 * @note Stop after termination or disposal. Cancellation does not interrupt
+		 * producer work; use observer.set_upstream() to attach cleanup.
+		 * Captured resources must outlive asynchronous work.
+		 */
+		template <concepts::CallbackFor<rpp::dynamic_observer<T>> F>
+		static Observable create(F producer);
+
+		/**
 		 * @brief Copies range elements and defers their emission until subscription.
 		 * @tparam R Input range whose elements are convertible to T.
 		 * @param range Elements copied into an owned collection in traversal order.
