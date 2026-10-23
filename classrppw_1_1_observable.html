@@ -248,6 +248,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a63286cee2e77aa7cd349b549e60ab36a" id="r_a63286cee2e77aa7cd349b549e60ab36a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a63286cee2e77aa7cd349b549e60ab36a">just</a> (<a class="el" href="classrppw_1_1_observable.html">T</a> <a class="el" href="classrppw_1_1_observable.html">value</a>)</td></tr>
 <tr class="memdesc:a63286cee2e77aa7cd349b549e60ab36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that emits the stored value and then completes.  <br /></td></tr>
 <tr class="separator:a63286cee2e77aa7cd349b549e60ab36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a515da084107fc3392e9e05b4593d1ea9" id="r_a515da084107fc3392e9e05b4593d1ea9"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; &gt; F&gt; </td></tr>
+<tr class="memitem:a515da084107fc3392e9e05b4593d1ea9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a515da084107fc3392e9e05b4593d1ea9">create</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">producer</a>)</td></tr>
+<tr class="memdesc:a515da084107fc3392e9e05b4593d1ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes a producer with an RPP observer for each subscription.  <br /></td></tr>
+<tr class="separator:a515da084107fc3392e9e05b4593d1ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691afacb9e6c9fe8da3e6baeacc25e73" id="r_a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memTemplParams" colspan="2">template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; R&gt; </td></tr>
 <tr class="memitem:a691afacb9e6c9fe8da3e6baeacc25e73"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_observable.html#a691afacb9e6c9fe8da3e6baeacc25e73">fromIterable</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">range</a>)</td></tr>
 <tr class="memdesc:a691afacb9e6c9fe8da3e6baeacc25e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies range elements and defers their emission until subscription.  <br /></td></tr>
@@ -326,6 +330,9 @@ class rppw::Observable&lt; T &gt;</div><p>Cold source of zero or more values, fo
 <div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classrppw_1_1_observable.html">value_type</a> = <a class="code hl_class" href="classrppw_1_1_observable.html">T</a>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> just(<a class="code hl_class" href="classrppw_1_1_observable.html">T</a> <a class="code hl_class" href="classrppw_1_1_observable.html">value</a>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;rpp::dynamic_observer&lt;T&gt;&gt; F&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> create(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">producer</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::RangeOf&lt;T&gt; R&gt;</div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_observable.html">Observable</a> fromIterable(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">range</a>);</div>
@@ -601,6 +608,47 @@ template&lt;detail::Value T&gt; </div>
 <p>Counts all values until normal completion. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> containing the number of values, or zero for an empty source. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Upstream errors discard the partial count. Counter overflow signals std::overflow_error through onError. Cancellation is propagated upstream. </dd></dl>
+
+</div>
+</div>
+<a id="a515da084107fc3392e9e05b4593d1ea9" name="a515da084107fc3392e9e05b4593d1ea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515da084107fc3392e9e05b4593d1ea9">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; &gt; F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_observable.html">Observable</a> <a class="el" href="classrppw_1_1_observable.html">rppw::Observable</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::create </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>producer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invokes a producer with an RPP observer for each subscription. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">producer</td><td>Const-invocable callable stored by value. The observer may be retained for asynchronous delivery; producer exceptions reach onError. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cold source forwarding values, completion and errors. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Notifications must be serialized; errors must be non-null. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Stop after termination or disposal. Cancellation does not interrupt producer work; use observer.set_upstream() to attach cleanup. Captured resources must outlive asynchronous work. </dd></dl>
 
 </div>
 </div>

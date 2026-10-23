@@ -172,6 +172,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a23e25a9581cf3c1492f2796089b8f548" id="r_a23e25a9581cf3c1492f2796089b8f548"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a23e25a9581cf3c1492f2796089b8f548">complete</a> ()</td></tr>
 <tr class="memdesc:a23e25a9581cf3c1492f2796089b8f548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that completes without executing an action.  <br /></td></tr>
 <tr class="separator:a23e25a9581cf3c1492f2796089b8f548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f87c7e7ade0d4769f34ea74477708cb" id="r_a7f87c7e7ade0d4769f34ea74477708cb"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; std::monostate &gt; &gt; F&gt; </td></tr>
+<tr class="memitem:a7f87c7e7ade0d4769f34ea74477708cb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a7f87c7e7ade0d4769f34ea74477708cb">create</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">producer</a>)</td></tr>
+<tr class="memdesc:a7f87c7e7ade0d4769f34ea74477708cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes a producer with an RPP observer for each subscription.  <br /></td></tr>
+<tr class="separator:a7f87c7e7ade0d4769f34ea74477708cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1881c132aaa5b69bd4cf31f60d44aa45" id="r_a1881c132aaa5b69bd4cf31f60d44aa45"><td class="memTemplParams" colspan="2">template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_completable.html">Completable</a> &gt; R&gt; </td></tr>
 <tr class="memitem:a1881c132aaa5b69bd4cf31f60d44aa45"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a1881c132aaa5b69bd4cf31f60d44aa45">concat</a> (<a class="el" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="el" href="classrppw_1_1_observable.html">sources</a>)</td></tr>
 <tr class="memdesc:a1881c132aaa5b69bd4cf31f60d44aa45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to Completables sequentially in range order.  <br /></td></tr>
@@ -230,6 +234,9 @@ template&lt;detail::Value &gt; </td></tr>
 <div class="line">        <span class="keyword">using </span><a class="code hl_typedef" href="classrppw_1_1_completable.html#ae5eda07885fd761b9fac302a8ffbe326">value_type</a> = std::monostate;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> complete();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;rpp::dynamic_observer&lt;std::monostate&gt;&gt; F&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> create(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">producer</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::RangeOf&lt;Completable&gt; R&gt;</div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> concat(<a class="code hl_class" href="classrppw_1_1_observable.html">R</a> &amp;&amp;<a class="code hl_class" href="classrppw_1_1_observable.html">sources</a>);</div>
@@ -405,6 +412,45 @@ template&lt;concepts::RangeOf&lt; <a class="el" href="classrppw_1_1_completable.
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> completing after all sources, including an empty range. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Each subscription restarts the chain. An error or cancellation prevents subscription to remaining sources. Range traversal and allocation exceptions are synchronous. </dd></dl>
+
+</div>
+</div>
+<a id="a7f87c7e7ade0d4769f34ea74477708cb" name="a7f87c7e7ade0d4769f34ea74477708cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f87c7e7ade0d4769f34ea74477708cb">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; std::monostate &gt; &gt; F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::create </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>producer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invokes a producer with an RPP observer for each subscription. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">producer</td><td>Const-invocable callable receiving rpp::dynamic_observer&lt;std::monostate&gt;, retainable for asynchronous delivery. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cold <a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> forwarding completion or errors, including producer exceptions. Any on_next notification is ignored. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Notifications must be serialized; errors must be non-null. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Stop after termination or disposal. Use observer.set_upstream() for cleanup; captured resources must outlive asynchronous work. </dd></dl>
 
 </div>
 </div>

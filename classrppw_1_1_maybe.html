@@ -191,6 +191,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3956ed0125f39ab847d3e44e402f6a52" id="r_a3956ed0125f39ab847d3e44e402f6a52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a3956ed0125f39ab847d3e44e402f6a52">just</a> (<a class="el" href="classrppw_1_1_observable.html">T</a> <a class="el" href="classrppw_1_1_observable.html">value</a>)</td></tr>
 <tr class="memdesc:a3956ed0125f39ab847d3e44e402f6a52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores a value to emit as success for each subscription.  <br /></td></tr>
 <tr class="separator:a3956ed0125f39ab847d3e44e402f6a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2524b5507e0a0eb88bf77a629255cc94" id="r_a2524b5507e0a0eb88bf77a629255cc94"><td class="memTemplParams" colspan="2">template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; &gt; F&gt; </td></tr>
+<tr class="memitem:a2524b5507e0a0eb88bf77a629255cc94"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a2524b5507e0a0eb88bf77a629255cc94">create</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">producer</a>)</td></tr>
+<tr class="memdesc:a2524b5507e0a0eb88bf77a629255cc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes a producer with an RPP observer for each subscription.  <br /></td></tr>
+<tr class="separator:a2524b5507e0a0eb88bf77a629255cc94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a4362e61a95a5ae396a917e8606f7c8" id="r_a0a4362e61a95a5ae396a917e8606f7c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrppw_1_1_maybe.html#a0a4362e61a95a5ae396a917e8606f7c8">empty</a> ()</td></tr>
 <tr class="memdesc:a0a4362e61a95a5ae396a917e8606f7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that completes without a value.  <br /></td></tr>
 <tr class="separator:a0a4362e61a95a5ae396a917e8606f7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,6 +264,9 @@ class rppw::Maybe&lt; T &gt;</div><p>Cold source that succeeds with a value, com
 <div class="line">        <span class="keyword">using </span><a class="code hl_class" href="classrppw_1_1_observable.html">value_type</a> = <a class="code hl_class" href="classrppw_1_1_observable.html">T</a>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> just(<a class="code hl_class" href="classrppw_1_1_observable.html">T</a> <a class="code hl_class" href="classrppw_1_1_observable.html">value</a>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::CallbackFor&lt;rpp::dynamic_observer&lt;T&gt;&gt; F&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> create(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">producer</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_maybe.html">Maybe</a> empty();</div>
 <div class="line"> </div>
@@ -348,6 +355,47 @@ class rppw::Maybe&lt; T &gt;</div><p>Cold source that succeeds with a value, com
 <div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
 <div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:34</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2524b5507e0a0eb88bf77a629255cc94" name="a2524b5507e0a0eb88bf77a629255cc94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2524b5507e0a0eb88bf77a629255cc94">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt; &gt; F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_maybe.html">Maybe</a> <a class="el" href="classrppw_1_1_maybe.html">rppw::Maybe</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::create </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">F</a>&#160;</td>
+          <td class="paramname"><em>producer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invokes a producer with an RPP observer for each subscription. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">producer</td><td>Const-invocable callable receiving rpp::dynamic_observer&lt;T&gt;. The observer may be retained for asynchronous delivery. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Cold <a class="el" href="classrppw_1_1_maybe.html" title="Cold source that succeeds with a value, completes empty or signals an error.">Maybe</a> forwarding the first value as terminal success, empty completion, or an error, including producer exceptions. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Notifications must be serialized; errors must be non-null. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Stop after termination or disposal. Use observer.set_upstream() for cleanup; captured resources must outlive asynchronous work. </dd></dl>
+
+</div>
+</div>
 <a id="a5630a7fff2ae53b35d4b35d2b57c4dcb" name="a5630a7fff2ae53b35d4b35d2b57c4dcb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5630a7fff2ae53b35d4b35d2b57c4dcb">&#9670;&#160;</a></span>defaultIfEmpty()</h2>
 
