@@ -19,6 +19,13 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::CallbackFor<rpp::dynamic_observer<T>> F>
+	Maybe<T> Maybe<T>::create(F producer)
+	{
+		return Maybe{Observable<T>::create(std::move(producer)).take(1)};
+	}
+
+	template <detail::Value T>
 	Maybe<T> Maybe<T>::empty()
 	{
 		return Maybe{Observable<T>::empty()};

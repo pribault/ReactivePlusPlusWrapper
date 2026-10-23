@@ -44,6 +44,19 @@ namespace rppw
 		static Maybe just(T value);
 
 		/**
+		 * @brief Invokes a producer with an RPP observer for each subscription.
+		 * @param producer Const-invocable callable receiving rpp::dynamic_observer<T>.
+		 * The observer may be retained for asynchronous delivery.
+		 * @return Cold Maybe forwarding the first value as terminal success,
+		 * empty completion, or an error, including producer exceptions.
+		 * @pre Notifications must be serialized; errors must be non-null.
+		 * @note Stop after termination or disposal. Use observer.set_upstream()
+		 * for cleanup; captured resources must outlive asynchronous work.
+		 */
+		template <concepts::CallbackFor<rpp::dynamic_observer<T>> F>
+		static Maybe create(F producer);
+
+		/**
 		 * @brief Creates a source that completes without a value.
 		 * @return Maybe invoking only onComplete at subscription time.
 		 */
