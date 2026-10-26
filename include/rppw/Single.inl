@@ -48,6 +48,14 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::ExceptionValue S>
+		requires std::convertible_to<S, std::string_view>
+	Single<T> Single<T>::error(S message)
+	{
+		return Single{Observable<T>::error(std::string_view{message})};
+	}
+
+	template <detail::Value T>
 	template <concepts::SourceFactoryFor<T, rppw::Single> F>
 	Single<T> Single<T>::defer(F factory)
 	{
