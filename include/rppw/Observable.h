@@ -6,6 +6,7 @@
 #include <exception>
 #include <functional>
 #include <ranges>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 
@@ -123,6 +124,17 @@ namespace rppw
 		 */
 		template <concepts::ExceptionValue E>
 		static Observable error(E error);
+
+		/**
+		 * @brief Creates a source that signals std::runtime_error with the supplied message.
+		 * @tparam S Copy-constructible text type convertible to std::string_view.
+		 * @param message Text copied immediately, including an empty message.
+		 * @return Observable forwarding the error for each subscription.
+		 * @pre C-string messages must be non-null and null-terminated.
+		 */
+		template <concepts::ExceptionValue S>
+			requires std::convertible_to<S, std::string_view>
+		static Observable error(S message);
 
 		/**
 		 * @brief Creates a new source through the factory for each subscription.

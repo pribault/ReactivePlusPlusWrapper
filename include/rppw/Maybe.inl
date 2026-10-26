@@ -57,6 +57,14 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::ExceptionValue S>
+		requires std::convertible_to<S, std::string_view>
+	Maybe<T> Maybe<T>::error(S message)
+	{
+		return Maybe{Observable<T>::error(std::string_view{message})};
+	}
+
+	template <detail::Value T>
 	template <concepts::SourceFactoryFor<T, rppw::Maybe> F>
 	Maybe<T> Maybe<T>::defer(F factory)
 	{

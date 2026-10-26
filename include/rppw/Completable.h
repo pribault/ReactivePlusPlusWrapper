@@ -4,6 +4,7 @@
 #include <concepts>
 #include <cstddef>
 #include <exception>
+#include <string_view>
 #include <type_traits>
 #include <variant>
 
@@ -93,6 +94,17 @@ namespace rppw
 		 */
 		template <concepts::ExceptionValue E>
 		static Completable error(E error);
+
+		/**
+		 * @brief Creates a source that signals std::runtime_error with the supplied message.
+		 * @tparam S Copy-constructible text type convertible to std::string_view.
+		 * @param message Text copied immediately, including an empty message.
+		 * @return Completable forwarding the error for each subscription.
+		 * @pre C-string messages must be non-null and null-terminated.
+		 */
+		template <concepts::ExceptionValue S>
+			requires std::convertible_to<S, std::string_view>
+		static Completable error(S message);
 
 		/**
 		 * @brief Executes an action and completes independently for each subscription.

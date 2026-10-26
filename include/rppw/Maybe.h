@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <exception>
 #include <optional>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 
@@ -89,6 +90,17 @@ namespace rppw
 		 */
 		template <concepts::ExceptionValue E>
 		static Maybe error(E error);
+
+		/**
+		 * @brief Creates a source that signals std::runtime_error with the supplied message.
+		 * @tparam S Copy-constructible text type convertible to std::string_view.
+		 * @param message Text copied immediately, including an empty message.
+		 * @return Maybe forwarding the error for each subscription.
+		 * @pre C-string messages must be non-null and null-terminated.
+		 */
+		template <concepts::ExceptionValue S>
+			requires std::convertible_to<S, std::string_view>
+		static Maybe error(S message);
 
 		/**
 		 * @brief Invokes a Maybe factory for each subscription.

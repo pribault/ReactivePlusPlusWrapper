@@ -5,6 +5,7 @@
 #include <limits>
 #include <memory>
 #include <stdexcept>
+#include <string>
 #include <variant>
 #include <vector>
 
@@ -105,6 +106,14 @@ namespace rppw
 	Observable<T> Observable<T>::error(E error)
 	{
 		return Observable::error(std::make_exception_ptr(error));
+	}
+
+	template <detail::Value T>
+	template <concepts::ExceptionValue S>
+		requires std::convertible_to<S, std::string_view>
+	Observable<T> Observable<T>::error(S message)
+	{
+		return Observable::error(std::runtime_error{std::string{std::string_view{message}}});
 	}
 
 	template <detail::Value T>
