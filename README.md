@@ -74,6 +74,12 @@ not a header-only package; ReactivePlusPlus remains a required dependency.
 Every type can also terminate with an error. For `Maybe`, success with a value
 and empty completion are separate outcomes: only one callback is called.
 
+All four types accept `error("message")`, `error(std::string{"message"})` and
+`error(std::string_view{"message"})` to create a failing source. The message is
+copied immediately into a `std::runtime_error`, delivered to the error callback
+on each subscription. Empty messages are accepted. The existing exception-object
+and `std::exception_ptr` overloads remain available.
+
 Include the header for the type you use, or
 [`rppw/ReactivePlusPlusWrapper.h`](include/rppw/ReactivePlusPlusWrapper.h)
 for the complete public API.

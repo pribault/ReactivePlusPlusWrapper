@@ -20,6 +20,7 @@
 #include <ranges>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -59,6 +60,10 @@ namespace rppw::test
 		static_assert(AcceptedErrorByEverySource<std::exception_ptr &>);
 		static_assert(AcceptedErrorByEverySource<const std::exception_ptr &>);
 		static_assert(AcceptedErrorByEverySource<std::nullptr_t>);
+		static_assert(AcceptedErrorByEverySource<const char (&)[8]>);
+		static_assert(AcceptedErrorByEverySource<std::string>);
+		static_assert(AcceptedErrorByEverySource<const std::string &>);
+		static_assert(AcceptedErrorByEverySource<std::string_view>);
 		static_assert(!AcceptsError<Observable<int>, std::unique_ptr<int>>);
 		static_assert(!AcceptsError<Single<int>, std::unique_ptr<int>>);
 		static_assert(!AcceptsError<Maybe<int>, std::unique_ptr<int>>);
@@ -441,6 +446,69 @@ namespace rppw::test
 			this->subscribe(TypeParam::error(std::logic_error{"object"}));
 		}
 
+		TYPED_TEST(ErrorFactoryTest, ConvertsStringLiteralToRuntimeError)
+		{
+			std::exception_ptr captured;
+			EXPECT_CALL(this->observer, error(::testing::_)).WillOnce(::testing::SaveArg<0>(&captured));
+			EXPECT_TRUE(this->subscribe(TypeParam::error("message")).isDisposed());
+			ASSERT_TRUE(captured);
+			try
+			{
+				std::rethrow_exception(captured);
+			}
+			catch (const std::runtime_error &error)
+			{
+				EXPECT_STREQ(error.what(), "message");
+			}
+		}
+
+		TYPED_TEST(ErrorFactoryTest, CopiesStringBeforeSubscription)
+		{
+			std::string message{"original"};
+			const auto	source = TypeParam::error(message);
+			message = "changed";
+			EXPECT_CALL(this->observer, error(ExceptionContaining<std::runtime_error>("original")));
+			this->subscribe(source);
+		}
+
+		TYPED_TEST(ErrorFactoryTest, OwnsStringViewMessageForEverySubscription)
+		{
+			const auto source = []
+			{
+				const std::string message{"owned message suffix"};
+				return TypeParam::error(std::string_view{message}.substr(0, 13));
+			}();
+			std::exception_ptr captured;
+			EXPECT_CALL(this->observer, error(::testing::_)).Times(2).WillRepeatedly(::testing::SaveArg<0>(&captured));
+			this->subscribe(source);
+			this->subscribe(source);
+			ASSERT_TRUE(captured);
+			try
+			{
+				std::rethrow_exception(captured);
+			}
+			catch (const std::runtime_error &error)
+			{
+				EXPECT_STREQ(error.what(), "owned message");
+			}
+		}
+
+		TYPED_TEST(ErrorFactoryTest, AcceptsEmptyMessage)
+		{
+			std::exception_ptr captured;
+			EXPECT_CALL(this->observer, error(::testing::_)).WillOnce(::testing::SaveArg<0>(&captured));
+			this->subscribe(TypeParam::error(std::string{}));
+			ASSERT_TRUE(captured);
+			try
+			{
+				std::rethrow_exception(captured);
+			}
+			catch (const std::runtime_error &error)
+			{
+				EXPECT_STREQ(error.what(), "");
+			}
+		}
+
 		TYPED_TEST(ErrorFactoryTest, OwnsCopiedErrorForEverySubscription)
 		{
 			const auto source = []
@@ -471,6 +539,11 @@ namespace rppw::test
 		TYPED_TEST(ErrorFactoryTest, RejectsNullPointerLiteral)
 		{
 			EXPECT_THROW(TypeParam::error(nullptr), std::invalid_argument);
+		}
+
+		TYPED_TEST(ErrorFactoryTest, RejectsEmptyBracedError)
+		{
+			EXPECT_THROW(TypeParam::error({}), std::invalid_argument);
 		}
 
 		class TypesTest : public ::testing::Test

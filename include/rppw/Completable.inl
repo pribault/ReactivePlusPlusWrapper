@@ -47,6 +47,13 @@ namespace rppw
 		return Completable::error(std::make_exception_ptr(error));
 	}
 
+	template <concepts::ExceptionValue S>
+		requires std::convertible_to<S, std::string_view>
+	Completable Completable::error(S message)
+	{
+		return Completable{Observable<std::monostate>::error(std::string_view{message})};
+	}
+
 	template <concepts::FactoryFor<void> F>
 	Completable Completable::fromAction(F action)
 	{
