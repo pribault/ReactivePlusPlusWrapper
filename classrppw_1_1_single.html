@@ -200,6 +200,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa8acef786dcb2f2b12cb43b8f236c146"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_single.html">Single</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_single.html#aa8acef786dcb2f2b12cb43b8f236c146">error</a> (<a class="el" href="classrppw_1_1_observable.html">E</a> error)</td></tr>
 <tr class="memdesc:aa8acef786dcb2f2b12cb43b8f236c146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures an error with std::make_exception_ptr and creates a failing source.  <br /></td></tr>
 <tr class="separator:aa8acef786dcb2f2b12cb43b8f236c146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dd06ab5ec6bd0362e0b454a650632c8" id="r_a1dd06ab5ec6bd0362e0b454a650632c8"><td class="memTemplParams" colspan="2">template&lt;concepts::ExceptionValue S&gt; <br />
+requires std::convertible_to&lt;<a class="el" href="classrppw_1_1_observable.html">S</a>, std::string_view&gt;</td></tr>
+<tr class="memitem:a1dd06ab5ec6bd0362e0b454a650632c8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_single.html">Single</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_single.html#a1dd06ab5ec6bd0362e0b454a650632c8">error</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">message</a>)</td></tr>
+<tr class="memdesc:a1dd06ab5ec6bd0362e0b454a650632c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that signals std::runtime_error with the supplied message.  <br /></td></tr>
+<tr class="separator:a1dd06ab5ec6bd0362e0b454a650632c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79ba33450778308fc3fdb466f71ef12e" id="r_a79ba33450778308fc3fdb466f71ef12e"><td class="memTemplParams" colspan="2">template&lt;concepts::SourceFactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">T</a>, <a class="el" href="classrppw_1_1_single.html">rppw::Single</a> &gt; F&gt; </td></tr>
 <tr class="memitem:a79ba33450778308fc3fdb466f71ef12e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_single.html">Single</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_single.html#a79ba33450778308fc3fdb466f71ef12e">defer</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">factory</a>)</td></tr>
 <tr class="memdesc:a79ba33450778308fc3fdb466f71ef12e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes a <a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> factory for each subscription.  <br /></td></tr>
@@ -235,6 +240,7 @@ class rppw::Single&lt; T &gt;</div><p>Cold source whose success produces exactly
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;exception&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"> </div>
@@ -265,6 +271,10 @@ class rppw::Single&lt; T &gt;</div><p>Cold source whose success produces exactly
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue E&gt;</div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_single.html">Single</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">E</a> error);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue S&gt;</div>
+<div class="line">            <span class="keyword">requires</span> std::convertible_to&lt;S, std::string_view&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_single.html">Single</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">message</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::SourceFactoryFor&lt;T, rppw::Single&gt; F&gt;</div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_single.html">Single</a> defer(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">factory</a>);</div>
@@ -333,11 +343,11 @@ class rppw::Single&lt; T &gt;</div><p>Cold source whose success produces exactly
 <div class="line"> </div>
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Single.inl&gt;</span></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:30</div></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:31</div></div>
 <div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
-<div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:34</div></div>
-<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
-<div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:34</div></div>
+<div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:35</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:40</div></div>
+<div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:35</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7b871cae854fe8d62cb9809f06cd4654" name="a7b871cae854fe8d62cb9809f06cd4654"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b871cae854fe8d62cb9809f06cd4654">&#9670;&#160;</a></span>create()</h2>
@@ -595,7 +605,7 @@ template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observab
 </div>
 </div>
 <a id="aa8acef786dcb2f2b12cb43b8f236c146" name="aa8acef786dcb2f2b12cb43b8f236c146"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8acef786dcb2f2b12cb43b8f236c146">&#9670;&#160;</a></span>error() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8acef786dcb2f2b12cb43b8f236c146">&#9670;&#160;</a></span>error() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -640,8 +650,55 @@ template&lt;concepts::ExceptionValue E&gt; </div>
 
 </div>
 </div>
+<a id="a1dd06ab5ec6bd0362e0b454a650632c8" name="a1dd06ab5ec6bd0362e0b454a650632c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dd06ab5ec6bd0362e0b454a650632c8">&#9670;&#160;</a></span>error() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;detail::Value T&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::ExceptionValue S&gt; <br />
+requires std::convertible_to&lt;<a class="el" href="classrppw_1_1_observable.html">S</a>, std::string_view&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_single.html">Single</a> <a class="el" href="classrppw_1_1_single.html">rppw::Single</a>&lt; <a class="el" href="classrppw_1_1_observable.html">T</a> &gt;::error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a source that signals std::runtime_error with the supplied message. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>Copy-constructible text type convertible to std::string_view. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Text copied immediately, including an empty message. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_single.html" title="Cold source whose success produces exactly one value.">Single</a> forwarding the error for each subscription. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>C-string messages must be non-null and null-terminated. </dd></dl>
+
+</div>
+</div>
 <a id="ad25186c9a6507d96124a0f1390502c4e" name="ad25186c9a6507d96124a0f1390502c4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad25186c9a6507d96124a0f1390502c4e">&#9670;&#160;</a></span>error() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad25186c9a6507d96124a0f1390502c4e">&#9670;&#160;</a></span>error() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -191,6 +191,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4467aaa598804a3476f3b0044588c14c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a4467aaa598804a3476f3b0044588c14c">error</a> (<a class="el" href="classrppw_1_1_observable.html">E</a> error)</td></tr>
 <tr class="memdesc:a4467aaa598804a3476f3b0044588c14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures an error with std::make_exception_ptr and creates a failing source.  <br /></td></tr>
 <tr class="separator:a4467aaa598804a3476f3b0044588c14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c3aa4d0925133da7a264edc7616855" id="r_a45c3aa4d0925133da7a264edc7616855"><td class="memTemplParams" colspan="2">template&lt;concepts::ExceptionValue S&gt; <br />
+requires std::convertible_to&lt;<a class="el" href="classrppw_1_1_observable.html">S</a>, std::string_view&gt;</td></tr>
+<tr class="memitem:a45c3aa4d0925133da7a264edc7616855"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#a45c3aa4d0925133da7a264edc7616855">error</a> (<a class="el" href="classrppw_1_1_observable.html">S</a> <a class="el" href="classrppw_1_1_observable.html">message</a>)</td></tr>
+<tr class="memdesc:a45c3aa4d0925133da7a264edc7616855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a source that signals std::runtime_error with the supplied message.  <br /></td></tr>
+<tr class="separator:a45c3aa4d0925133da7a264edc7616855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8338601ee3f9194cd52a583fbf72354" id="r_aa8338601ee3f9194cd52a583fbf72354"><td class="memTemplParams" colspan="2">template&lt;concepts::FactoryFor&lt; <a class="el" href="classrppw_1_1_observable.html">void</a> &gt; F&gt; </td></tr>
 <tr class="memitem:aa8338601ee3f9194cd52a583fbf72354"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classrppw_1_1_completable.html#aa8338601ee3f9194cd52a583fbf72354">fromAction</a> (<a class="el" href="classrppw_1_1_observable.html">F</a> <a class="el" href="classrppw_1_1_observable.html">action</a>)</td></tr>
 <tr class="memdesc:aa8338601ee3f9194cd52a583fbf72354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes an action and completes independently for each subscription.  <br /></td></tr>
@@ -216,6 +221,7 @@ template&lt;detail::Value &gt; </td></tr>
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;exception&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;variant&gt;</span></div>
 <div class="line"> </div>
@@ -248,6 +254,10 @@ template&lt;detail::Value &gt; </td></tr>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue E&gt;</div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">E</a> error);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">template</span> &lt;concepts::ExceptionValue S&gt;</div>
+<div class="line">            <span class="keyword">requires</span> std::convertible_to&lt;S, std::string_view&gt;</div>
+<div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> error(<a class="code hl_class" href="classrppw_1_1_observable.html">S</a> <a class="code hl_class" href="classrppw_1_1_observable.html">message</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">template</span> &lt;concepts::FactoryFor&lt;<span class="keywordtype">void</span>&gt; F&gt;</div>
 <div class="line">        <span class="keyword">static</span> <a class="code hl_class" href="classrppw_1_1_completable.html">Completable</a> fromAction(<a class="code hl_class" href="classrppw_1_1_observable.html">F</a> <a class="code hl_class" href="classrppw_1_1_observable.html">action</a>);</div>
@@ -302,10 +312,10 @@ template&lt;detail::Value &gt; </td></tr>
 <div class="line"> </div>
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Completable.inl&gt;</span></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:30</div></div>
-<div class="ttc" id="aclassrppw_1_1_completable_html_ae5eda07885fd761b9fac302a8ffbe326"><div class="ttname"><a href="classrppw_1_1_completable.html#ae5eda07885fd761b9fac302a8ffbe326">rppw::Completable::value_type</a></div><div class="ttdeci">std::monostate value_type</div><div class="ttdoc">Technical type without a domain value, used for generic composition.</div><div class="ttdef"><b>Definition</b> Completable.h:33</div></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:31</div></div>
+<div class="ttc" id="aclassrppw_1_1_completable_html_ae5eda07885fd761b9fac302a8ffbe326"><div class="ttname"><a href="classrppw_1_1_completable.html#ae5eda07885fd761b9fac302a8ffbe326">rppw::Completable::value_type</a></div><div class="ttdeci">std::monostate value_type</div><div class="ttdoc">Technical type without a domain value, used for generic composition.</div><div class="ttdef"><b>Definition</b> Completable.h:34</div></div>
 <div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
-<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:39</div></div>
+<div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:40</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a77e0452772249820424855dd3c4184e7" name="a77e0452772249820424855dd3c4184e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77e0452772249820424855dd3c4184e7">&#9670;&#160;</a></span>andThen()</h2>
@@ -623,7 +633,7 @@ template&lt;concepts::CallbackFor&lt; <a class="el" href="classrppw_1_1_observab
 </div>
 </div>
 <a id="a4467aaa598804a3476f3b0044588c14c" name="a4467aaa598804a3476f3b0044588c14c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4467aaa598804a3476f3b0044588c14c">&#9670;&#160;</a></span>error() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4467aaa598804a3476f3b0044588c14c">&#9670;&#160;</a></span>error() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -666,8 +676,53 @@ template&lt;concepts::ExceptionValue E&gt; </div>
 
 </div>
 </div>
+<a id="a45c3aa4d0925133da7a264edc7616855" name="a45c3aa4d0925133da7a264edc7616855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c3aa4d0925133da7a264edc7616855">&#9670;&#160;</a></span>error() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::ExceptionValue S&gt; <br />
+requires std::convertible_to&lt;<a class="el" href="classrppw_1_1_observable.html">S</a>, std::string_view&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrppw_1_1_observable.html">static</a> <a class="el" href="classrppw_1_1_completable.html">Completable</a> rppw::Completable::error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classrppw_1_1_observable.html">S</a>&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a source that signals std::runtime_error with the supplied message. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">S</td><td>Copy-constructible text type convertible to std::string_view. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Text copied immediately, including an empty message. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrppw_1_1_completable.html" title="Cold source that completes without a value or signals an error.">Completable</a> forwarding the error for each subscription. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>C-string messages must be non-null and null-terminated. </dd></dl>
+
+</div>
+</div>
 <a id="a947a21fed35b2768682bf55679986578" name="a947a21fed35b2768682bf55679986578"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a947a21fed35b2768682bf55679986578">&#9670;&#160;</a></span>error() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a947a21fed35b2768682bf55679986578">&#9670;&#160;</a></span>error() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
