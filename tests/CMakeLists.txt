@@ -3,6 +3,7 @@ include(GoogleTest)
 
 add_executable(ReactivePlusPlusWrapperTests
     CompletableTests.cpp
+    CompositeDisposableTests.cpp
     CompositionTests.cpp
     CreateTests.cpp
     DisposableTests.cpp
@@ -37,7 +38,7 @@ gtest_discover_tests(ReactivePlusPlusWrapperIntegrationTests
     PROPERTIES LABELS "integration" TIMEOUT 30)
 
 set(header_checks)
-foreach(header IN ITEMS Completable Concepts Disposable Maybe Observable ReactivePlusPlusWrapper Single)
+foreach(header IN ITEMS Completable CompositeDisposable Concepts Disposable Maybe Observable ReactivePlusPlusWrapper Single)
     set(source "${CMAKE_CURRENT_BINARY_DIR}/Standalone${header}.cpp")
     file(GENERATE OUTPUT "${source}" CONTENT "// rppw\n#include <rppw/${header}.h>\n")
     list(APPEND header_checks "${source}")

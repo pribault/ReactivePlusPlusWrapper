@@ -48,6 +48,33 @@ processing, ignores values and normal completion, and logs unhandled errors to
 subscription; destroying it does not cancel processing. Use the callback overload
 when errors require application-specific handling.
 
+## Cancellation scopes
+
+`Disposable{}` is empty and already disposed. `Disposable::create()` creates an
+independent, active token that stays active until explicitly disposed. Copies
+share cancellation state.
+
+`CompositeDisposable` starts as a fresh active scope. Its copies share the scope:
+
+```cpp
+rppw::CompositeDisposable scope;
+auto token = rppw::Disposable::create();
+scope.add(token);       // Subscription handles can also be added.
+scope.remove(token);    // Detach without cancelling; release the retained handle.
+scope.dispose();        // Cancel all remaining children; close the scope permanently.
+```
+
+Adding an active child after scope disposal cancels it immediately. Removing a
+child through any copy detaches all registrations of that child, without
+cancelling it. Remove completed children to bound retained handles.
+Destroying a handle or scope does not request cancellation.
+
+Scope operations and token cancellation/status checks are thread-safe, but
+concurrent assignment or destruction of the same handle object is not supported.
+Removal racing with scope disposal cannot undo cancellation if disposal wins.
+Disposal does not interrupt running work or callbacks. Scope creation and adding
+children may throw allocation errors.
+
 ## Why use this wrapper?
 
 - **Familiar composition:** chain transformations and conversions using an API
