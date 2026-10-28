@@ -344,7 +344,7 @@ class rppw::Single&lt; T &gt;</div><p>Cold source whose success produces exactly
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Single.inl&gt;</span></div>
 <div class="ttc" id="aclassrppw_1_1_completable_html"><div class="ttname"><a href="classrppw_1_1_completable.html">rppw::Completable</a></div><div class="ttdoc">Cold source that completes without a value or signals an error.</div><div class="ttdef"><b>Definition</b> Completable.h:31</div></div>
-<div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
+<div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing cancellation state for a subscription or token.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
 <div class="ttc" id="aclassrppw_1_1_maybe_html"><div class="ttname"><a href="classrppw_1_1_maybe.html">rppw::Maybe</a></div><div class="ttdoc">Cold source that succeeds with a value, completes empty or signals an error.</div><div class="ttdef"><b>Definition</b> Maybe.h:35</div></div>
 <div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:40</div></div>
 <div class="ttc" id="aclassrppw_1_1_single_html"><div class="ttname"><a href="classrppw_1_1_single.html">rppw::Single</a></div><div class="ttdoc">Cold source whose success produces exactly one value.</div><div class="ttdef"><b>Definition</b> Single.h:35</div></div>
@@ -378,6 +378,12 @@ template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; <a class="el" hr
 </div><div class="memdoc">
 
 <p>Invokes a producer with an RPP observer for each subscription. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable producer type. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">producer</td><td>Const-invocable callable receiving rpp::dynamic_observer&lt;T&gt;. The observer may be retained for asynchronous delivery. </td></tr>

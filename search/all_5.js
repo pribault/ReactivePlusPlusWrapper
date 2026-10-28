@@ -7,5 +7,5 @@ var searchData=
   ['fromaction_4',['fromAction',['../classrppw_1_1_completable.html#aa8338601ee3f9194cd52a583fbf72354',1,'rppw::Completable']]],
   ['fromcallable_5',['fromcallable',['../classrppw_1_1_maybe.html#a9abb40c092c474a40816080a6fc43bf3',1,'rppw::Maybe::fromCallable()'],['../classrppw_1_1_single.html#aa0942de8735b99c8eb15b8f5f7a99002',1,'rppw::Single::fromCallable()']]],
   ['fromiterable_6',['fromIterable',['../classrppw_1_1_observable.html#a691afacb9e6c9fe8da3e6baeacc25e73',1,'rppw::Observable']]],
-  ['further_7',['Explore further',['../index.html#autotoc_md5',1,'']]]
+  ['further_7',['Explore further',['../index.html#autotoc_md7',1,'']]]
 ];

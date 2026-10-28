@@ -2,6 +2,7 @@ var dir_8a1d856c60d0345779c851116ba6e056 =
 [
     [ "detail", "dir_ec557f1b6f287e9c760f042ac75bf6b5.html", "dir_ec557f1b6f287e9c760f042ac75bf6b5" ],
     [ "Completable.h", "_completable_8h_source.html", null ],
+    [ "CompositeDisposable.h", "_composite_disposable_8h_source.html", null ],
     [ "Concepts.h", "_concepts_8h_source.html", null ],
     [ "Disposable.h", "_disposable_8h_source.html", null ],
     [ "Maybe.h", "_maybe_8h_source.html", null ],

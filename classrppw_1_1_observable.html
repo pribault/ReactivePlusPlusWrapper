@@ -473,7 +473,7 @@ class rppw::Observable&lt; T &gt;</div><p>Cold source of zero or more values, fo
 <div class="line"> </div>
 <div class="line"><span class="comment">// rppw</span></div>
 <div class="line"><span class="preprocessor">#include &lt;rppw/Observable.inl&gt;</span></div>
-<div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing the cancellation state of an RPP subscription.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
+<div class="ttc" id="aclassrppw_1_1_disposable_html"><div class="ttname"><a href="classrppw_1_1_disposable.html">rppw::Disposable</a></div><div class="ttdoc">Copyable handle sharing cancellation state for a subscription or token.</div><div class="ttdef"><b>Definition</b> Disposable.h:18</div></div>
 <div class="ttc" id="aclassrppw_1_1_observable_html"><div class="ttname"><a href="classrppw_1_1_observable.html">rppw::Observable</a></div><div class="ttdoc">Cold source of zero or more values, followed by completion or an error.</div><div class="ttdef"><b>Definition</b> Observable.h:40</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0df5534d41caef2db084f6008d6296b5" name="a0df5534d41caef2db084f6008d6296b5"></a>
@@ -650,6 +650,12 @@ template&lt;concepts::CallbackFor&lt; rpp::dynamic_observer&lt; <a class="el" hr
 </div><div class="memdoc">
 
 <p>Invokes a producer with an RPP observer for each subscription. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">F</td><td>Const-invocable producer type. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">producer</td><td>Const-invocable callable stored by value. The observer may be retained for asynchronous delivery; producer exceptions reach onError. </td></tr>
