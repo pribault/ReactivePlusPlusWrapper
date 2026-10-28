@@ -51,6 +51,7 @@ namespace rppw
 
 		/**
 		 * @brief Invokes a producer with an RPP observer for each subscription.
+		 * @tparam F Const-invocable producer type.
 		 * @param producer Const-invocable callable stored by value. The observer may
 		 * be retained for asynchronous delivery; producer exceptions reach onError.
 		 * @return Cold source forwarding values, completion and errors.
