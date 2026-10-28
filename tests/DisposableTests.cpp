@@ -34,6 +34,41 @@ namespace rppw::test
 			EXPECT_TRUE(subscription.isDisposed());
 		}
 
+		TEST_F(DisposableTest, CreatedTokenStaysActiveUntilDisposed)
+		{
+			const auto token = Disposable::create();
+			EXPECT_FALSE(token.isDisposed());
+			token.dispose();
+			token.dispose();
+			EXPECT_TRUE(token.isDisposed());
+		}
+
+		TEST_F(DisposableTest, CreatedTokensCancelIndependently)
+		{
+			const auto first = Disposable::create();
+			const auto second = Disposable::create();
+			first.dispose();
+			EXPECT_TRUE(first.isDisposed());
+			EXPECT_FALSE(second.isDisposed());
+		}
+
+		TEST_F(DisposableTest, CreatedTokenCopiesShareCancellation)
+		{
+			const auto token = Disposable::create();
+			const auto copy = token;
+			copy.dispose();
+			EXPECT_TRUE(token.isDisposed());
+		}
+
+		TEST_F(DisposableTest, DestroyedTokenCopyDoesNotCancelToken)
+		{
+			const auto token = Disposable::create();
+			{
+				const auto copy = token;
+			}
+			EXPECT_FALSE(token.isDisposed());
+		}
+
 		TEST_F(DisposableTest, ReportsTerminationAfterError)
 		{
 			EXPECT_CALL(observer, error(failure));

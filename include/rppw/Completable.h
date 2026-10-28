@@ -41,6 +41,7 @@ namespace rppw
 
 		/**
 		 * @brief Invokes a producer with an RPP observer for each subscription.
+		 * @tparam F Const-invocable producer type.
 		 * @param producer Const-invocable callable receiving
 		 * rpp::dynamic_observer<std::monostate>, retainable for asynchronous delivery.
 		 * @return Cold Completable forwarding completion or errors, including

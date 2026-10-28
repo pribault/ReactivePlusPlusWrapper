@@ -68,9 +68,11 @@ complete
 - **Cold sources:** each subscription executes its own chain. Callable factories
   and actions run at subscription time, not when the pipeline is composed.
   `fromIterable` copies its input elements immediately and defers their emission.
-- **Explicit error handling:** subscriptions require the callbacks appropriate
-  to their reactive type, including an error callback. Producer and operator
-  exceptions are delivered through `std::exception_ptr`.
+- **Explicit error handling:** callback-based subscriptions accept the callbacks
+  appropriate to their reactive type, including an error callback. Producer and
+  operator exceptions are delivered through `std::exception_ptr`. The no-argument
+  `subscribe()` overload ignores values and normal completion and logs unhandled
+  errors to `stderr` without stopping the program.
 - **Non-throwing callbacks:** callbacks passed to `subscribe` must not throw.
   An exception escaping a subscription callback terminates the program.
 - **Shared cancellation:** `subscribe` returns an rppw::Disposable.
@@ -87,6 +89,46 @@ outlive their use, including asynchronous processing.
 There is no backpressure mechanism, `flatMap` concurrency limit or bounded
 `observeOn` queue. Cancellation does not interrupt an action or callback already
 in progress.
+
+## Custom producers and error sources
+
+All four reactive types provide `create(producer)`. The const-invocable producer
+runs independently for each subscription and receives an
+`rpp::dynamic_observer<T>` (`std::monostate` for `Completable`). The observer may
+be retained for asynchronous delivery, and producer exceptions reach the error
+callback.
+
+`Observable` accepts multiple values followed by completion. `Single` and `Maybe`
+terminate on the first value; `Maybe` also accepts empty completion, whereas a
+`Single` producer must emit a value or an error. `Completable` ignores values and
+waits for completion. Serialize notifications, pass non-null errors and stop
+after termination or disposal. Attach cancellation cleanup with
+`observer.set_upstream()`; cancellation alone does not interrupt producer work.
+Captured resources must outlive asynchronous processing.
+
+The `error` factories accept `std::exception_ptr`, copyable exception values and
+text messages. Text is copied immediately into a `std::runtime_error`, including
+empty messages, and the error is delivered for each subscription. Exception
+pointers must be non-null; a null pointer throws `std::invalid_argument` when
+constructing the source.
+
+## Cancellation scopes
+
+An empty rppw::Disposable is already disposed. rppw::Disposable::create() returns
+an independent active token that stays active until explicitly disposed; copies
+share cancellation state.
+
+rppw::CompositeDisposable starts as an active scope. Its copies share the scope;
+`add()` retains children for cancellation together, and `remove()` detaches all
+registrations of a child without cancelling it. `dispose()` permanently closes
+the scope and cancels attached children. Adding an active child after disposal
+cancels it immediately. Destroying a handle or scope does not request
+cancellation.
+
+Scope operations and token cancellation/status checks are thread-safe, but
+concurrent assignment or destruction of the same handle object is not supported.
+Removal racing with scope disposal cannot undo cancellation if disposal wins.
+Remove completed children to release retained handles.
 
 ## Build and integrate
 
@@ -124,7 +166,7 @@ remain available to the consuming project.
 - [Runnable examples](https://github.com/pribault/ReactivePlusPlusWrapper/tree/master/examples):
   all four reactive types, scheduling and an independent CMake consumer.
 - **API reference:** browse rppw::Observable, rppw::Single, rppw::Maybe,
-  rppw::Completable and rppw::Disposable for detailed contracts.
+  rppw::Completable, rppw::Disposable and rppw::CompositeDisposable for detailed contracts.
 
 ## License
 
