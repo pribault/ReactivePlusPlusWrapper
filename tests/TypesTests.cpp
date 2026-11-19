@@ -132,6 +132,26 @@ namespace rppw::test
 		template <typename Source, typename F>
 		concept AcceptsFlatMap = requires(const Source &source, F function) { source.flatMap(function); };
 
+		template <typename Source, typename F, typename Result>
+		concept FlatMapsSingleTo = requires(const Source &source, F function) {
+			{ source.flatMapSingle(function) } -> std::same_as<Result>;
+		};
+
+		template <typename Source, typename F, typename Result>
+		concept FlatMapsMaybeTo = requires(const Source &source, F function) {
+			{ source.flatMapMaybe(function) } -> std::same_as<Result>;
+		};
+
+		template <typename Source, typename F>
+		concept FlatMapsCompletable = requires(const Source &source, F function) {
+			{ source.flatMapCompletable(function) } -> std::same_as<Completable>;
+		};
+
+		template <typename Source, typename F, typename Result>
+		concept FlatMapsObservableTo = requires(const Source &source, F function) {
+			{ source.flatMapObservable(function) } -> std::same_as<Result>;
+		};
+
 		template <typename Source, typename F>
 		concept AcceptsFilter = requires(const Source &source, F function) { source.filter(function); };
 
@@ -235,6 +255,7 @@ namespace rppw::test
 		using ObservableMapper = decltype([](int) { return Observable<int>::just(1); });
 		using SingleMapper = decltype([](int) { return Single<int>::just(1); });
 		using MaybeMapper = decltype([](int) { return Maybe<int>::empty(); });
+		using CompletableMapper = decltype([](int) { return Completable::complete(); });
 		using ImpostorMapper = decltype([](int) { return SourceImpostor{}; });
 		using InvalidValueMapper = decltype([](int) { return InvalidValueSource{}; });
 		using MutableObservableMapper = decltype([value = 0](int) mutable { return Observable<int>::just(++value); });
@@ -305,6 +326,22 @@ namespace rppw::test
 		static_assert(RejectedByEveryFlatMap<MutableObservableMapper>);
 		static_assert(RejectedByEveryFlatMap<MutableMapper>);
 		static_assert(RejectedByEveryFlatMap<ReferenceMapper>);
+
+		using StringSingleMapper = decltype([](int) { return Single<std::string>::just("value"); });
+		using StringMaybeMapper = decltype([](int) { return Maybe<std::string>::empty(); });
+		using StringObservableMapper = decltype([](int) { return Observable<std::string>::empty(); });
+		static_assert(FlatMapsSingleTo<Maybe<int>, StringSingleMapper, Maybe<std::string>>);
+		static_assert(FlatMapsSingleTo<Observable<int>, StringSingleMapper, Observable<std::string>>);
+		static_assert(FlatMapsMaybeTo<Single<int>, StringMaybeMapper, Maybe<std::string>>);
+		static_assert(FlatMapsMaybeTo<Observable<int>, StringMaybeMapper, Observable<std::string>>);
+		static_assert(FlatMapsCompletable<Single<int>, CompletableMapper>);
+		static_assert(FlatMapsCompletable<Maybe<int>, CompletableMapper>);
+		static_assert(FlatMapsCompletable<Observable<int>, CompletableMapper>);
+		static_assert(FlatMapsObservableTo<Single<int>, StringObservableMapper, Observable<std::string>>);
+		static_assert(FlatMapsObservableTo<Maybe<int>, StringObservableMapper, Observable<std::string>>);
+		static_assert(!FlatMapsCompletable<Observable<int>, MaybeMapper>);
+		static_assert(!FlatMapsCompletable<Single<int>, decltype([](int &&) { return Completable::complete(); })>);
+		static_assert(!FlatMapsMaybeTo<Single<int>, SingleMapper, Maybe<int>>);
 
 		static_assert(AcceptsSubscribe<Observable<int>, IntCallback, ErrorCallback, CompletionCallback>);
 		static_assert(AcceptsSubscribe<Single<int>, IntCallback, ErrorCallback>);

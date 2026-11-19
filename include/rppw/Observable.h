@@ -307,6 +307,33 @@ namespace rppw
 		auto flatMap(F function) const;
 
 		/**
+		 * @brief Maps each value to a Single and merges their results.
+		 * @param function Mapper applied to each upstream value.
+		 * @return `Observable<U>` emitting each mapped success.
+		 * @see flatMap
+		 */
+		template <concepts::FlatMapperFor<T, rppw::Single> F>
+		auto flatMapSingle(F function) const;
+
+		/**
+		 * @brief Maps each value to a Maybe and merges their non-empty results.
+		 * @param function Mapper applied to each upstream value.
+		 * @return `Observable<U>` emitting each mapped success.
+		 * @see flatMap
+		 */
+		template <concepts::FlatMapperFor<T, rppw::Maybe> F>
+		auto flatMapMaybe(F function) const;
+
+		/**
+		 * @brief Maps each value to a Completable and waits for upstream and all mapped sources to complete.
+		 * @param function Mapper applied to each upstream value.
+		 * @return Completable that forwards the first error or completes without a value.
+		 * @see flatMap
+		 */
+		template <concepts::CompletableMapperFor<T> F>
+		Completable flatMapCompletable(F function) const;
+
+		/**
 		 * @brief Completes after at most count values and cancels upstream.
 		 * @param count Maximum number of values to forward.
 		 * @return Limited source; a zero count completes without subscribing upstream.

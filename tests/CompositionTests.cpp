@@ -14,6 +14,131 @@ namespace rppw::test
 {
 	namespace
 	{
+		using FlatMapSpecializationTest = RunLoopTest;
+
+		TEST_F(FlatMapSpecializationTest, PreservesEmptyMaybeAndSkipsEmptyMappedSources)
+		{
+			::testing::StrictMock<::testing::MockFunction<Single<int>(int)>> mapper;
+			::testing::InSequence											 sequence;
+			EXPECT_CALL(observer, complete());
+			EXPECT_CALL(observer, complete());
+			EXPECT_CALL(observer, next(20));
+			EXPECT_CALL(observer, complete());
+
+			subscribe(Maybe<int>::empty().flatMapSingle(mapper.AsStdFunction()));
+			subscribe(Single<int>::just(1).flatMapMaybe(
+				[](int)
+				{
+					return Maybe<int>::empty();
+				}));
+			subscribe(Observable<int>::fromIterable(std::array{1, 2})
+						  .flatMapMaybe(
+							  [](int value)
+							  {
+								  return value == 1 ? Maybe<int>::empty() : Maybe<int>::just(value * 10);
+							  }));
+		}
+
+		TEST_F(FlatMapSpecializationTest, FlattensSingleSuccessAndObservableValues)
+		{
+			::testing::InSequence sequence;
+			EXPECT_CALL(observer, next(10));
+			EXPECT_CALL(observer, next(20));
+			EXPECT_CALL(observer, complete());
+			EXPECT_CALL(observer, next(30));
+			EXPECT_CALL(observer, next(4));
+			EXPECT_CALL(observer, next(5));
+			EXPECT_CALL(observer, complete());
+
+			const auto mapper = [](int value)
+			{
+				return Single<int>::just(value * 10);
+			};
+			subscribe(Observable<int>::fromIterable(std::array{1, 2}).flatMapSingle(mapper));
+			subscribe(Maybe<int>::just(3).flatMapSingle(mapper));
+			subscribe(Single<int>::just(4).flatMapObservable(
+				[](int value)
+				{
+					return Observable<int>::fromIterable(std::array{value, value + 1});
+				}));
+		}
+
+		TEST_F(FlatMapSpecializationTest, WaitsForEveryMappedCompletable)
+		{
+			rpp::schedulers::run_loop otherLoop;
+			int						  completed = 0;
+			EXPECT_CALL(observer, complete())
+				.WillOnce(
+					[&]
+					{
+						++completed;
+					});
+
+			const auto subscription = subscribe(Observable<int>::fromIterable(std::array{1, 2})
+													.flatMapCompletable(
+														[&](int value)
+														{
+															return Completable::complete().subscribeOn(value == 1 ? loop : otherLoop);
+														}));
+			EXPECT_EQ(completed, 0);
+			drain(loop);
+			EXPECT_EQ(completed, 0);
+			drain(otherLoop);
+			EXPECT_EQ(completed, 1);
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(FlatMapSpecializationTest, MaybeFlatMapCompletableRunsOnlyOnSuccess)
+		{
+			::testing::StrictMock<::testing::MockFunction<Completable(int)>> mapper;
+			EXPECT_CALL(observer, complete());
+			subscribe(Maybe<int>::empty().flatMapCompletable(mapper.AsStdFunction()));
+
+			EXPECT_CALL(mapper, Call(7)).WillOnce(::testing::Return(Completable::complete().subscribeOn(loop)));
+			const auto subscription = subscribe(Maybe<int>::just(7).flatMapCompletable(mapper.AsStdFunction()));
+			EXPECT_FALSE(subscription.isDisposed());
+			EXPECT_CALL(observer, complete());
+			drain();
+			EXPECT_TRUE(subscription.isDisposed());
+		}
+
+		TEST_F(FlatMapSpecializationTest, MaybeFlatMapObservableRunsOnlyOnSuccess)
+		{
+			::testing::StrictMock<::testing::MockFunction<Observable<int>(int)>> mapper;
+			::testing::InSequence												 sequence;
+			EXPECT_CALL(observer, complete());
+			EXPECT_CALL(observer, error(failure));
+			EXPECT_CALL(mapper, Call(7)).WillOnce(::testing::Return(Observable<int>::fromIterable(std::array{7, 8})));
+			EXPECT_CALL(observer, next(7));
+			EXPECT_CALL(observer, next(8));
+			EXPECT_CALL(observer, complete());
+
+			subscribe(Maybe<int>::empty().flatMapObservable(mapper.AsStdFunction()));
+			subscribe(Maybe<int>::error(failure).flatMapObservable(mapper.AsStdFunction()));
+			subscribe(Maybe<int>::just(7).flatMapObservable(mapper.AsStdFunction()));
+		}
+
+		TEST_F(FlatMapSpecializationTest, ForwardsSourceMapperAndMappedErrors)
+		{
+			::testing::StrictMock<::testing::MockFunction<Completable(int)>> mapper;
+			::testing::InSequence											 sequence;
+			EXPECT_CALL(observer, error(failure));
+			EXPECT_CALL(observer, error(ExceptionContaining<std::runtime_error>("mapper")));
+			EXPECT_CALL(observer, error(failure));
+
+			subscribe(Single<int>::error(failure).flatMapCompletable(mapper.AsStdFunction()));
+			subscribe(Single<int>::just(1).flatMapCompletable(
+				[](int) -> Completable
+				{
+					throw std::runtime_error{"mapper"};
+				}));
+			subscribe(Observable<int>::just(1).flatMapCompletable(
+				[this](int)
+				{
+					return Completable::error(failure);
+				}));
+		}
+
 		template <typename S, bool Merge>
 		struct CompositionCase
 		{
