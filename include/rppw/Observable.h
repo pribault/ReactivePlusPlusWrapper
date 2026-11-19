@@ -103,6 +103,32 @@ namespace rppw
 		static Observable merge(R &&sources);
 
 		/**
+		 * @brief Merges sources with at most maxConcurrency active subscriptions at a time.
+		 * @tparam R Input range of Observable<T>, Single<T> or Maybe<T>.
+		 * @param sources Homogeneous range copied into owned storage immediately.
+		 * @param maxConcurrency Positive subscription limit, applied separately to each subscriber.
+		 * @return Observable forwarding all values and completing when all sources complete.
+		 * An empty range completes without values; empty Maybes contribute no values.
+		 * @throws std::invalid_argument If maxConcurrency is zero.
+		 * @details Each completed source frees a slot for a waiting source. A limit of one
+		 * subscribes to sources sequentially. Reserving a slot admits its source. An error
+		 * prevents new reservations before notifying onError. Active subscriptions are
+		 * disposed when onError returns. Cancellation disposes active subscriptions and
+		 * prevents further reservations. A source that reserved its slot on another thread
+		 * just before an error or a cancellation may still enter its producer.
+		 * Notifications are serialized without blocking: one raised while another of this
+		 * subscription is being delivered, from any thread, is queued and delivered in order by
+		 * the delivering thread once its callback returns. A callback may therefore run on the
+		 * thread of another source, and the queue is unbounded. Slots freed meanwhile are refilled
+		 * on that thread once its queue is empty, outside any callback, so a refilled synchronous
+		 * source is delivered as it emits.
+		 * No worker thread is added, and the limit does not throttle values.
+		 * Range traversal and allocation exceptions are synchronous.
+		 */
+		template <concepts::ObservableSourceRangeOf<T> R>
+		static Observable merge(R &&sources, std::size_t maxConcurrency);
+
+		/**
 		 * @brief Creates a source that completes without emitting a value.
 		 * @return Empty source.
 		 */
