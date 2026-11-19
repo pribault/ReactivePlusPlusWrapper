@@ -309,6 +309,39 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::FlatMapperFor<T, rppw::Single> F>
+	auto Observable<T>::flatMapSingle(F function) const
+	{
+		return flatMap(
+			[function = std::move(function)](const T &value)
+			{
+				return std::invoke(function, value).toObservable();
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::FlatMapperFor<T, rppw::Maybe> F>
+	auto Observable<T>::flatMapMaybe(F function) const
+	{
+		return flatMap(
+			[function = std::move(function)](const T &value)
+			{
+				return std::invoke(function, value).toObservable();
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CompletableMapperFor<T> F>
+	Completable Observable<T>::flatMapCompletable(F function) const
+	{
+		return Completable{flatMap(
+			[function = std::move(function)](const T &value)
+			{
+				return Observable<std::monostate>{std::invoke(function, value).source_};
+			})};
+	}
+
+	template <detail::Value T>
 	Observable<T> Observable<T>::take(std::size_t count) const
 	{
 		if (count == 0)

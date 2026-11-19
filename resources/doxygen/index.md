@@ -63,6 +63,27 @@ This synchronous example prints:
 complete
 ```
 
+## Choose a flat-map specialization
+
+The method name identifies the reactive type returned by the mapper. The table
+shows the type returned by the operator for each upstream type.
+
+| Operator | rppw::Single | rppw::Maybe | rppw::Completable | rppw::Observable |
+| --- | --- | --- | --- | --- |
+| `flatMapSingle` | N/A | `Maybe<U>` | N/A | `Observable<U>` |
+| `flatMapMaybe` | `Maybe<U>` | N/A | N/A | `Observable<U>` |
+| `flatMapCompletable` | `Completable` | `Completable` | N/A | `Completable` |
+| `flatMapObservable` | `Observable<U>` | `Observable<U>` | N/A | N/A |
+
+Mappers run only for upstream values. If an upstream `Maybe` is empty, the
+result completes without emitting a value or calling the mapper.
+`Observable::flatMapMaybe` skips empty mapped sources.
+
+The `Observable` variants merge mapped sources without guaranteeing their
+relative order. `flatMapCompletable` completes without a value once the upstream
+and all mapped sources have completed. An upstream or mapped error, or an
+exception thrown by the mapper, terminates the result with an error.
+
 ## Execution, errors and cancellation
 
 - **Cold sources:** each subscription executes its own chain. Callable factories

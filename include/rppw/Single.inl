@@ -126,6 +126,28 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::FlatMapperFor<T, rppw::Maybe> F>
+	auto Single<T>::flatMapMaybe(F function) const
+	{
+		using U = typename std::invoke_result_t<const F &, T>::value_type;
+		return Maybe<U>{source_.flatMapMaybe(std::move(function))};
+	}
+
+	template <detail::Value T>
+	template <concepts::CompletableMapperFor<T> F>
+	Completable Single<T>::flatMapCompletable(F function) const
+	{
+		return source_.flatMapCompletable(std::move(function));
+	}
+
+	template <detail::Value T>
+	template <concepts::FlatMapperFor<T, rppw::Observable> F>
+	auto Single<T>::flatMapObservable(F function) const
+	{
+		return source_.flatMap(std::move(function));
+	}
+
+	template <detail::Value T>
 	template <concepts::PredicateFor<T> F>
 	Maybe<T> Single<T>::filter(F predicate) const
 	{
