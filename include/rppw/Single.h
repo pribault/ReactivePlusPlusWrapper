@@ -180,23 +180,30 @@ namespace rppw
 
 		/**
 		 * @brief Maps success to a Maybe and forwards its value, empty completion or error.
+		 * @tparam F Const-invocable mapper returning `Maybe<U>` by value.
 		 * @param function Mapper invoked only on success.
 		 * @return `Maybe<U>` matching the mapped source.
+		 * @note Upstream errors and mapper exceptions are delivered to onError.
 		 */
 		template <concepts::FlatMapperFor<T, rppw::Maybe> F>
 		auto flatMapMaybe(F function) const;
 
 		/**
 		 * @brief Maps success to a Completable and forwards its termination.
+		 * @tparam F Const-invocable mapper returning `Completable` by value.
 		 * @param function Mapper invoked only on success.
+		 * @return Completable that completes when the mapped source completes.
+		 * @note Upstream errors, mapped errors and mapper exceptions are delivered to onError.
 		 */
 		template <concepts::CompletableMapperFor<T> F>
 		Completable flatMapCompletable(F function) const;
 
 		/**
 		 * @brief Maps success to an Observable and forwards its values and termination.
+		 * @tparam F Const-invocable mapper returning `Observable<U>` by value.
 		 * @param function Mapper invoked only on success.
 		 * @return `Observable<U>` matching the mapped source.
+		 * @note Upstream errors and mapper exceptions are delivered to onError.
 		 */
 		template <concepts::FlatMapperFor<T, rppw::Observable> F>
 		auto flatMapObservable(F function) const;

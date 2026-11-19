@@ -79,9 +79,10 @@ namespace rppw::concepts
 							std::same_as<std::invoke_result_t<const F &, T>, Source<typename std::invoke_result_t<const F &, T>::value_type>>;
 
 	/**
-	 * @brief Const-invocable factory returning exactly Completable for T and const T&.
+	 * @brief Const-invocable mapper returning exactly `Completable` by value.
 	 * @tparam F Callable type.
 	 * @tparam T Source value type.
+	 * @note The callable must accept both `T` and `const T&`.
 	 */
 	template <typename F, typename T>
 	concept CompletableMapperFor =
