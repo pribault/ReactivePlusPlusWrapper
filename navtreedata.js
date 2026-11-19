@@ -27,12 +27,13 @@ var NAVTREE =
   [ "ReactivePlusPlusWrapper", "index.html", [
     [ "Choose the right reactive type", "index.html#autotoc_md1", null ],
     [ "A first pipeline", "index.html#autotoc_md2", null ],
-    [ "Execution, errors and cancellation", "index.html#autotoc_md3", null ],
-    [ "Custom producers and error sources", "index.html#autotoc_md4", null ],
-    [ "Cancellation scopes", "index.html#autotoc_md5", null ],
-    [ "Build and integrate", "index.html#autotoc_md6", null ],
-    [ "Explore further", "index.html#autotoc_md7", null ],
-    [ "License", "index.html#autotoc_md8", null ],
+    [ "Choose a flat-map specialization", "index.html#autotoc_md3", null ],
+    [ "Execution, errors and cancellation", "index.html#autotoc_md4", null ],
+    [ "Custom producers and error sources", "index.html#autotoc_md5", null ],
+    [ "Cancellation scopes", "index.html#autotoc_md6", null ],
+    [ "Build and integrate", "index.html#autotoc_md7", null ],
+    [ "Explore further", "index.html#autotoc_md8", null ],
+    [ "License", "index.html#autotoc_md9", null ],
     [ "Concepts", "concepts.html", "concepts" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -54,5 +55,6 @@ var NAVTREEINDEX =
 "_completable_8h_source.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';
