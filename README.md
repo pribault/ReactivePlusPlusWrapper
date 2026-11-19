@@ -111,6 +111,26 @@ Include the header for the type you use, or
 [`rppw/ReactivePlusPlusWrapper.h`](include/rppw/ReactivePlusPlusWrapper.h)
 for the complete public API.
 
+### Specialized flat mapping
+
+The method name identifies the reactive type returned by the mapper. The table
+shows the result type for each upstream type (`N/A` means the method is unavailable).
+
+| Method | `Single<T>` | `Maybe<T>` | `Completable` | `Observable<T>` |
+| --- | --- | --- | --- | --- |
+| `flatMapSingle` | N/A | `Maybe<U>` | N/A | `Observable<U>` |
+| `flatMapMaybe` | `Maybe<U>` | N/A | N/A | `Observable<U>` |
+| `flatMapCompletable` | `Completable` | `Completable` | N/A | `Completable` |
+| `flatMapObservable` | `Observable<U>` | `Observable<U>` | N/A | N/A |
+
+Mappers run only for upstream values. An empty `Maybe` completes normally with
+any of these specializations; `Observable::flatMapMaybe` skips empty mapped
+sources.
+Observable variants merge mapped sources without guaranteeing their relative
+order. `flatMapCompletable` waits for upstream and all mapped sources to
+complete. Upstream and mapped errors, including mapper exceptions, terminate
+the result immediately.
+
 ## Custom producers
 
 All four types provide `create(producer)`. The const-invocable producer runs

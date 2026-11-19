@@ -189,6 +189,36 @@ namespace rppw
 		auto flatMap(F function) const;
 
 		/**
+		 * @brief Maps success to a Single; an empty upstream still completes empty.
+		 * @tparam F Const-invocable mapper returning `Single<U>` by value.
+		 * @param function Mapper invoked only on success.
+		 * @return `Maybe<U>` forwarding the mapped Single's success or error.
+		 * @note Upstream errors and mapper exceptions are delivered to onError.
+		 */
+		template <concepts::FlatMapperFor<T, rppw::Single> F>
+		auto flatMapSingle(F function) const;
+
+		/**
+		 * @brief Maps success to a Completable and forwards its termination.
+		 * @tparam F Const-invocable mapper returning `Completable` by value.
+		 * @param function Mapper invoked only on success.
+		 * @return Completable that also completes normally if the upstream is empty.
+		 * @note Upstream errors and mapper exceptions are delivered to onError.
+		 */
+		template <concepts::CompletableMapperFor<T> F>
+		Completable flatMapCompletable(F function) const;
+
+		/**
+		 * @brief Maps success to an Observable and forwards its values and termination.
+		 * @tparam F Const-invocable mapper returning `Observable<U>` by value.
+		 * @param function Mapper invoked only on success.
+		 * @return `Observable<U>` that completes without values if the upstream is empty.
+		 * @note Upstream errors and mapper exceptions are delivered to onError.
+		 */
+		template <concepts::FlatMapperFor<T, rppw::Observable> F>
+		auto flatMapObservable(F function) const;
+
+		/**
 		 * @brief Keeps an accepted value or completes empty.
 		 * @tparam F Const-invocable predicate accepting const T&.
 		 * @param predicate Retention test, not invoked for an empty source.

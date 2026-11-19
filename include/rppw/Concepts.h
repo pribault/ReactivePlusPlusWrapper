@@ -79,6 +79,17 @@ namespace rppw::concepts
 							std::same_as<std::invoke_result_t<const F &, T>, Source<typename std::invoke_result_t<const F &, T>::value_type>>;
 
 	/**
+	 * @brief Const-invocable mapper returning exactly `Completable` by value.
+	 * @tparam F Callable type.
+	 * @tparam T Source value type.
+	 * @note The callable must accept both `T` and `const T&`.
+	 */
+	template <typename F, typename T>
+	concept CompletableMapperFor =
+		std::invocable<const F &, T> && std::invocable<const F &, const T &> && std::same_as<std::invoke_result_t<const F &, T>, Completable> &&
+		std::same_as<std::invoke_result_t<const F &, const T &>, Completable>;
+
+	/**
 	 * @brief Const-invocable binary reducer: (accumulator, value) -> new accumulator.
 	 * @tparam F Callable type accepting accumulator and const T&.
 	 * @tparam R Accumulator/result type.

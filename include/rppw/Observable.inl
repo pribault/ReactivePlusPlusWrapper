@@ -88,6 +88,33 @@ namespace rppw
 	}
 
 	template <detail::Value T>
+	template <concepts::ObservableSourceRangeOf<T> R>
+	Observable<T> Observable<T>::merge(R &&sources, std::size_t maxConcurrency)
+	{
+		if (maxConcurrency == 0)
+			throw std::invalid_argument{"Observable::merge: maxConcurrency must be positive"};
+
+		using Source = rpp::dynamic_observable<T>;
+		std::vector<Source> owned;
+		if constexpr (std::ranges::sized_range<R>)
+			owned.reserve(std::ranges::size(sources));
+		for (auto &&item : sources)
+		{
+			const std::ranges::range_value_t<R> &source = item;
+			if constexpr (std::same_as<std::ranges::range_value_t<R>, Observable<T>>)
+				owned.push_back(source.source_);
+			else
+				owned.push_back(source.toObservable().source_);
+		}
+
+		return create(
+			[sources = std::make_shared<const std::vector<Source>>(std::move(owned)), maxConcurrency](rpp::dynamic_observer<T> observer)
+			{
+				std::make_shared<detail::BoundedMerge<T>>(std::move(observer), sources)->start(maxConcurrency);
+			});
+	}
+
+	template <detail::Value T>
 	Observable<T> Observable<T>::empty()
 	{
 		return Observable{rpp::source::empty<T>().as_dynamic()};
@@ -279,6 +306,39 @@ namespace rppw
 												return std::invoke(function, value).source_;
 											}))
 								 .as_dynamic()};
+	}
+
+	template <detail::Value T>
+	template <concepts::FlatMapperFor<T, rppw::Single> F>
+	auto Observable<T>::flatMapSingle(F function) const
+	{
+		return flatMap(
+			[function = std::move(function)](const T &value)
+			{
+				return std::invoke(function, value).toObservable();
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::FlatMapperFor<T, rppw::Maybe> F>
+	auto Observable<T>::flatMapMaybe(F function) const
+	{
+		return flatMap(
+			[function = std::move(function)](const T &value)
+			{
+				return std::invoke(function, value).toObservable();
+			});
+	}
+
+	template <detail::Value T>
+	template <concepts::CompletableMapperFor<T> F>
+	Completable Observable<T>::flatMapCompletable(F function) const
+	{
+		return Completable{flatMap(
+			[function = std::move(function)](const T &value)
+			{
+				return Observable<std::monostate>{std::invoke(function, value).source_};
+			})};
 	}
 
 	template <detail::Value T>
