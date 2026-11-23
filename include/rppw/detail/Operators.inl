@@ -113,7 +113,7 @@ namespace rppw::detail
 					child,
 					[self](const T &value)
 					{
-						self->emit(
+						self->deliverOrQueue(
 							[&]
 							{
 								self->observer_.on_next(value);
@@ -131,7 +131,7 @@ namespace rppw::detail
 					{
 						// User cleanup may cancel the merge; run it before the slot is refilled.
 						child.dispose();
-						self->emit(Event{std::in_place_index<2>, child});
+						self->deliverOrQueue(Event{std::in_place_index<2>, child});
 					});
 			}
 			catch (...)
@@ -144,7 +144,7 @@ namespace rppw::detail
 		{
 			// Stops admissions even while the error waits for delivery.
 			next_.store(sources_->size(), std::memory_order_relaxed);
-			emit(Event{std::in_place_index<1>, error});
+			deliverOrQueue(Event{std::in_place_index<1>, error});
 		}
 
 		void handle(Event &event)
@@ -167,9 +167,9 @@ namespace rppw::detail
 			}
 		}
 
-		void emit(Event event)
+		void deliverOrQueue(Event event)
 		{
-			emit(
+			deliverOrQueue(
 				[&]
 				{
 					handle(event);
@@ -182,7 +182,7 @@ namespace rppw::detail
 
 		// wip_ counts the delivery in progress plus queued events not yet accounted.
 		template <typename Deliver, typename Make>
-		void emit(Deliver &&deliver, Make &&make)
+		void deliverOrQueue(Deliver &&deliver, Make &&make)
 		{
 			std::size_t missed = 1;
 			if (std::size_t idle = 0; wip_.compare_exchange_strong(idle, 1, std::memory_order_acquire))
